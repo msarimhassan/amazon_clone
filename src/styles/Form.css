@@ -1,0 +1,28 @@
+.main-login{
+
+    text-align: center;
+    margin-top: 50px;
+}
+.login-form{
+     margin-left: auto;
+     margin-right: auto;
+    width:30%;
+    padding:10px 20px 10px 20px;
+  margin-top: 20px;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 425px){
+    .login-form {
+        
+       
+        width:100%;
+    }
+}
+.btn-color{
+   
+ background-color: #FF9900;
+        
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .login-form {width: 50%;}
+}
