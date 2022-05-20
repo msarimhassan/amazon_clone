@@ -1,31 +1,31 @@
+// Library Imports
 import React from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import { useFormik } from 'formik';
 
+// Custom Imports
 import Logo from '../assets/logo.png';
 import '../styles/Form.css';
 import { loginSchema } from '../validations/LoginSchema';
+import AuthInput from './Signup/AuthInput';
 
-
-const initialValues={
+const initialValues = {
     username: '',
-    password:''
+    password: '',
 };
 
-const onSubmit=(values)=>{
-      console.log(values);
-}
-
+const onSubmit = (values) => {
+    console.log(values);
+};
 
 const Login = () => {
-      const { values, handleChange, handleSubmit, errors } = useFormik({
-          initialValues,
-          onSubmit,
-         validationSchema:loginSchema
-        
-      });
- console.log({errors});
+    const { values, handleChange, handleSubmit, errors } = useFormik({
+        initialValues,
+        onSubmit,
+        validationSchema: loginSchema,
+    });
+
     return (
         <div className='main-login rounded'>
             <img src={Logo} alt='Amazaon Logo' style={{ width: '200px' }} />
@@ -33,32 +33,22 @@ const Login = () => {
             <div className=' border shadow login-form'>
                 <Form inline>
                     <h2>Sign in</h2>
-
-                    <Label className='me-sm-2' for='username'>
-                        UserName
-                    </Label>
-                    <Input
+                    <AuthInput
+                        label='UserName'
                         name='username'
                         type='text'
-                        onChange={handleChange}
                         value={values.username}
+                        onChange={handleChange}
+                        error={errors}
                     />
-                    {errors.username && (
-                        <p className='text-danger fst-italic my-1 fw-bold'>{errors.username}</p>
-                    )}
-
-                    <Label className='me-sm-2' for='Password'>
-                        Password
-                    </Label>
-                    <Input
+                    <AuthInput
+                        label='Password'
                         name='password'
                         type='password'
-                        onChange={handleChange}
                         value={values.password}
+                        onChange={handleChange}
+                        error={errors}
                     />
-                    {errors.password && (
-                        <p className='text-danger fst-italic my-1 fw-bold'>{errors.password}</p>
-                    )}
                     <Button type='submit' onClick={handleSubmit} className='w-100 mt-4 btn-color'>
                         Sign in
                     </Button>

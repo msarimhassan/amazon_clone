@@ -11,7 +11,7 @@ const  CardContainer=()=> {
                   <CardTitle tag='h2'>Eletronics</CardTitle>
 
                   <CardText >
-                      <img src={electronics} alt='' className='rounded mx-auto d-block' />
+                      <img src={electronics} alt='' className='rounded mx-auto d-block image-fluid' />
                   </CardText>
                   <Link to={NavRoutes.ProductPage}
                       
