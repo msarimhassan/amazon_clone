@@ -1,12 +1,12 @@
 import React from 'react';
-import Header from '../components/Header';
+
 import { Container,Row,Col,Table } from 'reactstrap';
 import Ratings from '../components/Ratings';
 import airpods from '../assets/airpods.jpg';
 const ProductDetail = () => {
     return (
         <div>
-            <Header />
+          
             {/* Detail Container */}
             <Container className='mt-5 d-flex justify-content-center '>
                 <Row>

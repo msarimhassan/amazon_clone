@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Form } from 'reactstrap';
 import { useFormik } from 'formik';
 
-import Logo from '../assets/logo.png';
-import '../styles/Form.css';
-import { signupSchema } from '../validations';
-import GeneralInfoForm from './Signup/GeneralForm';
-import AddressForm from './Signup/AddressForm';
+import Logo from '../../assets/logo.png';
+import '../../styles/Form.css';
+import { signupSchema } from '../../validations';
+import GeneralInfoForm from './GeneralForm';
+import AddressForm from './AddressForm';
 
 const initialValues = {
     firstname: '',
@@ -52,10 +52,6 @@ const Signup = () => {
         validationSchema: signupSchema,
     });
 
-    const handleNext = () => {
-        setisNext(!isNext);
-    };
-
     return (
         <div className='main-login'>
             <img src={Logo} alt='Amazaon Logo' style={{ width: '200px' }} />
@@ -64,17 +60,17 @@ const Signup = () => {
                     <h2>Create Account</h2>
                     {isNext ? (
                         <GeneralInfoForm
+                            onNext={() => setisNext(!isNext)}
                             values={values}
-                            onNext={handleNext}
-                            errors={errors}
                             handleChange={handleChange}
+                            errors={errors}
                         />
                     ) : (
                         <AddressForm
                             values={values}
-                            errors={errors}
-                            onBackClick={handleNext}
+                            onBackClick={() => setisNext(!isNext)}
                             handleChange={handleChange}
+                            errors={errors}
                             onSignup={handleSubmit}
                         />
                     )}
