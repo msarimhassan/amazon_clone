@@ -23,8 +23,8 @@ const CartPage = () => {
                 <hr />
             </Container>
             <Container>
-                {products.map((product) => {
-                    return <CartContainer product={product} />;
+                {products.map((product,key) => {
+                    return <CartContainer key={key} product={product} />;
                 })}
             </Container>
             <h2 className='text-center'>Total Bill ${totalPrice}</h2>

@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { Container, Row, Col, Button } from 'reactstrap';
 import { useDispatch } from 'react-redux';
 
@@ -7,16 +7,16 @@ import {Increment,Decrement,DeleteProduct} from '../app/CartHandler/CartSlice';
 const  CartContainer=({product})=> {
 
    const dispatch = useDispatch();
-    const [count, setCount] = useState(product.quantity);
+    // const [count, setCount] = useState(product.quantity);
    
-const handleNegative=()=>{
-    if(count>1)
-    {
+// const handleNegative=()=>{
+//     if(count>1)
+//     {
 
-        setCount(count-1);
-        dispatch(Decrement(product));
-    }
-}
+//         setCount(count-1);
+//         dispatch(Decrement(product));
+//     }
+// }
 const deleteProduct=()=>{
      dispatch(DeleteProduct(product));
 }
@@ -29,23 +29,21 @@ const deleteProduct=()=>{
                   </Col>
                   <Col sm='6'>
                       <h5>
-                          TALK WORKS AirPods Case Cover with Keychain - Protective Hard Silicone
-                          Skin for AirPods Keychain Case Clip Carabiner{' '}
+                         {product.name}
                       </h5>
-                      <span>{product.name}</span>
+                     
                       <br />
                       Quantity{' '}
                       <Button
                           onClick={() => {
-                              handleNegative();
+                              dispatch(Decrement(product));
                           }}
                       >
                           -
                       </Button>{' '}
-                      {count}{' '}
+                      {product.quantity}{' '}
                       <Button
                           onClick={() => {
-                              setCount(count+1)
                               dispatch(Increment(product));
                           }}
                       >
