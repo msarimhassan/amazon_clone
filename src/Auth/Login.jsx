@@ -4,7 +4,6 @@ import { Form, Button } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { SiFacebook } from 'react-icons/si';
 import { gapi } from 'gapi-script';
 
 // Custom Imports
@@ -13,6 +12,7 @@ import '../styles/Form.css';
 import { loginSchema } from '../validations/LoginSchema';
 import AuthInput from './Signup/AuthInput';
 import GoogleLogin from './AuthProviders/GoogleLogin';
+import FacebookLogin from './AuthProviders/FacebookLogin';
 
 const initialValues = {
     username: '',
@@ -41,7 +41,13 @@ const Login = () => {
       gapi.load('client:auth2', Start);
     }, []);
 
-    const LoginWithFacebook = () => {};
+    const responseFacebook = (response) => {
+        console.log(response);
+    };
+
+   const  componentClicked=(res)=>{
+        console.log(res);
+   }
 
     const responseGoogle = (response) => {
         console.log( response );
@@ -77,16 +83,14 @@ const Login = () => {
                     </Button>
                 </Form>
                 <hr />
-                <Button onClick={LoginWithFacebook} className='m-2' color='primary'>
-                    <SiFacebook className='mx-2' />
-                    LogIn with Facebook
-                </Button>
+              <FacebookLogin responseFacebook={responseFacebook} componentClicked={componentClicked}/>
                 <GoogleLogin responseGoogle={responseGoogle} />
                 <NavLink to='/signup'>
                     <Button type='button' className='w-100 mt-3'>
                         {t('I am a new customer')}
                     </Button>
                 </NavLink>
+                
             </div>
         </div>
     );
