@@ -1,8 +1,9 @@
 // Library Imports
 import React from 'react';
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Form, Button } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import { useFormik } from 'formik';
+ import { useTranslation } from 'react-i18next';
 
 // Custom Imports
 import Logo from '../assets/logo.png';
@@ -26,15 +27,17 @@ const Login = () => {
         validationSchema: loginSchema,
     });
 
+    const {t}=useTranslation(["Login"]);
+
     return (
         <div className='main-login rounded'>
             <img src={Logo} alt='Amazaon Logo' style={{ width: '200px' }} />
 
             <div className=' border shadow login-form'>
                 <Form inline>
-                    <h2>Sign in</h2>
+                    <h2>{t('Signin')}</h2>
                     <AuthInput
-                        label='UserName'
+                        label={t('UserName')}
                         name='username'
                         type='text'
                         value={values.username}
@@ -42,7 +45,7 @@ const Login = () => {
                         error={errors}
                     />
                     <AuthInput
-                        label='Password'
+                        label={t('Password')}
                         name='password'
                         type='password'
                         value={values.password}
@@ -50,13 +53,13 @@ const Login = () => {
                         error={errors}
                     />
                     <Button type='submit' onClick={handleSubmit} className='w-100 mt-4 btn-color'>
-                        Sign in
+                        {t('Signin')}
                     </Button>
                 </Form>
                 <hr />
                 <NavLink to='/signup'>
                     <Button type='button' className='w-100'>
-                        I am a new customer
+                        {t('I am a new customer')}
                     </Button>
                 </NavLink>
             </div>

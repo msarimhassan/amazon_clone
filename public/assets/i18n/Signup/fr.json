@@ -1,0 +1,15 @@
+{
+    "createaccount": "Créer un compte",
+    "firstname": "Prénom",
+    "lastname": "Nom de famille",
+    "email": "E-mail",
+    "Password":"Mot de passe",
+    "confirmpassword":"Confirmez le mot de passe",
+    "next":"Suivant",
+    "city":"Ville",
+    "streetname":"Nom de rue",
+    "streetnumber":"Numéro de rue",
+    "zipcode":"Code postal",
+    "back":"Arrière",
+    "signup":"Inscrivez-vous"
+}

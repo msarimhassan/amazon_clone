@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form } from 'reactstrap';
 import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
 
 import Logo from '../assets/logo.png';
 import '../styles/Form.css';
@@ -21,6 +22,7 @@ const initialValues = {
 };
 
 const onSubmit = (values) => {
+   
     const obj = {
         email: values.email,
         username: values.firstname + values.lastname[0],
@@ -55,13 +57,13 @@ const Signup = () => {
     const handleNext = () => {
         setisNext(!isNext);
     };
-
+    const { t } = useTranslation(['Signup']);
     return (
         <div className='main-login'>
             <img src={Logo} alt='Amazaon Logo' style={{ width: '200px' }} />
             <div className=' border shadow login-form rounded'>
                 <Form inline>
-                    <h2>Create Account</h2>
+                    <h2>{t('createaccount')}</h2>
                     {isNext ? (
                         <GeneralInfoForm
                             values={values}

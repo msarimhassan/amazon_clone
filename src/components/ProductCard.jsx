@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap';
-import headphones from '../assets/headphones.PNG';
 import Ratings from './Ratings';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import NavRoutes from '../common/NavRoutes';
 import '../styles/Form.css'
@@ -16,6 +16,7 @@ const ProductCard = ({product}) => {
     const handleProduct=(product)=>{
           dispatch(AddToCart(product));
     }
+    const {t}=useTranslation(["Products"]);
     return (
        
           
@@ -24,13 +25,13 @@ const ProductCard = ({product}) => {
                     <CardBody>
                         <CardText>
                             <img src={product.image} width='200px' height='300px'  alt='' className='rounded mx-auto d-block' />
-                            <CardTitle tag='p'>{product.name}</CardTitle>
+                            <CardTitle tag='p'>{t(product.name)}</CardTitle>
                             <Ratings />
-                           Price{product.price}
+                           {t("price")}{' '}{t(product.price)}
                         </CardText>
                     </CardBody>
                     </Link>
-                    <Button className='btn-color' onClick={()=>handleProduct(product)} >Add to Cart</Button>
+                    <Button className='btn-color' onClick={()=>handleProduct(product)} >{t("addtocart")}</Button>
                 </Card>
         
        

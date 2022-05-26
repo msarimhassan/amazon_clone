@@ -1,22 +1,15 @@
 import React from 'react'
 import { Container, Row, Col, Button } from 'reactstrap';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import {Increment,Decrement,DeleteProduct} from '../app/CartHandler/CartSlice';
 
 const  CartContainer=({product})=> {
 
    const dispatch = useDispatch();
-    // const [count, setCount] = useState(product.quantity);
-   
-// const handleNegative=()=>{
-//     if(count>1)
-//     {
+   const {t}=useTranslation(["Products"]);
 
-//         setCount(count-1);
-//         dispatch(Decrement(product));
-//     }
-// }
 const deleteProduct=()=>{
      dispatch(DeleteProduct(product));
 }
@@ -28,10 +21,7 @@ const deleteProduct=()=>{
                       <img src={product.image} style={{ width: '150px' }} alt='' />
                   </Col>
                   <Col sm='6'>
-                      <h5>
-                         {product.name}
-                      </h5>
-                     
+                      <h5>{t(product.name)}</h5>
                       <br />
                       Quantity{' '}
                       <Button
@@ -51,10 +41,13 @@ const deleteProduct=()=>{
                       </Button>
                   </Col>
                   <Col sm='2'>
-                      <h5>${product.price}</h5>
+                      <h5>
+                          {' '}
+                          {t('price')} ${t(product.price)}
+                      </h5>
                   </Col>
                   <Col>
-                  <Button onClick={deleteProduct}>Delete</Button>
+                      <Button onClick={deleteProduct}>{t('delete')}</Button>
                   </Col>
               </Row>
           </Container>

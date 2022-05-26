@@ -1,0 +1,15 @@
+{
+    "createaccount": "Create Account",
+    "firstname": "First Name",
+    "lastname": "Last Name",
+    "email": "Email",
+    "Password":"Password",
+    "confirmpassword":"Confirm Password",
+    "next":"Next",
+    "city":"City",
+    "streetname":"Street Name",
+    "streetnumber":"Street Number",
+    "zipcode":"Zip Code",
+    "back":"Back",
+    "signup":"Signup"
+}

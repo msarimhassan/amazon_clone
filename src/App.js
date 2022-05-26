@@ -1,5 +1,5 @@
-import React from 'react';
-import HomePage from "./Pages/Home"
+import { Suspense } from 'react';
+import HomePage from './Pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProductPage from './Pages/ProductPage';
 import ProductDetail from './Pages/ProductDetail';
@@ -11,7 +11,7 @@ import Header from './components/Header';
 
 const App = () => {
     return (
-        
+        <Suspense fallback={null}>
             <Router>
                 <Header />
                 <Routes>
@@ -23,7 +23,7 @@ const App = () => {
                     <Route path={NavRoutes.Signup} element={<Signup />} />
                 </Routes>
             </Router>
-     
+        </Suspense>
     );
 };
 

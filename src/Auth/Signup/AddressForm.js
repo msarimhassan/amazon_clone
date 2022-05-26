@@ -1,22 +1,14 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import AuthInput from './AuthInput';
+import { useTranslation } from 'react-i18next';
 
 const AddressForm = ({ onBackClick, onSignup, values, handleChange, errors }) => {
-    // const AuthInput = ({ label, name, type, onChange, value }) => (
-    //     <>
-    //         <Label className='me-sm-2' for='firstname'>
-    //             {label}
-    //         </Label>
-    //         <Input name={name} type={type} onChange={onChange} value={value} />
-    //         <div className='text-danger fst-italic my-1 fw-bold'> {errors[name]} </div>
-    //     </>
-    // );
-    console.log({ values });
+    const {t}=useTranslation(["Signup"])
     return (
         <div id='address'>
             <AuthInput
-                label='City'
+                label={t("city")}
                 name='city'
                 type='text'
                 value={values?.city}
@@ -25,7 +17,7 @@ const AddressForm = ({ onBackClick, onSignup, values, handleChange, errors }) =>
             />
 
             <AuthInput
-                label='Street Name'
+                label={t("streetname")}
                 name='stname'
                 type='text'
                 value={values.stname}
@@ -33,7 +25,7 @@ const AddressForm = ({ onBackClick, onSignup, values, handleChange, errors }) =>
                 error={errors}
             />
             <AuthInput
-                label='Street Number'
+                label={t("streetnumber")}
                 name='stno'
                 type='number'
                 value={values.stno}
@@ -41,7 +33,7 @@ const AddressForm = ({ onBackClick, onSignup, values, handleChange, errors }) =>
                 error={errors}
             />
             <AuthInput
-                label='Zip Code'
+                label={t("zipcode")}
                 name='zipcode'
                 type='text'
                 value={values.zipcode}
@@ -49,10 +41,10 @@ const AddressForm = ({ onBackClick, onSignup, values, handleChange, errors }) =>
                 error={errors}
             />
             <Button type='Button' onClick={onBackClick} className='m-2'>
-                Back
+                {t("back")}
             </Button>
             <Button className='m-2 btn-color' type='submit' onClick={onSignup}>
-                Signup
+                {t("signup")}
             </Button>
         </div>
     );
