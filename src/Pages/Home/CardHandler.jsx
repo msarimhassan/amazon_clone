@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'reactstrap';
 
 const CardHandler = () => {
     return (
-        <Container className='d-flex flex-wrap'>
+        <Container className='d-flex flex-wrap mb-5'>
             <Row>
                 {Array(5)
                     .fill(0)

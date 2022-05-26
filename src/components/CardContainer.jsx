@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, CardBody, CardTitle, CardSubtitle, CardText, Button} from 'reactstrap';
+import {Card, CardBody, CardTitle, CardSubtitle, CardText, Button,CardImg} from 'reactstrap';
 import electronics from '../assets/electronics.PNG';
 import {Link} from 'react-router-dom';
 import NavRoutes from '../common/NavRoutes';
@@ -8,23 +8,26 @@ const  CardContainer=()=> {
 
     const {t}=useTranslation(["Products"]);
   return (
-    
-          <Card className='border-0 shadow rounded mt-4'>
-              <CardBody>
-                  <CardTitle tag='h2'>{t("electronics")}</CardTitle>
-
-                  <CardText >
-                      <img src={electronics} alt='' className='rounded mx-auto d-block image-fluid' />
-                  </CardText>
-                  <Link to={NavRoutes.ProductPage}
-                      
-                      style={{ textDecoration: 'none', cursor: 'pointer', color: 'primary' }}
-                  >
-                      {t('shopnow')}
-                  </Link>
-              </CardBody>
-          </Card>
-
+      <Card className='border-0 shadow rounded mt-4'>
+      
+          <CardImg alt='Card image cap' src={electronics} top width='100%' />
+          <CardBody>
+              <CardTitle tag='h5'>{t('electronics')}</CardTitle>
+              {/* <CardSubtitle className='mb-2 text-muted' tag='h6'>
+                  Card subtitle
+              </CardSubtitle>
+              <CardText>
+                  This is a wider card with supporting text below as a natural lead-in to additional
+                  content. This content is a little bit longer.
+              </CardText> */}
+              <Link
+                  to={NavRoutes.ProductPage}
+                  style={{ textDecoration: 'none', cursor: 'pointer', color: 'primary' }}
+              >
+                  <Button color="danger">{t('shopnow')}</Button>
+              </Link>
+          </CardBody>
+      </Card>
   );
 }
 

@@ -1,15 +1,18 @@
 // Library Imports
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Button } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import { useFormik } from 'formik';
- import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
+import { SiFacebook } from 'react-icons/si';
+import { gapi } from 'gapi-script';
 
 // Custom Imports
 import Logo from '../assets/logo.png';
 import '../styles/Form.css';
 import { loginSchema } from '../validations/LoginSchema';
 import AuthInput from './Signup/AuthInput';
+import GoogleLogin from './AuthProviders/GoogleLogin';
 
 const initialValues = {
     username: '',
@@ -20,6 +23,7 @@ const onSubmit = (values) => {
     console.log(values);
 };
 
+const clientId = '602962461138-h83tgckucrbsbh5m4q7e9d1doh3hrq50.apps.googleusercontent.com';
 const Login = () => {
     const { values, handleChange, handleSubmit, errors } = useFormik({
         initialValues,
@@ -27,7 +31,23 @@ const Login = () => {
         validationSchema: loginSchema,
     });
 
-    const {t}=useTranslation(["Login"]);
+    useEffect(() => {
+      function Start(){
+            gapi.client.init({
+                clientId: clientId,
+                scope: '',
+            });
+      }
+      gapi.load('client:auth2', Start);
+    }, []);
+
+    const LoginWithFacebook = () => {};
+
+    const responseGoogle = (response) => {
+        console.log( response );
+    };
+
+    const { t } = useTranslation(['Login']);
 
     return (
         <div className='main-login rounded'>
@@ -57,8 +77,13 @@ const Login = () => {
                     </Button>
                 </Form>
                 <hr />
+                <Button onClick={LoginWithFacebook} className='m-2' color='primary'>
+                    <SiFacebook className='mx-2' />
+                    LogIn with Facebook
+                </Button>
+                <GoogleLogin responseGoogle={responseGoogle} />
                 <NavLink to='/signup'>
-                    <Button type='button' className='w-100'>
+                    <Button type='button' className='w-100 mt-3'>
                         {t('I am a new customer')}
                     </Button>
                 </NavLink>
