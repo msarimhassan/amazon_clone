@@ -8,7 +8,8 @@ import '../styles/Form.css';
 import { signupSchema } from '../validations';
 import GeneralInfoForm from './Signup/GeneralForm';
 import AddressForm from './Signup/AddressForm';
-
+import ACNetwork from '../config/ACNetwork';
+import Urls from '../config/Urls';
 const initialValues = {
     firstname: '',
     lastname: '',
@@ -21,8 +22,7 @@ const initialValues = {
     zipcode: '',
 };
 
-const onSubmit = (values) => {
-   
+const onSubmit = async (values) => {
     const obj = {
         email: values.email,
         username: values.firstname + values.lastname[0],
@@ -43,7 +43,10 @@ const onSubmit = (values) => {
         },
         phone: '1-570-236-7033',
     };
-    console.log(obj);
+      console.log(obj);
+    const response = await ACNetwork.post(Urls.signUp,obj,{});
+
+    console.log(response.ok);
 };
 
 const Signup = () => {
