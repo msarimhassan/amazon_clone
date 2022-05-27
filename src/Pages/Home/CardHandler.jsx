@@ -10,7 +10,7 @@ const CardHandler = () => {
                     .fill(0)
                     .map((_) => {
                         return (
-                            <Col md={4} sm={10} className='m-lg-0 m-sm-5' > 
+                            <Col lg={3} md={4} sm={3} className='m-lg-0 m-md-0 m-sm-3'>
                                 <CardContainer />
                             </Col>
                         );
