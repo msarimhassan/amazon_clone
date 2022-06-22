@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react';
 import CardContainer from '../../components/CardContainer';
 import { Container, Row, Col } from 'reactstrap';
 
-const CardHandler = () => {
+const CardHandler = ({categories}) => {
 
    const [longitude,setLongitude]=useState();
    const[latitude,setLatitude]=useState();
@@ -18,12 +18,10 @@ const CardHandler = () => {
     return (
         <Container className='d-flex flex-wrap mb-5'>
             <Row>
-                {Array(5)
-                    .fill(0)
-                    .map((_) => {
+                {categories.map((category) => {
                         return (
                             <Col lg={3} md={4} sm={3} className='m-lg-0 m-md-0 m-sm-3'>
-                                <CardContainer />
+                                <CardContainer id={category._id} image={category.imageUrl} name={category.name} />
                             </Col>
                         );
                     })}

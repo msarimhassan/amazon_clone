@@ -1,16 +1,19 @@
 import React from 'react';
 import { Card, CardBody, CardTitle, CardSubtitle, CardText, Button, CardImg } from 'reactstrap';
-import electronics from '../assets/Electronics.png';
+
 import { Link } from 'react-router-dom';
 import NavRoutes from '../common/NavRoutes';
 import { useTranslation } from 'react-i18next';
-const CardContainer = () => {
+const CardContainer = ({id,image,name}) => {
+  
+
+
     const { t } = useTranslation(['Products']);
     return (
         <Card className='rounded-3 shadow  mt-3'>
-            <CardImg alt='Card image cap' src={electronics} top width='100%' className='rounded' />
+            <CardImg alt='Card image cap' src={image} top width='100%' height='auto' className='rounded' />
             <CardBody>
-                <CardTitle tag='h5'>{t('electronics')}</CardTitle>
+                <CardTitle tag='h5'>{t(name)}</CardTitle>
                 {/* <CardSubtitle className='mb-2 text-muted' tag='h6'>
                   Card subtitle
               </CardSubtitle>
@@ -20,6 +23,7 @@ const CardContainer = () => {
               </CardText> */}
                 <Link
                     to={NavRoutes.ProductPage}
+                    state={{id:id}}
                     style={{ textDecoration: 'none', cursor: 'pointer', color: 'primary' }}
                 >
                     <Button color='danger'>{t('shopnow')}</Button>

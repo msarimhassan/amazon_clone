@@ -1,6 +1,6 @@
 import { create } from 'apisauce';
 
-const baseURL = process.env.REACT_APP_BASE_URL;
+const baseURL = 'https://amazon-clone-12345.herokuapp.com/api/';
 
 console.log({ baseURL });
 
@@ -26,7 +26,7 @@ export const authConfig = async (token) => {
     };
 };
 
-export const muntipartConfig = async () => {
+export const multipartConfig = async () => {
     const token = localStorage.getItem('token');
     return {
         headers: {

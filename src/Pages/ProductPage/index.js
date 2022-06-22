@@ -1,30 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 
 import ProductCard from '../../components/ProductCard';
-import { products } from '../../common/Products';
+import { ACNetwork, Urls } from '../../config';
+import Loader from '../../assets/animations';
 const ProductCardHandler = () => {
-    const obj={
-        name:'Electronics',
-        price:'150$'
-    }
-    const { t } = useTranslation(["Products"]);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        console.log('We are in useEffcet');
+        getProduct();
+        console.log({ products });
+    }, []);
+    let location = useLocation();
+    const [products, setProducts] = useState();
+
+    const getProduct = async () => {
+        setLoading(true);
+        const response = await ACNetwork.get(Urls.getProducts + location.state.id, {});
+        setProducts(response.data.products);
+        setLoading(false);
+    };
+    const { t } = useTranslation(['Products']);
     return (
         <div>
-            <Container className='d-flex flex-wrap'>
-                <h1 className='mt-3'>{t('electronics')}</h1>
-                <Row>
-                   { products.map((product,id)=>{
-                        return (
-                            <Col md={4} sm={10} className='m-lg-0 m-sm-5'>
-                                <ProductCard key={id} product={product}/>
-                            </Col>
-                        );
-                    })}
-                    
-                </Row>
-            </Container>
+            {loading ? (
+                <Loader />
+            ) : (
+                <>
+                    <h1 className='mt-3'>{t('electronics')}</h1>
+                    <Container>
+                        <Row>
+                            {products.map((product) => {
+                                return (
+                                    <Col sm={3} md={6} lg={3}>
+                                        <ProductCard key={product._id} product={product} />
+                                    </Col>
+                                );
+                            })}
+                        </Row>
+                    </Container>
+                </>
+            )}
         </div>
     );
 };

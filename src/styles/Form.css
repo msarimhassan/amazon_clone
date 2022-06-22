@@ -20,8 +20,12 @@
 }
 .btn-color{
    
- background-color: #FF9900;
+ background-color: #ffd814;
+ border: 0px;
         
+}
+.card-body{
+    padding: 12px !important;
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
     .login-form {width: 50%;}
