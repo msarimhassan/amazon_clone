@@ -13,44 +13,39 @@ const CartContainer = ({ product }) => {
         dispatch(DeleteProduct(product));
     };
     return (
-        <div>
-            <Container className='mt-5'>
-                <Row>
-                    <Col sm='3'>
-                        <img src={product.imageUrl} style={{ width: '150px' }} alt='' />
-                    </Col>
-                    <Col sm='6'>
-                        <h5>{t(product.name)}</h5>
-                        <br />
-                        Quantity{' '}
-                        <Button
-                            onClick={() => {
-                                dispatch(Decrement(product));
-                            }}
-                        >
-                            -
-                        </Button>{' '}
-                        {product.quantity}{' '}
-                        <Button
-                            onClick={() => {
-                                dispatch(Increment(product));
-                            }}
-                        >
-                            +
-                        </Button>
-                    </Col>
-                    <Col sm='2'>
-                        <h5>
-                            {' '}
-                            {t('price')} ${t(product.sellingPrice)}
-                        </h5>
-                    </Col>
-                    <Col>
-                        <Button onClick={deleteProduct}>{t('delete')}</Button>
-                    </Col>
-                </Row>
-            </Container>
-        </div>
+        <>
+            <Row className='mt-4'>
+                <Col sm={2} className='d-flex align-items-center'>
+                    <Button onClick={deleteProduct}>{t('delete')}</Button>
+                </Col>
+                <Col sm={4} className='d-flex align-items-center'>
+                    <img src={product.imageUrl} style={{ width: '150px' }} alt='' />
+                </Col>
+                <Col sm={2} className='d-flex align-items-center'>
+                    <h5>{t(product.name)}</h5>
+                </Col>
+                <Col sm={2} className='d-flex align-items-center'>
+                    <h5>${t(product.sellingPrice)}</h5>
+                </Col>
+                <Col sm={2} className='d-flex align-items-center'>
+                    <Button
+                        onClick={() => {
+                            dispatch(Decrement(product));
+                        }}
+                    >
+                        -
+                    </Button>{' '}
+                    {product.quantity}{' '}
+                    <Button
+                        onClick={() => {
+                            dispatch(Increment(product));
+                        }}
+                    >
+                        +
+                    </Button>
+                </Col>
+            </Row>
+        </>
     );
 };
 export default CartContainer;

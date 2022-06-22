@@ -9,7 +9,7 @@ import NavRoutes from '../common/NavRoutes';
 import '../styles/Form.css';
 import { AddToCart } from '../app/CartHandler/CartSlice';
 import { set } from 'react-hook-form';
-
+import '../styles/Card.css';
 const ProductCard = ({ product }) => {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.cart.cartProducts);
@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
     };
     const { t } = useTranslation(['Products']);
     return (
-        <Card>
+        <Card className='card-with-shadow'>
             <Link
                 to={NavRoutes.ProductDetail}
                 state={{ id: product._id }}
@@ -28,12 +28,8 @@ const ProductCard = ({ product }) => {
                 <CardBody>
                     <img
                         src={product.imageUrl}
-                        style={{
-                            width: '40vh',
-                            height: '40vh',
-                        }}
                         alt='Product-image'
-                        className='rounded mx-auto d-block'
+                        className='rounded mx-auto d-block product-card-image'
                     />
                     <CardText>
                         <CardTitle tag='h3' className='text-black mt-2'>
@@ -53,7 +49,7 @@ const ProductCard = ({ product }) => {
                 </CardBody>
             </Link>
             <Button
-                className='btn-color'
+                className=' product-button btn-color'
                 disabled={products.some((item) => item._id == product._id)}
                 onClick={() => handleProduct(product)}
             >
