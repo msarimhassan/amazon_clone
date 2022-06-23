@@ -1,0 +1,12 @@
+.Bill-Box{
+    border-left: solid;
+    height:100vh;
+    border-width: 0.5px;
+    border-color: #ccc;
+}
+
+@media only screen and (max-width: 600px) {
+    .Bill-Box {
+        border-left:none ;
+    }
+}

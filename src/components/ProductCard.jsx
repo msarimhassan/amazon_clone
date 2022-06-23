@@ -8,11 +8,12 @@ import { useTranslation } from 'react-i18next';
 import NavRoutes from '../common/NavRoutes';
 import '../styles/Form.css';
 import { AddToCart } from '../app/CartHandler/CartSlice';
-import { set } from 'react-hook-form';
+import { Icons } from '../common';
 import '../styles/Card.css';
 const ProductCard = ({ product }) => {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.cart.cartProducts);
+    const {AI}=Icons;
 
     const handleProduct = (product) => {
         dispatch(AddToCart(product));
@@ -53,7 +54,7 @@ const ProductCard = ({ product }) => {
                 disabled={products.some((item) => item._id == product._id)}
                 onClick={() => handleProduct(product)}
             >
-                {t('addtocart')}
+                {t('addtocart')} <AI.AiOutlineShoppingCart size={28}/>
             </Button>
         </Card>
     );

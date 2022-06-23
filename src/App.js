@@ -3,7 +3,7 @@ import HomePage from './Pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProductPage from './Pages/ProductPage';
 import ProductDetail from './Pages/ProductDetail';
-import CartPage from './Pages/CartPage';
+import CartPage from './Pages/Cart';
 import Login from './Auth/Login';
 import Signup from './Auth/Signup';
 import NavRoutes from './common/NavRoutes';
