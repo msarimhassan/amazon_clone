@@ -62,7 +62,7 @@ const Signup = () => {
     };
     const { t } = useTranslation(['Signup']);
     return (
-        <div className='main-login'>
+        <div className='main-login pb-5'>
             <img src={Logo} alt='Amazaon Logo' style={{ width: '200px' }} />
             <div className=' border shadow login-form rounded'>
                 <Form inline>

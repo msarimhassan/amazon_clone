@@ -1,28 +1,39 @@
-import { Suspense } from 'react';
-import HomePage from './Pages/Home';
+import { Suspense, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ProductPage from './Pages/ProductPage';
-import ProductDetail from './Pages/ProductDetail';
-import CartPage from './Pages/Cart';
-import Login from './Auth/Login';
-import Signup from './Auth/Signup';
-import NavRoutes from './common/NavRoutes';
 import Header from './components/Header';
+import { UserContext } from './Context';
+import { PublicRoutes } from './common/PublicRoutes';
+import {PrivateRoutes} from './common/PrivateRoutes';
+import {AuthRoutes} from './common/AuthRoutes';
 
 const App = () => {
+    const [token, setToken] = useState();
+
+    useEffect(() => {
+        const t = localStorage.getItem('Ac-Token');
+        if (t) {
+            setToken(t);
+        }
+    }, []);
+
+    const RoutesList = ({ data }) => {
+        return (
+            <Routes>
+                {data.map((obj) => {
+                    return <Route path={obj.link} element={obj.element} />;
+                })}
+            </Routes>
+        );
+    };
+
     return (
         <Suspense fallback={null}>
-            <Router>
-                <Header />
-                <Routes>
-                    <Route path='/' element={<HomePage />} />
-                    <Route path={NavRoutes.ProductPage} element={<ProductPage />} />
-                    <Route path={NavRoutes.CartPage} element={<CartPage />} />
-                    <Route path={NavRoutes.ProductDetail} element={<ProductDetail />} />
-                    <Route path={NavRoutes.Login} element={<Login />} />
-                    <Route path={NavRoutes.Signup} element={<Signup />} />
-                </Routes>
-            </Router>
+            <UserContext.Provider value={{ setToken, token }}>
+                <Router>
+                    <Header />
+                    <RoutesList data={!token ? [...PublicRoutes,...AuthRoutes] : [...PublicRoutes,...PrivateRoutes]} />
+                </Router>
+            </UserContext.Provider>
         </Suspense>
     );
 };

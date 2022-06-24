@@ -1,48 +1,25 @@
-// import React, { useEffect } from 'react';
-// import { Container } from 'reactstrap';
-
-
-
-// import CartContainer from '../components/CartContainer';
-// const CartPage = () => {
-
-
-
-
-//     //getting all the products
-
-
-
-
-//     return (
-//         <div>
-//             <Container>
-//                 <h1>Shopping Cart</h1>
-//                 <hr />
-//             </Container>
-//             <Container>
-//
-//             </Container>
-//             <h2 className='text-center'>Total Bill ${totalPrice}</h2>
-//         </div>
-//     );
-// };
-// export default CartPage;
-
 import React,{useEffect} from 'react';
 import { Container, Row, Col,Button } from 'reactstrap';
-import CartContainer from '../../components/CartContainer';
 import { useSelector, useDispatch } from 'react-redux';
- import { Calculate } from '../../app/CartHandler/CartSlice';
- import '../../styles/CartPage.css';
-export default function CartPage() {
+import { useNavigate } from 'react-router-dom';
 
+
+import CartContainer from '../../components/CartContainer';
+import { Calculate } from '../../app/CartHandler/CartSlice';
+import '../../styles/CartPage.css';
+import NavRoutes from '../../common/NavRoutes'
+export default function CartPage() {
+    let navigate=useNavigate();
     const dispatch = useDispatch();
      const products = useSelector((state) => state.cart.cartProducts);
     useEffect(() => {
         dispatch(Calculate(products));
     }, [products]);
     const totalPrice = useSelector((state) => state.cart.totalPrice);
+
+    const handleOrder=()=>{
+         navigate(NavRoutes.Order);
+    }
     
     return (
         <>
@@ -80,7 +57,7 @@ export default function CartPage() {
                             </Col>
                         </Row>
                         <div className='text-center mt-5'>
-                            <Button>Proceed to checkout</Button>
+                            <Button onClick={()=>{handleOrder()}}>Proceed to checkout</Button>
                         </div>
                     </Col>
                 </Row>
