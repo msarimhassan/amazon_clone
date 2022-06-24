@@ -48,22 +48,22 @@ export default function CartPage() {
         <>
             <Container>
                 <Row>
-                    <Col sm={12} lg={7} className='p-5'>
+                    <Col sm={12} lg={8} className='p-5'>
                         <h4>Shopping Cart</h4>
                         <hr />
                         <Row>
-                            <Col sm={2}></Col>
                             <Col sm={4}></Col>
                             <Col sm={2}>Product</Col>
                             <Col sm={2}>Price</Col>
                             <Col sm={2}>Quantity</Col>
+                            <Col sm={2}></Col>
                         </Row>
                         <hr />
                         {products.map((product, key) => {
                             return <CartContainer key={key} product={product} />;
                         })}
                     </Col>
-                    <Col sm={12} lg={5} className='p-5 Bill-Box'>
+                    <Col sm={12} lg={4} className='p-5 Bill-Box'>
                         <h4>Cart totals</h4>
                         <hr />
                         <Row>

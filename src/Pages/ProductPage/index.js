@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import ProductCard from '../../components/ProductCard';
 import { ACNetwork, Urls } from '../../config';
 import Loader from '../../assets/animations';
+import '../../styles/Category.css';
 const ProductCardHandler = () => {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -29,8 +30,8 @@ const ProductCardHandler = () => {
                 <Loader />
             ) : (
                 <>
-                    <h1 className='mt-3'>{t('electronics')}</h1>
-                    <Container>
+                    <h1 className='heading'>{location.state.name}</h1>
+                    <Container className='mt-4'>
                         <Row>
                             {products.map((product) => {
                                 return (

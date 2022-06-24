@@ -20,7 +20,7 @@ const CardContainer = ({ id, image, name }) => {
                 <CardTitle tag='h5'>{t(name)}</CardTitle>
                 <Link
                     to={NavRoutes.ProductPage}
-                    state={{ id: id }}
+                    state={{ id: id ,name}}
                     style={{ textDecoration: 'none', cursor: 'pointer', color: 'primary' }}
                 >
                     <Button color='danger'>{t('shopnow')}</Button>
