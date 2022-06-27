@@ -25,6 +25,7 @@
     "react-redux": "^8.0.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-select": "^5.3.2",
     "react-stars": "^2.2.5",
     "reactstrap": "^9.0.2",
     "redux-persist": "^6.0.0",

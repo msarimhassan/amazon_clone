@@ -1,7 +1,7 @@
 import React from 'react';
-import { Label,Input } from 'reactstrap';
+import { Label, Input } from 'reactstrap';
 
-const AuthInput = ({ label, name, type, onChange, value,error }) => (
+const AuthInput = ({ label, name, type, onChange, value, error }) => (
     <>
         <Label className='me-sm-2' for='firstname'>
             {label}

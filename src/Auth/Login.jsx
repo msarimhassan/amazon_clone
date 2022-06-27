@@ -1,7 +1,7 @@
 // Library Imports
 import React, { useEffect } from 'react';
 import { Form, Button } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
+import { NavLink,useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { gapi } from 'gapi-script';
@@ -13,18 +13,26 @@ import { loginSchema } from '../validations/LoginSchema';
 import AuthInput from './Signup/AuthInput';
 import GoogleLogin from './AuthProviders/GoogleLogin';
 import FacebookLogin from './AuthProviders/FacebookLogin';
-
+import NavRoutes from '../common/NavRoutes';
+import {ACNetwork,Urls} from '../config'
+import useToken from '../hooks/useToken';
 const initialValues = {
-    username: '',
+    email: '',
     password: '',
-};
-
-const onSubmit = (values) => {
-    console.log(values);
 };
 
 const clientId = '602962461138-h83tgckucrbsbh5m4q7e9d1doh3hrq50.apps.googleusercontent.com';
 const Login = () => {
+
+    const { Login } = useToken();
+    let navigate = useNavigate();
+        const onSubmit = async(values) => {
+        
+      const response=await ACNetwork.post(Urls.login,values,{});
+      console.log(response.data.token);
+            Login(response.data.token)
+            navigate(NavRoutes.Homepage);
+    };
     const { values, handleChange, handleSubmit, errors } = useFormik({
         initialValues,
         onSubmit,
@@ -32,25 +40,25 @@ const Login = () => {
     });
 
     useEffect(() => {
-      function Start(){
+        function Start() {
             gapi.client.init({
                 clientId: clientId,
                 scope: '',
             });
-      }
-      gapi.load('client:auth2', Start);
+        }
+        gapi.load('client:auth2', Start);
     }, []);
 
     const responseFacebook = (response) => {
         console.log(response);
     };
 
-   const  componentClicked=(res)=>{
+    const componentClicked = (res) => {
         console.log(res);
-   }
+    };
 
     const responseGoogle = (response) => {
-        console.log( response );
+        console.log(response);
     };
 
     const { t } = useTranslation(['Login']);
@@ -63,10 +71,10 @@ const Login = () => {
                 <Form inline>
                     <h2>{t('Signin')}</h2>
                     <AuthInput
-                        label={t('UserName')}
-                        name='username'
-                        type='text'
-                        value={values.username}
+                        label='Email'
+                        name='email'
+                        type='email'
+                        value={values.email}
                         onChange={handleChange}
                         error={errors}
                     />
@@ -83,14 +91,16 @@ const Login = () => {
                     </Button>
                 </Form>
                 <hr />
-              <FacebookLogin responseFacebook={responseFacebook} componentClicked={componentClicked}/>
+                <FacebookLogin
+                    responseFacebook={responseFacebook}
+                    componentClicked={componentClicked}
+                />
                 <GoogleLogin responseGoogle={responseGoogle} />
-                <NavLink to='/signup'>
+                <NavLink to={NavRoutes.Signup}>
                     <Button type='button' className='w-100 mt-3'>
                         {t('I am a new customer')}
                     </Button>
                 </NavLink>
-                
             </div>
         </div>
     );

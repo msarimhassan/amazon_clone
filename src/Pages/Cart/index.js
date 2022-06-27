@@ -1,15 +1,15 @@
 import React,{useEffect} from 'react';
-import { Container, Row, Col,Button } from 'reactstrap';
+import { Container, Row, Col} from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 
 import CartContainer from '../../components/CartContainer';
 import { Calculate } from '../../app/CartHandler/CartSlice';
 import '../../styles/CartPage.css';
-import NavRoutes from '../../common/NavRoutes'
+
+import Bill from './Bill';
 export default function CartPage() {
-    let navigate=useNavigate();
+    
     const dispatch = useDispatch();
      const products = useSelector((state) => state.cart.cartProducts);
     useEffect(() => {
@@ -17,9 +17,7 @@ export default function CartPage() {
     }, [products]);
     const totalPrice = useSelector((state) => state.cart.totalPrice);
 
-    const handleOrder=()=>{
-         navigate(NavRoutes.Order);
-    }
+   
     
     return (
         <>
@@ -41,24 +39,7 @@ export default function CartPage() {
                         })}
                     </Col>
                     <Col sm={12} lg={4} className='p-5 Bill-Box'>
-                        <h4>Cart totals</h4>
-                        <hr />
-                        <Row>
-                            <Col sm={6}>SubTotal</Col>
-                            <Col sm={6} style={{ textAlign: 'right' }}>
-                                Rs{totalPrice}
-                            </Col>
-                        </Row>
-                        <hr />
-                        <Row>
-                            <Col sm={6}>Total</Col>
-                            <Col sm={6} style={{ textAlign: 'right' }}>
-                                Rs{totalPrice}
-                            </Col>
-                        </Row>
-                        <div className='text-center mt-5'>
-                            <Button onClick={()=>{handleOrder()}}>Proceed to checkout</Button>
-                        </div>
+                        <Bill totalPrice={totalPrice}  />
                     </Col>
                 </Row>
             </Container>

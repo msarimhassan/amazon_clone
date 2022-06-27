@@ -4,29 +4,21 @@ import { useTranslation } from 'react-i18next';
 
 import AuthInput from './AuthInput';
 
-const GeneralInfoForm = ({ values, onNext, handleChange, errors }) => {
+const GeneralInfoForm = ({ values, onSignUp, handleChange, errors }) => {
     const { t } = useTranslation(['Signup']);
     return (
         <div>
             <AuthInput
-                label={t('firstname')}
-                name='firstname'
+                label='Name'
+                name='name'
                 type='text'
-                value={values.firstname}
-                onChange={handleChange}
-                error={errors}
-            />
-            <AuthInput
-                label={t('lastname')}
-                name='lastname'
-                type='text'
-                value={values.lastname}
+                value={values.name}
                 onChange={handleChange}
                 error={errors}
             />
 
             <AuthInput
-                label={t('email')}
+                label='Email'
                 name='email'
                 type='email'
                 value={values.email}
@@ -41,18 +33,16 @@ const GeneralInfoForm = ({ values, onNext, handleChange, errors }) => {
                 onChange={handleChange}
                 error={errors}
             />
-
             <AuthInput
-                label={t('confirmpassword')}
-                name='repassword'
-                type='password'
-                value={values.repassword}
+                label='Phone'
+                name='phone'
+                type='text'
+                value={values.phone}
                 onChange={handleChange}
                 error={errors}
             />
-
-            <Button type='Button' className='w-100 mt-4 btn-color' onClick={onNext}>
-                {t('next')}
+            <Button type='button' className='w-100 mt-4 btn-color' onClick={onSignUp}>
+                Signup
             </Button>
         </div>
     );

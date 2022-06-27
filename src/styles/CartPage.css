@@ -5,6 +5,63 @@
     border-color: #ccc;
 }
 
+.Address-Card{
+    border:1px solid #f5bb5c;
+    border-radius: 30px;
+    padding: 20px;
+    align-items: center;
+    min-width:200px;
+}
+
+.radio-btn{
+    /* border-radius: 70px;
+    border: 1px solid;
+    padding: 10px 20px 10px 20px; */
+    /* width:22px;
+    height:22px;
+    border:1px solid;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center; */
+    width: 22px;
+    height:22px;
+    border-radius: 50%;
+    border : 1px solid #f5bb5c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inside-btn{
+width: 11px;
+height: 11px;
+border: 1px solid #f5bb5c;
+border-radius: 50%;
+
+}
+
+.amazon-btn{
+    background-color: #f5bb5c;
+    border-color:#f5bb5c ;
+    color: white;
+    font-weight: bold;
+    width: 200px;
+    border-radius: 12px;
+    text-transform: uppercase;
+}
+.btn-secondary:hover{
+    background-color: #f5bb5c !important;
+    border-color: #f5bb5c !important;
+    color: white !important;
+    font-weight: bold !important;
+    width: 200px !important;
+    border-radius: 12px !important;
+    text-transform: uppercase !important;
+}
+
+
+
 @media only screen and (max-width: 600px) {
     .Bill-Box {
         border-left:none ;

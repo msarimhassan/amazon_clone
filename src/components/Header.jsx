@@ -1,11 +1,12 @@
 import React,{useEffect} from 'react'
-import {Navbar,NavbarBrand,NavbarToggler,Collapse,Nav,NavItem,NavLink,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem,NavbarText} from 'reactstrap';
+import {Button,Navbar,NavbarBrand,NavbarToggler,Collapse,Nav,NavItem,NavLink,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem,NavbarText} from 'reactstrap';
 import { GrLocation,GrLogin } from 'react-icons/gr';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
+import useToken from '../hooks/useToken';
 
 import Amazonlogo from '../assets/logo.png';
 import NavRoutes from '../common/NavRoutes';
@@ -13,7 +14,9 @@ import NavRoutes from '../common/NavRoutes';
 const Header = () => {
 
      const itemCount=useSelector(state=>state.counter.itemcount);
-      const cartCount = useSelector((state) => state.cart.cartProducts);
+    const cartCount = useSelector((state) => state.cart.cartProducts);
+    const { Logout,token } = useToken();
+    let navigate = useNavigate();
       
 useEffect(()=>{
     if(localStorage.getItem('i8nextLng')?.length>2){
@@ -24,7 +27,13 @@ useEffect(()=>{
 
 const handleLanguage=(e)=>{
    i18next.changeLanguage(e.target.value);
-}
+    }
+    const handleLogout = () => {
+        console.log('Logout')
+        Logout();
+        navigate(NavRoutes.Login);
+
+    }
       
     return (
         <div>
@@ -64,10 +73,15 @@ const handleLanguage=(e)=>{
                         </select>
                     </Nav>
                     <NavbarText>
-                        <Link to={NavRoutes.Login} style={{ textDecoration: 'none' }}>
+                        {token ? <button onClick={()=>handleLogout()}>
+                            <GrLogin />
+                            Logout
+                            </button>
+                         : <Link to={NavRoutes.Login} style={{ textDecoration: 'none' }}>
                             <GrLogin />
                             Login
-                        </Link>
+                        </Link>}
+                        
                         <Link to='cartpage'>
                             <AiOutlineShoppingCart size='2em' />
                             {cartCount.length}

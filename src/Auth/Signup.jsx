@@ -1,65 +1,42 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form } from 'reactstrap';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import Logo from '../assets/logo.png';
 import '../styles/Form.css';
 import { signupSchema } from '../validations';
 import GeneralInfoForm from './Signup/GeneralForm';
-import AddressForm from './Signup/AddressForm';
-import ACNetwork from '../config/ACNetwork';
-import Urls from '../config/Urls';
+import { ACNetwork, Urls, config } from '../config';
+import useToken from '../hooks/useToken';
+import NavRoutes from '../common/NavRoutes';
+
 const initialValues = {
-    firstname: '',
-    lastname: '',
+    name: '',
     email: '',
     password: '',
-    repassword: '',
-    city: '',
-    stname: '',
-    stno: '',
-    zipcode: '',
-};
-
-const onSubmit = async (values) => {
-    const obj = {
-        email: values.email,
-        username: values.firstname + values.lastname[0],
-        password: values.password,
-        name: {
-            firstname: values.firstname,
-            lastname: values.lastname,
-        },
-        address: {
-            city: values.city,
-            street: values.stname,
-            number: values.stno,
-            zipcode: values.zipcode,
-            geolocation: {
-                lat: '-37.3159',
-                long: '81.1496',
-            },
-        },
-        phone: '1-570-236-7033',
-    };
-      console.log(obj);
-    const response = await ACNetwork.post(Urls.signUp,obj,{});
-
-    console.log(response.ok);
+    phone: '',
 };
 
 const Signup = () => {
-    const [isNext, setisNext] = useState(true);
+    let navigate = useNavigate();
+    const { Login } = useToken();
+    const onSubmit = async (values) => {
+        const { name, email, password, phone, address } = values;
+        const obj = { name, email, password, phone, address };
+        console.log(obj);
+        const response = await ACNetwork.post(Urls.signUp, obj, (await config()).headers);
+        console.log(response);
+        Login(response.data.token);
+        navigate(NavRoutes.Homepage);
+    };
     const { values, handleChange, handleSubmit, errors } = useFormik({
         initialValues,
         onSubmit,
         validationSchema: signupSchema,
     });
 
-    const handleNext = () => {
-        setisNext(!isNext);
-    };
     const { t } = useTranslation(['Signup']);
     return (
         <div className='main-login pb-5'>
@@ -67,22 +44,13 @@ const Signup = () => {
             <div className=' border shadow login-form rounded'>
                 <Form inline>
                     <h2>{t('createaccount')}</h2>
-                    {isNext ? (
-                        <GeneralInfoForm
-                            values={values}
-                            onNext={handleNext}
-                            errors={errors}
-                            handleChange={handleChange}
-                        />
-                    ) : (
-                        <AddressForm
-                            values={values}
-                            errors={errors}
-                            onBackClick={handleNext}
-                            handleChange={handleChange}
-                            onSignup={handleSubmit}
-                        />
-                    )}
+
+                    <GeneralInfoForm
+                        values={values}
+                        errors={errors}
+                        handleChange={handleChange}
+                        onSignUp={handleSubmit}
+                    />
                 </Form>
             </div>
         </div>

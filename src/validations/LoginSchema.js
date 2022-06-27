@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
 
 export const loginSchema = Yup.object().shape({
-    username: Yup.string().required('Username in required'),
+    email: Yup.string().required('Email in required').email('Enter a valid email'),
     password: Yup.string()
         .required('Password is required')
         .min(6, 'Password must be at least 6 characters'),

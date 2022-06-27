@@ -9,7 +9,8 @@ const client = create({
 });
 
 export const config = async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('AC-Token');
+    console.log(token);
     return {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -27,7 +28,7 @@ export const authConfig = async (token) => {
 };
 
 export const multipartConfig = async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('AC-Token');
     return {
         headers: {
             Authorization: `Bearer ${token}`,

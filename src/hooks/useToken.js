@@ -6,8 +6,8 @@ const  useToken=()=>{
     const { token, setToken } = useContext(UserContext);
 
     const Login=(t)=>{
-        // localStorage.setItem('AC-Token',t);
-        // setToken(t);
+        localStorage.setItem('AC-Token',t);
+        setToken(t);
        
     }
 
