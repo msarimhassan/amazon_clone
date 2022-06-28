@@ -7,6 +7,7 @@ import AddressForm from './AddressForm';
 import OrderBill from './OrderBill';
 import RadioButton from '../../components/RadioButton';
 import { ACNetwork, config, Urls } from '../../config';
+import CardForm from './CardForm';
 const Array = [
     {
         _id: 1,
@@ -25,7 +26,7 @@ const Array = [
 const PaymentMethod = [
     {
         _id: 0,
-        mode: 'Cash',
+        mode: 'Cash on Delivery',
     },
     {
         _id: 1,
@@ -54,7 +55,7 @@ export default function Order() {
     }, []);
 
     const [userAddress, setUserAddress] = useState(null);
-    const [mode, setMode] = useState();
+    const [mode, setMode] = useState(PaymentMethod[0]);
     const [userCard, setUserCard] = useState();
     const [address, setAddress] = useState();
     const getAddresses = async () => {
@@ -97,7 +98,9 @@ export default function Order() {
                             })}
                         </DropDown>
                         <DropDown Header='Payment Method'>
-                            <Drawer btnText='Add Card' show={false}></Drawer>
+                            <Drawer btnText='Add Card' show={true}>
+                               <CardForm/>
+                            </Drawer>
                             <div className='d-flex flex-row'>
                                 {PaymentMethod.map((payment) => {
                                     return (
@@ -115,6 +118,7 @@ export default function Order() {
                             {mode?.mode == 'Card' ? (
                                 <h4 className='mt-4 ms-4'>Select Card</h4>
                             ) : null}
+                           
                             {mode?.mode == 'Card'
                                 ? CardList.map((Card) => {
                                       return (
