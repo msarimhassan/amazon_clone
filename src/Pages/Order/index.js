@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/CartPage.css';
 import DropDown from '../../components/DropDown';
 import Drawer from '../../components/Drawer';
@@ -8,6 +9,7 @@ import OrderBill from './OrderBill';
 import RadioButton from '../../components/RadioButton';
 import { ACNetwork, config, Urls } from '../../config';
 import CardForm from './CardForm';
+import NavRoutes from '../../common/NavRoutes';
 const Array = [
     {
         _id: 1,
@@ -58,11 +60,20 @@ export default function Order() {
     const [mode, setMode] = useState(PaymentMethod[0]);
     const [userCard, setUserCard] = useState();
     const [address, setAddress] = useState();
+    let navigate = useNavigate();
     const getAddresses = async () => {
         const response = await ACNetwork.get(Urls.getAddresses,(await config()).headers,{});    
         console.log(response.data);
         setAddress(response.data.addresses);
     };
+
+
+
+    const handleOrder = () => {
+        
+        navigate(NavRoutes.confirmOrder, { state: { paymentMethod: mode, address: userAddress } })
+        
+    }
     return (
         <>
             <Container>
@@ -131,7 +142,7 @@ export default function Order() {
                                       );
                                   })
                                 : null}
-                            <Button className='float-end mt-2 amazon-btn'>Next</Button>
+                            <Button className='float-end mt-2 amazon-btn' onClick={()=>handleOrder()}>Next</Button>
                         </DropDown>
                     </Col>
                     <Col lg={4}>

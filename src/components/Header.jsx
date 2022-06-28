@@ -1,96 +1,132 @@
-import React,{useEffect} from 'react'
-import {Button,Navbar,NavbarBrand,NavbarToggler,Collapse,Nav,NavItem,NavLink,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem,NavbarText} from 'reactstrap';
-import { GrLocation,GrLogin } from 'react-icons/gr';
-import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { Link,useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+    UncontrolledDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+    Input,
+    NavbarText,
+    Button
+} from 'reactstrap';
+import { GrLocation, GrLogin } from 'react-icons/gr';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import useToken from '../hooks/useToken';
+import NotificationBadge from 'react-notification-badge';
 
 import Amazonlogo from '../assets/logo.png';
+import UsaFlag from '../assets/usa-flag.svg';
 import NavRoutes from '../common/NavRoutes';
+import { useState } from 'react';
+import '../styles/Header.css';
+import { Icons } from '../common';
 
 const Header = () => {
-
-     const itemCount=useSelector(state=>state.counter.itemcount);
+    const { AI,FA } = Icons;
+    const itemCount = useSelector((state) => state.counter.itemcount);
     const cartCount = useSelector((state) => state.cart.cartProducts);
-    const { Logout,token } = useToken();
+    const { Logout, token } = useToken();
     let navigate = useNavigate();
-      
-useEffect(()=>{
-    if(localStorage.getItem('i8nextLng')?.length>2){
-         i18next.changeLanguage('en');
+    const [open, setOpen] = useState(false);
+    const [openDrop, setOpenDrop] = useState(false);
+    const handleNavbar = () => {
+        console.log('Toggle');
+        setOpen(!open);
+    };
+    useEffect(() => {
+        if (localStorage.getItem('i8nextLng')?.length > 2) {
+            i18next.changeLanguage('en');
+        }
+    }, []);
 
-    }
-},[])
-
-const handleLanguage=(e)=>{
-   i18next.changeLanguage(e.target.value);
-    }
+    const handleLanguage = (e) => {
+        i18next.changeLanguage(e.target.value);
+    };
     const handleLogout = () => {
-        console.log('Logout')
+        console.log('Logout');
         Logout();
         navigate(NavRoutes.Login);
-
-    }
-      
+    };
+  
     return (
         <div>
-            <Navbar color='light' expand='md' light>
-                <NavbarBrand href='#'>
-                    <Link to='/'>
-                        <img src={Amazonlogo} alt='' width='110px' />
-                    </Link>
+            <Navbar style={{ backgroundColor: '#131921', color: 'white' }} light expand='lg'>
+                <NavbarBrand href='/'>
+                    <img src={Amazonlogo} alt='Amazon-Logo' width='150px' />
                 </NavbarBrand>
-                <NavbarToggler onClick={function noRefCheck() {}} />
-                <Collapse navbar>
-                    <Nav className='me-auto' navbar>
-                        <NavItem>
-                            <NavLink href='#'>
-                                Deliver to Pakistan <GrLocation />
+                <NavbarToggler onClick={() => handleNavbar()} style={{color:'white'}} />
+                <Collapse isOpen={open} navbar>
+                    <Nav className='m-auto' navbar>
+                        {/* <NavItem>
+                            <NavLink>
+                                <Link style={{ textDecoration: 'none' }} to='/'>
+                                    Orders
+                                </Link>
                             </NavLink>
-                        </NavItem>
+                        </NavItem> */}
                         <NavItem>
-                            <NavLink href='#'>GitHub</NavLink>
+                            <div className='d-flex flex-row'>
+                                <Input placeholder='Search' className='Search-Box' />
+                                <button className='Search-Btn'>
+                                    <AI.AiOutlineSearch size='25px' />
+                                </button>
+                            </div>
                         </NavItem>
-                        <UncontrolledDropdown inNavbar nav>
-                            <DropdownToggle caret nav>
-                                Account and List
+                        <UncontrolledDropdown nav inNavbar>
+                            <DropdownToggle nav caret>
+                                <img src={UsaFlag} width='30px' height='25px' />
+                            </DropdownToggle>
+                            <DropdownMenu right>
+                                <DropdownItem>English</DropdownItem>
+                                <DropdownItem divider />
+                                <DropdownItem>French</DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                    </Nav>
+                    <NavbarText className='me-3'>
+                        <AI.AiOutlineShoppingCart size='2em' />
+                    </NavbarText>
+                    {token ? (
+                        <UncontrolledDropdown>
+                            <DropdownToggle
+                                caret
+                                style={{ backgroundColor: 'transparent', border: 0 }}
+                            >
+                                <img
+                                    src='https://mdbcdn.b-cdn.net/img/new/avatars/1.webp'
+                                    className='rounded-circle shadow-4'
+                                    width='50px'
+                                    alt='Avatar'
+                                />
                             </DropdownToggle>
                             <DropdownMenu right>
                                 <DropdownItem>Profile</DropdownItem>
-                                <DropdownItem>Account</DropdownItem>
                                 <DropdownItem divider />
-                                <DropdownItem>Logout</DropdownItem>
+                                <DropdownItem>Order</DropdownItem>
+                                <DropdownItem divider />
+                                <DropdownItem onClick={()=>handleLogout()}>Logout</DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        {/* For languages */}
-                        <select name='languages' id='languages' onChange={handleLanguage}>
-                            Languages
-                            <option value='en'>English</option>
-                            <option value='fr'>French</option>
-                        </select>
-                    </Nav>
-                    <NavbarText>
-                        {token ? <button onClick={()=>handleLogout()}>
-                            <GrLogin />
-                            Logout
-                            </button>
-                         : <Link to={NavRoutes.Login} style={{ textDecoration: 'none' }}>
-                            <GrLogin />
-                            Login
-                        </Link>}
-                        
-                        <Link to='cartpage'>
-                            <AiOutlineShoppingCart size='2em' />
-                            {cartCount.length}
-                        </Link>
-                    </NavbarText>
+                    ) : (
+                        <NavbarText>
+                            <Button color='warning' onClick={() => navigate(NavRoutes.Login)}>
+                                Login
+                            </Button>
+                        </NavbarText>
+                    )}
                 </Collapse>
             </Navbar>
         </div>
     );
-}
+};
 
 export default Header;

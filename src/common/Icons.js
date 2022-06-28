@@ -3,5 +3,8 @@ import * as BI from 'react-icons/bi';
 import * as AI from 'react-icons/ai';
 import * as MD from 'react-icons/md';
 import * as FC from 'react-icons/fc';
+import * as BS from 'react-icons/bs';
+import * as TB from 'react-icons/tb';
+import * as FA from 'react-icons/fa';
 
-export { AI,BI,RI,MD,FC};
+export { AI,BI,RI,MD,FC,BS,TB,FA};

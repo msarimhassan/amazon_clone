@@ -9,4 +9,5 @@ export default {
     getCities: 'customer/cities-list/',
     addNewAddress: 'customer/add-new-address',
     getAddresses: 'customer/get-addresses',
+    addOrder: 'customer/add-to-order',
 };
