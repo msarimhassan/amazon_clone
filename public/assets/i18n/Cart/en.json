@@ -1,0 +1,10 @@
+{
+    "shoppingcart":"Shopping Cart ",
+    "orderdetails":"Order Details",
+    "product":"Product",
+    "price":"Price",
+    "quantity":"Quantity",
+    "total":"Total",
+    "subtotal":"SubTotal",
+    "proceed":"Proceed to checkout"
+}

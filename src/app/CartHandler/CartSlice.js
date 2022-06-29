@@ -9,9 +9,10 @@ export const CartSlice = createSlice({
     initialState,
     reducers: {
         AddToCart: (state, action) => {
-            console.log({state});
-            console.log({action});
-            const itemIndex = state.cartProducts.findIndex((item) => item._id === action.payload._id);
+            console.log();
+            const itemIndex = state.cartProducts.findIndex(
+                (item) => item._id === action.payload._id
+            );
             if (itemIndex >= 0) {
                 state.cartProducts[itemIndex].quantity += 1;
             } else {
@@ -31,22 +32,41 @@ export const CartSlice = createSlice({
             });
         },
         Increment: (state, action) => {
-            const itemIndex = state.cartProducts.findIndex((item) => item._id === action.payload._id);
+            const itemIndex = state.cartProducts.findIndex(
+                (item) => item._id === action.payload._id
+            );
             if (itemIndex >= 0) {
                 state.cartProducts[itemIndex].quantity += 1;
             }
         },
         Decrement: (state, action) => {
-            const itemIndex = state.cartProducts.findIndex((item) => item._id === action.payload._id);
+            const itemIndex = state.cartProducts.findIndex(
+                (item) => item._id === action.payload._id
+            );
             if (itemIndex >= 0) {
                 if (state.cartProducts[itemIndex].quantity > 1) {
                     state.cartProducts[itemIndex].quantity -= 1;
                 }
             }
         },
+        SetCart: (state, action) => {
+            const newData = state.cartProducts.map((element, index) => {
+                return {
+                    ...element,
+                    ...action.payload[index],
+                };
+            });
+            console.log({ newData })
+            state.cartProducts=newData
+        },
+        EmptyCart: (state, action) => {
+            state.cartProducts = [];
+            state.totalPrice = 0;
+        },
     },
 });
 
-export const { AddToCart, Calculate, Increment, Decrement, DeleteProduct } = CartSlice.actions;
+export const { AddToCart, Calculate, Increment, Decrement, DeleteProduct, SetCart,EmptyCart } =
+    CartSlice.actions;
 
 export default CartSlice.reducer;

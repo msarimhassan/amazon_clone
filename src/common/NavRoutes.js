@@ -1,7 +1,7 @@
 export default {
     Homepage:'/',
-    ProductPage: 'productpage',
-    CartPage: 'cartpage',
+    ProductPage: '/productpage',
+    CartPage: '/cartpage',
     ProductDetail: '/productdetail',
     Login: '/login',
     Signup: '/signup',

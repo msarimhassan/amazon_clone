@@ -9,21 +9,8 @@ import OrderBill from './OrderBill';
 import RadioButton from '../../components/RadioButton';
 import { ACNetwork, config, Urls } from '../../config';
 import CardForm from './CardForm';
+import { toast, ToastContainer } from 'react-toastify';
 import NavRoutes from '../../common/NavRoutes';
-const Array = [
-    {
-        _id: 1,
-        address: 'House#2,Gulistan Street#2, Chohan Road , Islampura, Lahore , Pakistan',
-    },
-    {
-        _id: 2,
-        address: 'House#3,Gulistan Street#3, Chohan Road , Islampura, Lahore , Pakistan',
-    },
-    {
-        _id: 3,
-        address: 'House#4,Gulistan Street#4, Chohan Road , Islampura, Lahore , Pakistan',
-    },
-];
 
 const PaymentMethod = [
     {
@@ -32,50 +19,45 @@ const PaymentMethod = [
     },
     {
         _id: 1,
-        mode: 'Card',
-    },
-];
-
-const CardList = [
-    {
-        _id: 1,
-        CardNumber: '*****09090',
-    },
-    {
-        _id: 2,
-        CardNumber: '*****09090',
-    },
-    {
-        _id: 3,
-        CardNumber: '*****09090',
+        mode: 'card',
     },
 ];
 
 export default function Order() {
     useEffect(() => {
         getAddresses();
+        getCards();
     }, []);
 
-    const [userAddress, setUserAddress] = useState(null);
+    const [userAddress, setUserAddress] = useState();
     const [mode, setMode] = useState(PaymentMethod[0]);
     const [userCard, setUserCard] = useState();
     const [address, setAddress] = useState();
+    const [cardList, setCardList] = useState([]);
     let navigate = useNavigate();
     const getAddresses = async () => {
-        const response = await ACNetwork.get(Urls.getAddresses,(await config()).headers,{});    
+        const response = await ACNetwork.get(Urls.getAddresses, (await config()).headers, {});
         console.log(response.data);
         setAddress(response.data.addresses);
     };
 
-
+    const getCards =async() => {
+        const response = await ACNetwork.get(Urls.getCards, (await config()).headers);
+        setCardList(response.data.cards);
+    }
 
     const handleOrder = () => {
-        
-        navigate(NavRoutes.confirmOrder, { state: { paymentMethod: mode, address: userAddress } })
-        
-    }
+        if (!userAddress) {
+            toast.warn('Please Select the Address');
+            return;
+        }
+        navigate(NavRoutes.confirmOrder, {
+            state: { paymentMethod: mode, address: userAddress, cardId:userCard&&userCard._id },
+        });
+    };
     return (
         <>
+            <ToastContainer />
             <Container>
                 <Row>
                     <Col lg={8}>
@@ -110,7 +92,7 @@ export default function Order() {
                         </DropDown>
                         <DropDown Header='Payment Method'>
                             <Drawer btnText='Add Card' show={true}>
-                               <CardForm/>
+                                <CardForm addCard={setCardList} />
                             </Drawer>
                             <div className='d-flex flex-row'>
                                 {PaymentMethod.map((payment) => {
@@ -126,24 +108,26 @@ export default function Order() {
                                     );
                                 })}
                             </div>
-                            {mode?.mode == 'Card' ? (
+                            {mode?.mode == 'card' ? (
                                 <h4 className='mt-4 ms-4'>Select Card</h4>
                             ) : null}
-                           
-                            {mode?.mode == 'Card'
-                                ? CardList.map((Card) => {
+
+                            {mode?.mode == 'card'
+                                ? cardList?.map((Card) => {
                                       return (
                                           <RadioButton
                                               key={Card._id}
-                                              label={Card.CardNumber}
+                                              label={Card.cardNumber}
                                               onClick={() => setUserCard(Card)}
                                               selected={userCard?._id === Card._id}
                                           />
                                       );
                                   })
                                 : null}
-                            <Button className='float-end mt-2 amazon-btn' onClick={()=>handleOrder()}>Next</Button>
                         </DropDown>
+                        <Button className='float-end mt-4 amazon-btn' onClick={() => handleOrder()}>
+                            Next
+                        </Button>
                     </Col>
                     <Col lg={4}>
                         <OrderBill />

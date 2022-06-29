@@ -1,0 +1,10 @@
+{
+    "shoppingcart":"Panier",
+    "orderdetails":"détails de la commande",
+    "product":"produit",
+    "price":"le prix",
+    "quantity":"quantité",
+    "total":"Totale",
+    "subtotal":"total",
+    "proceed":"Passer à la caisse"
+}

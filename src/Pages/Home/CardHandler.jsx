@@ -11,8 +11,8 @@ const CardHandler = ({ categories }) => {
             setLatitude(position.coords.latitude);
         });
 
-        console.log({ longitude });
-        console.log({ latitude });
+        // console.log({ longitude });
+        // console.log({ latitude });
     }, [longitude, latitude]);
     return (
         <Container className='mb-5'>

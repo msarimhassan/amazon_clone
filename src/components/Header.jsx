@@ -13,7 +13,7 @@ import {
     DropdownItem,
     Input,
     NavbarText,
-    Button
+    Button,
 } from 'reactstrap';
 import { GrLocation, GrLogin } from 'react-icons/gr';
 import { Link, useNavigate } from 'react-router-dom';
@@ -25,13 +25,14 @@ import NotificationBadge from 'react-notification-badge';
 
 import Amazonlogo from '../assets/logo.png';
 import UsaFlag from '../assets/usa-flag.svg';
+import FrenchFlag from '../assets/french-flag.svg';
 import NavRoutes from '../common/NavRoutes';
 import { useState } from 'react';
 import '../styles/Header.css';
 import { Icons } from '../common';
 
 const Header = () => {
-    const { AI,FA } = Icons;
+    const { AI, FA } = Icons;
     const itemCount = useSelector((state) => state.counter.itemcount);
     const cartCount = useSelector((state) => state.cart.cartProducts);
     const { Logout, token } = useToken();
@@ -50,20 +51,20 @@ const Header = () => {
 
     const handleLanguage = (e) => {
         i18next.changeLanguage(e.target.value);
+        window.location.reload()
     };
     const handleLogout = () => {
-        console.log('Logout');
         Logout();
         navigate(NavRoutes.Login);
     };
-  
+    const { t } = useTranslation(['Categories']);
     return (
         <div>
-            <Navbar style={{ backgroundColor: '#131921', color: 'white' }} light expand='lg'>
+            <Navbar style={{ backgroundColor: '#131921', color: 'white' }} expand='lg'>
                 <NavbarBrand href='/'>
                     <img src={Amazonlogo} alt='Amazon-Logo' width='150px' />
                 </NavbarBrand>
-                <NavbarToggler onClick={() => handleNavbar()} style={{color:'white'}} />
+                <NavbarToggler onClick={() => handleNavbar()} style={{ color: 'white' }} />
                 <Collapse isOpen={open} navbar>
                     <Nav className='m-auto' navbar>
                         {/* <NavItem>
@@ -82,18 +83,29 @@ const Header = () => {
                             </div>
                         </NavItem>
                         <UncontrolledDropdown nav inNavbar>
-                            <DropdownToggle nav caret>
-                                <img src={UsaFlag} width='30px' height='25px' />
+                            <DropdownToggle nav caret style={{ color: 'white' }}>
+                                {i18next.language == 'en' ? (
+                                    <img src={UsaFlag} width='30px' height='25px' />
+                                ) : (
+                                    <img src={FrenchFlag} width='30px' height='25px' />
+                                )}
                             </DropdownToggle>
                             <DropdownMenu right>
-                                <DropdownItem>English</DropdownItem>
+                                <DropdownItem value='en' onClick={(e) => handleLanguage(e)}>
+                                    English
+                                </DropdownItem>
                                 <DropdownItem divider />
-                                <DropdownItem>French</DropdownItem>
+                                <DropdownItem value='fr' onClick={(e) => handleLanguage(e)}>
+                                    French
+                                </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
                     </Nav>
                     <NavbarText className='me-3'>
-                        <AI.AiOutlineShoppingCart size='2em' />
+                        {cartCount?.length}
+                        <Link to={NavRoutes.CartPage}>
+                            <AI.AiOutlineShoppingCart size='2em' color='white' />
+                        </Link>
                     </NavbarText>
                     {token ? (
                         <UncontrolledDropdown>
@@ -109,11 +121,11 @@ const Header = () => {
                                 />
                             </DropdownToggle>
                             <DropdownMenu right>
-                                <DropdownItem>Profile</DropdownItem>
+                                <DropdownItem>{t('profile')}</DropdownItem>
                                 <DropdownItem divider />
                                 <DropdownItem>Order</DropdownItem>
                                 <DropdownItem divider />
-                                <DropdownItem onClick={()=>handleLogout()}>Logout</DropdownItem>
+                                <DropdownItem onClick={() => handleLogout()}>Logout</DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
                     ) : (

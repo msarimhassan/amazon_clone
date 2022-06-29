@@ -5,8 +5,8 @@ export default {
         client.setHeaders(headers);
         return await client.get(url, data);
     },
-    post: async (url, data,headers) => {
-         client.setHeaders(headers);
+    post: async (url, data, headers) => {
+        client.setHeaders(headers);
         return await client.post(url, data);
     },
     patch: async (url, data, headers) => {

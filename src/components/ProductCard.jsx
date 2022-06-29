@@ -11,11 +11,14 @@ import { AddToCart } from '../app/CartHandler/CartSlice';
 import { Icons } from '../common';
 import '../styles/Card.css';
 const ProductCard = ({ product }) => {
+    console.log(product);
+
     const dispatch = useDispatch();
     const products = useSelector((state) => state.cart.cartProducts);
-    const {AI}=Icons;
+    const { AI } = Icons;
 
     const handleProduct = (product) => {
+        console.log(product);
         dispatch(AddToCart(product));
     };
     const { t } = useTranslation(['Products']);
@@ -23,18 +26,18 @@ const ProductCard = ({ product }) => {
         <Card className='card-with-shadow'>
             <Link
                 to={NavRoutes.ProductDetail}
-                state={{ id: product._id }}
+                state={{ id: product?._id }}
                 style={{ textDecoration: 'none' }}
             >
                 <CardBody>
                     <img
-                        src={product.imageUrl}
+                        src={product?.imageUrl}
                         alt='Product-image'
                         className='rounded mx-auto d-block product-card-image'
                     />
                     <CardText>
                         <CardTitle tag='h3' className='text-black mt-2'>
-                            {t(product.name)}
+                            {product?.name}
                         </CardTitle>
                         <Ratings />
                         <div className='d-flex justify-content-between'>
@@ -43,19 +46,25 @@ const ProductCard = ({ product }) => {
                                 {' : '}
                             </CardText>
                             <CardText tag='h5' style={{ color: '#c45500' }}>
-                                Rs{t(product.sellingPrice)}
+                                Rs{product?.sellingPrice}
                             </CardText>
                         </div>
                     </CardText>
                 </CardBody>
             </Link>
-            <Button
-                className=' product-button btn-color'
-                disabled={products.some((item) => item._id == product._id)}
-                onClick={() => handleProduct(product)}
-            >
-                {t('addtocart')} <AI.AiOutlineShoppingCart size={28}/>
-            </Button>
+            {product?.quantity > 0 ? (
+                <Button
+                    className=' product-button btn-color'
+                    disabled={products?.some((item) => item._id == product?._id)}
+                    onClick={() => handleProduct(product)}
+                >
+                    {t('addtocart')} <AI.AiOutlineShoppingCart size={28} />
+                </Button>
+            ) : (
+                <div className='text-center' style={{ backgroundColor: 'red',color:'white' }}>
+                    <h5 className='mt-1'>Not in stock</h5>
+                </div>
+            )}
         </Card>
     );
 };

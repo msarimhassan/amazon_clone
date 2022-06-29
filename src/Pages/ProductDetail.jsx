@@ -1,28 +1,32 @@
-import React,{useEffect,useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { Container,Row,Col,Table } from 'reactstrap';
+import { Container, Row, Col, Table } from 'reactstrap';
 import Ratings from '../components/Ratings';
 import Loader from '../assets/animations';
-import {ACNetwork,Urls} from '../config'
+import { ACNetwork, config, Urls } from '../config';
+import i18next from 'i18next';
 const ProductDetail = () => {
-
-    let location=useLocation();
-    const[loading,setLoading]=useState(true);
-    const[product,setProduct]=useState();
-    useEffect(()=>{
+    let location = useLocation();
+    const [loading, setLoading] = useState(true);
+    const [product, setProduct] = useState();
+    useEffect(() => {
         getProduct();
-    },[])
+    }, []);
 
-    const getProduct=async()=>{
+    const getProduct = async () => {
         setLoading(true);
-          const response=await ACNetwork.get(Urls.getProduct+location.state.id,{});
+        const response = await ACNetwork.get(
+            Urls.getProduct(i18next.language) + location.state.id,
+            (
+                await config()
+            ).headers
+        );
 
-          console.log(response.data);
-          setProduct(response.data.product);
-  
-          setLoading(false);
-    }
+        setProduct(response.data.product);
+
+        setLoading(false);
+    };
     return (
         <div>
             {/* Detail Container */}
@@ -57,14 +61,12 @@ const ProductDetail = () => {
                                 <tbody>
                                     <tr>
                                         <th scope='row'>Special Feature</th>
-                                        <td>
-                                            {product&&product.features}
-                                        </td>
+                                        <td>{product && product.features}</td>
                                     </tr>
-                                
+
                                     <tr>
                                         <th scope='row'>Brand</th>
-                                        <td>{product&&product.brandName}</td>
+                                        <td>{product && product.brandName}</td>
                                     </tr>
                                 </tbody>
                             </Table>

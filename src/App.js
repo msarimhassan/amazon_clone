@@ -5,7 +5,9 @@ import { UserContext } from './Context';
 import { PublicRoutes } from './common/PublicRoutes';
 import { PrivateRoutes } from './common/PrivateRoutes';
 import { AuthRoutes } from './common/AuthRoutes';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+            
 const App = () => {
     const [token, setToken] = useState();
 
@@ -31,6 +33,7 @@ const App = () => {
             <UserContext.Provider value={{ setToken, token }}>
                 <Router>
                     <Header />
+                    <ToastContainer/>
                     <RoutesList
                         data={
                             !token

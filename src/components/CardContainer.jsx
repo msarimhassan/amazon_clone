@@ -4,6 +4,7 @@ import { Card, CardBody, CardTitle, CardSubtitle, CardText, Button, CardImg } fr
 import { Link } from 'react-router-dom';
 import NavRoutes from '../common/NavRoutes';
 import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
 
 const CardContainer = ({ id, image, name }) => {
     const { t } = useTranslation(['Products']);
@@ -17,10 +18,10 @@ const CardContainer = ({ id, image, name }) => {
                 className='rounded'
             />
             <CardBody>
-                <CardTitle tag='h5'>{t(name)}</CardTitle>
+                <CardTitle tag='h5'>{name}</CardTitle>
                 <Link
                     to={NavRoutes.ProductPage}
-                    state={{ id: id ,name}}
+                    state={{ id: id }}
                     style={{ textDecoration: 'none', cursor: 'pointer', color: 'primary' }}
                 >
                     <Button color='danger'>{t('shopnow')}</Button>

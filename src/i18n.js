@@ -7,7 +7,7 @@ import i18next from 'i18next';
 i18.use(Backend).use(LanguageDetector).use(initReactI18next).init({
 
     backend:{
-        //translation file paths are given in bcakcend
+        //translation file paths are given in backcend
         loadPath:"assets/i18n/{{ns}}//{{lng}}.json"
     },
     fallbackLng: 'en',

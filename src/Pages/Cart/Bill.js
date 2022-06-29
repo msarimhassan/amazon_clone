@@ -2,26 +2,27 @@ import React from 'react'
 import {Row,Col,Button} from 'reactstrap';
 import NavRoutes from '../../common/NavRoutes';
 import { useNavigate } from 'react-router-dom';
-
+import { useTranslation } from 'react-i18next';
 
 export default function Bill({totalPrice}) {
   let navigate = useNavigate();
    const handleOrder = () => {
        navigate(NavRoutes.Order);
-   };
+    };
+    const { t } = useTranslation(['Cart']);
   return (
       <>
-          <h4>Order Details</h4>
+          <h4>{t('orderdetails')}</h4>
           <hr />
           <Row>
-              <Col sm={6}>SubTotal</Col>
+              <Col sm={6}>{t('subtotal')}</Col>
               <Col sm={6} style={{ textAlign: 'right' }}>
                   Rs{totalPrice}
               </Col>
           </Row>
           <hr />
           <Row>
-              <Col sm={6}>Total</Col>
+              <Col sm={6}>{t('total') }</Col>
               <Col sm={6} style={{ textAlign: 'right' }}>
                   Rs{totalPrice}
               </Col>
@@ -33,7 +34,7 @@ export default function Bill({totalPrice}) {
                   }}
                   className='amazon-btn'
               >
-                  Proceed to checkout
+                  {t('proceed')}
               </Button>
           </div>
       </>
