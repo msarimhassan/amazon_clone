@@ -7,6 +7,7 @@ import { PrivateRoutes } from './common/PrivateRoutes';
 import { AuthRoutes } from './common/AuthRoutes';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "./App.css";
             
 const App = () => {
     const [token, setToken] = useState();

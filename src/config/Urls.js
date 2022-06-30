@@ -13,4 +13,6 @@ export default {
     changeName: (ln) => `products/${ln}/change-names`,
     addCard: 'customer/add-card',
     getCards: 'customer/get-card',
+    getOrders: 'customer/my-orders',
+    getOrderDetail: 'customer/order-detail/',
 };
