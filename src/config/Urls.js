@@ -15,4 +15,5 @@ export default {
     getCards: 'customer/get-card',
     getOrders: 'customer/my-orders',
     getOrderDetail: 'customer/order-detail/',
+    getOrderHistory: 'customer/orders-history',
 };

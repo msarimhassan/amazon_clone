@@ -1,27 +1,32 @@
-import React,{useEffect,useState} from 'react';
-import DropDown from './DropDown';
-import { ACNetwork, Urls, config } from '../../config';
-import Loader from '../../assets/animations';
+import React, { useState } from 'react';
+
+import OrderHistory from './OrderHistory';
+import MyOrders from './MyOrders';
 
 export default function OrderDetails() {
-    const [userOrders, setUserOrders] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const getOrder = async () => {
-        setLoading(true);
-        const response = await ACNetwork.get(Urls.getOrders, (await config()).headers);
-        console.log(response.data);
-        setUserOrders(response.data.orders);
-        setLoading(false);
-    }
-    useEffect(() => {
-        getOrder();
-   },[])
-    
-    return <>
-        {loading ? <Loader /> :
-            userOrders.map((order) => {
-                return <DropDown order={order}  />;
-            })}
-    </>;      
-        
+    const [currentTab, setCurrentTab] = useState('orders');
+
+    return (
+        <>
+            <div className='d-flex justify-content-center'>
+                <div
+                    className='tab'
+                    style={{ backgroundColor: currentTab === 'orders' ? '#f5bb5c' : 'white', color: currentTab === 'orders' ? 'white' : 'black' }}
+                    onClick={() => setCurrentTab('orders')}
+                >
+                    My Orders
+                </div>
+                <div
+                    className='tab'
+                    style={{ backgroundColor: currentTab === 'orders' ? 'white' : '#f5bb5c', color: currentTab === 'orders' ? 'black' : 'white'  }}
+                    onClick={() => setCurrentTab('ordershistory')}
+                >
+                    Orders History
+                </div>
+            </div>
+
+            {/* conditional rendering  */}
+            {currentTab === 'orders' ? <MyOrders /> : <OrderHistory />}
+        </>
+    );
 }
