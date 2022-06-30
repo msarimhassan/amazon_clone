@@ -34,6 +34,8 @@ export default function Order() {
     const [userCard, setUserCard] = useState();
     const [address, setAddress] = useState();
     const [cardList, setCardList] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [showCardModal, setShowCardModal] = useState(false);
     let navigate = useNavigate();
     const getAddresses = async () => {
         const response = await ACNetwork.get(Urls.getAddresses, (await config()).headers, {});
@@ -62,8 +64,14 @@ export default function Order() {
                 <Row>
                     <Col lg={8}>
                         <DropDown Header='Address Details'>
-                            <Drawer btnText='Add Address' show={true}>
-                                <AddressForm setAddress={setAddress} />
+                            <Button
+                                className='float-end amazon-btn'
+                                onClick={() => setShowModal(true)}
+                            >
+                                Add Address
+                            </Button>
+                            <Drawer open={showModal} setOpen={setShowModal} Header='Add Address'>
+                                <AddressForm setOpen={setShowModal} setAddress={setAddress} />
                             </Drawer>
                             <br />
                             <br />
@@ -91,8 +99,14 @@ export default function Order() {
                             })}
                         </DropDown>
                         <DropDown Header='Payment Method'>
-                            <Drawer btnText='Add Card' show={true}>
-                                <CardForm addCard={setCardList} />
+                            <Button
+                                className='float-end amazon-btn'
+                                onClick={() => setShowCardModal(true)}
+                            >
+                                Add Card
+                            </Button>
+                            <Drawer open={showCardModal} setOpen={setShowCardModal} Header="Add Card">
+                                <CardForm setShowModal={setShowCardModal} addCard={setCardList} />
                             </Drawer>
                             <div className='d-flex flex-row'>
                                 {PaymentMethod.map((payment) => {

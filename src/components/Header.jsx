@@ -6,7 +6,7 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
+    Badge,
     UncontrolledDropdown,
     DropdownToggle,
     DropdownMenu,
@@ -104,9 +104,12 @@ const Header = () => {
                         </UncontrolledDropdown>
                     </Nav>
                     <NavbarText className='me-3'>
-                        {cartCount?.length}
+                        {/* <Badge color='warning'>{cartCount?.length}</Badge> */}
                         <Link to={NavRoutes.CartPage}>
+                            <div>
+                            <NotificationBadge count={cartCount?.length}  />
                             <AI.AiOutlineShoppingCart size='2em' color='white' />
+                                </div>
                         </Link>
                     </NavbarText>
                     {token ? (
@@ -129,7 +132,9 @@ const Header = () => {
                                     Order
                                 </DropdownItem>
                                 <DropdownItem divider />
-                                <DropdownItem onClick={() =>navigate(NavRoutes.myCards)}>Cards</DropdownItem>
+                                <DropdownItem onClick={() => navigate(NavRoutes.myCards)}>
+                                    Cards
+                                </DropdownItem>
                                 <DropdownItem divider />
                                 <DropdownItem onClick={() => handleLogout()}>Logout</DropdownItem>
                             </DropdownMenu>

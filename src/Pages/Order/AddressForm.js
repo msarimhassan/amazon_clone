@@ -11,7 +11,7 @@ const initialValues = {
     streetNumber: '',
 };
 
-const AddressForm = ({ setAddress }) => {
+const AddressForm = ({ setAddress,setOpen }) => {
     const [countries, setCountries] = useState();
     const [states, setStates] = useState();
     const [cities, setCities] = useState();
@@ -80,6 +80,8 @@ const AddressForm = ({ setAddress }) => {
         setAddress((preState) => {
             return [...preState, response.data.address];
         });
+
+        setOpen(false);
     };
     const { values, handleChange, handleSubmit, errors } = useFormik({
         initialValues,
