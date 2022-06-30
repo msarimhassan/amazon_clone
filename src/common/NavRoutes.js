@@ -8,6 +8,7 @@ export default {
     Address: '/signup/address',
     Order: '/order',
     confirmOrder: '/confirmOrder',
-    myOrder:'/myorders',
+    myOrder: '/myorders',
+    myCards:'mycards',
     NotFound:'*',
 };

@@ -8,4 +8,5 @@ import * as TB from 'react-icons/tb';
 import * as FA from 'react-icons/fa';
 import * as GI from 'react-icons/gi';
 
+
 export { AI,BI,RI,MD,FC,BS,TB,FA,GI};

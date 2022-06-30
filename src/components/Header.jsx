@@ -129,6 +129,8 @@ const Header = () => {
                                     Order
                                 </DropdownItem>
                                 <DropdownItem divider />
+                                <DropdownItem onClick={() =>navigate(NavRoutes.myCards)}>Cards</DropdownItem>
+                                <DropdownItem divider />
                                 <DropdownItem onClick={() => handleLogout()}>Logout</DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
