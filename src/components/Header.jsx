@@ -69,16 +69,10 @@ const Header = () => {
                 </NavbarToggler>
                 <Collapse isOpen={open} navbar>
                     <Nav className='m-auto' navbar>
-                        {/* <NavItem>
-                            <NavLink>
-                                <Link style={{ textDecoration: 'none' }} to='/'>
-                                    Orders
-                                </Link>
-                            </NavLink>
-                        </NavItem> */}
+                       
                         <NavItem>
                             <div className='d-flex flex-row'>
-                                <Input placeholder='Search' className='Search-Box' />
+                                <Input placeholder='Search' onChange={()=>console.log('change')} className='Search-Box' />
                                 <button className='Search-Btn'>
                                     <AI.AiOutlineSearch size='25px' />
                                 </button>

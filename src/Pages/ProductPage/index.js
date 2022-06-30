@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import i18next from 'i18next';
 
+
 import ProductCard from '../../components/ProductCard';
 import { ACNetwork, config, Urls } from '../../config';
 import Loader from '../../assets/animations';

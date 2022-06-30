@@ -26,7 +26,7 @@ const ProductCard = ({ product }) => {
         <Card className='card-with-shadow'>
             <Link
                 to={NavRoutes.ProductDetail}
-                state={{ id: product?._id }}
+                state={{ id: product?._id, data: product }}
                 style={{ textDecoration: 'none' }}
             >
                 <CardBody>
@@ -58,10 +58,17 @@ const ProductCard = ({ product }) => {
                     disabled={products?.some((item) => item._id == product?._id)}
                     onClick={() => handleProduct(product)}
                 >
-                    {t('addtocart')} <AI.AiOutlineShoppingCart size={28} />
+                    {products?.some((item) => item._id == product?._id) ? (
+                        'Added in Cart'
+                    ) : (
+                        <>
+                            {' '}
+                            {t('addtocart')} <AI.AiOutlineShoppingCart size={28} />
+                        </>
+                    )}
                 </Button>
             ) : (
-                <div className='text-center' style={{ backgroundColor: 'red',color:'white' }}>
+                <div className='text-center' style={{ backgroundColor: 'red', color: 'white' }}>
                     <h5 className='mt-1'>Not in stock</h5>
                 </div>
             )}

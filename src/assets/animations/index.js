@@ -1,10 +1,11 @@
 import React from 'react';
 import Lottie from 'react-lottie'
 import circleloader from './circleloader.json';
+import amazonloader from './amazonloader.json';
 
 export default function Loader() {
     const mainDivStyles = {
-        opacity: 0.6,
+        
         height: '90vh',
         display: 'flex',
         zIndex: 9999999,
@@ -14,7 +15,7 @@ export default function Loader() {
      const defaultOptions = {
          loop: true,
          autoplay: true,
-         animationData: circleloader,
+         animationData: amazonloader,
          rendererSettings: {
              preserveAspectRatio: 'xMidYMid slice',
          },
@@ -25,3 +26,5 @@ export default function Loader() {
         </div>
     );
 }
+
+// opacity: 0.6,

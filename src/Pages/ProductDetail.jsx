@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import i18next from 'i18next';
 
-import { Container, Row, Col, Table } from 'reactstrap';
+import { Container, Row, Col, Table,Button } from 'reactstrap';
 import Ratings from '../components/Ratings';
 import Loader from '../assets/animations';
 import { ACNetwork, config, Urls } from '../config';
-import i18next from 'i18next';
+import { AddToCart } from '../app/CartHandler/CartSlice';
+import '../styles/CartPage.css';
+
+
 const ProductDetail = () => {
     let location = useLocation();
     const [loading, setLoading] = useState(true);
     const [product, setProduct] = useState();
+    let dispatch = useDispatch();
     useEffect(() => {
         getProduct();
     }, []);
@@ -73,6 +79,7 @@ const ProductDetail = () => {
                             <hr />
                             <h6>About this term</h6>
                             <div>{product.description}</div>
+                            <Button className='float-end mt-5 amazon-btn' onClick={()=>dispatch(AddToCart(location.state.data))}>Add To Cart</Button>
                         </Col>
                     </Row>
                 </Container>
