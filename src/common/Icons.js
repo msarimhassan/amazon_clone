@@ -6,5 +6,6 @@ import * as FC from 'react-icons/fc';
 import * as BS from 'react-icons/bs';
 import * as TB from 'react-icons/tb';
 import * as FA from 'react-icons/fa';
+import * as GI from 'react-icons/gi';
 
-export { AI,BI,RI,MD,FC,BS,TB,FA};
+export { AI,BI,RI,MD,FC,BS,TB,FA,GI};

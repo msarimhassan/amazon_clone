@@ -32,7 +32,7 @@ import '../styles/Header.css';
 import { Icons } from '../common';
 
 const Header = () => {
-    const { AI, FA } = Icons;
+    const { AI,GI } = Icons;
     const itemCount = useSelector((state) => state.counter.itemcount);
     const cartCount = useSelector((state) => state.cart.cartProducts);
     const { Logout, token } = useToken();
@@ -64,7 +64,9 @@ const Header = () => {
                 <NavbarBrand href='/'>
                     <img src={Amazonlogo} alt='Amazon-Logo' width='150px' />
                 </NavbarBrand>
-                <NavbarToggler onClick={() => handleNavbar()} style={{ color: 'white' }} />
+                <NavbarToggler onClick={() => handleNavbar()} style={{ color: 'white' }}>
+                    <GI.GiHamburgerMenu size={40} />
+                </NavbarToggler>
                 <Collapse isOpen={open} navbar>
                     <Nav className='m-auto' navbar>
                         {/* <NavItem>
@@ -123,7 +125,9 @@ const Header = () => {
                             <DropdownMenu right>
                                 <DropdownItem>{t('profile')}</DropdownItem>
                                 <DropdownItem divider />
-                                <DropdownItem>Order</DropdownItem>
+                                <DropdownItem onClick={() => navigate(NavRoutes.myOrder)}>
+                                    Order
+                                </DropdownItem>
                                 <DropdownItem divider />
                                 <DropdownItem onClick={() => handleLogout()}>Logout</DropdownItem>
                             </DropdownMenu>

@@ -1,6 +1,7 @@
 import Order from '../Pages/Order';
 import NavRoutes from './NavRoutes';
 import ConfirmOrder from '../Pages/Order/ConfirmOrder';
+import OrderDetails from '../Pages/OrderDetails';
 
 export const PrivateRoutes=[
     {
@@ -10,5 +11,9 @@ export const PrivateRoutes=[
     {
         link: NavRoutes.confirmOrder,
         element:<ConfirmOrder/>
+    },
+    {
+        link: NavRoutes.myOrder,
+        element:<OrderDetails/>
     }
 ]

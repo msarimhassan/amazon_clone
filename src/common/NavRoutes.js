@@ -7,6 +7,7 @@ export default {
     Signup: '/signup',
     Address: '/signup/address',
     Order: '/order',
-    confirmOrder:'/confirmOrder',
+    confirmOrder: '/confirmOrder',
+    myOrder:'/myorders',
     NotFound:'*',
 };

@@ -3,7 +3,8 @@ import { Container, Row, Col,Button } from 'reactstrap'
 import { useSelector } from 'react-redux';
 import { useLocation,useNavigate } from 'react-router-dom';
 import i18next from 'i18next';
-import {toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+import { v4 as uuidv4 } from 'uuid';
 
 import { useDispatch } from 'react-redux';
 
@@ -24,6 +25,8 @@ export default function ConfirmOrder() {
 
     const PlaceOrder = async () => {
         
+        let orderId = uuidv4();
+        orderId = orderId.substring(0, 7);
         if (products.length == 0)
         {
             toast.warning('No Items in the Cart')
@@ -39,7 +42,9 @@ export default function ConfirmOrder() {
         const obj = {
             paymentMethod: location.state.paymentMethod.mode,
             products: newarray,
-            ...(location.state.cardId && {cardId:location.state.cardId})
+            ...(location.state.cardId && { cardId: location.state.cardId }),
+            orderId
+            
         };
     
         console.log(obj);
