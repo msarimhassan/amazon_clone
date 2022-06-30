@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import {
     Collapse,
     Navbar,
@@ -15,21 +15,23 @@ import {
     NavbarText,
     Button,
 } from 'reactstrap';
-import { GrLocation, GrLogin } from 'react-icons/gr';
+
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import useToken from '../hooks/useToken';
+import {debounce} from 'lodash';
 import NotificationBadge from 'react-notification-badge';
 
 import Amazonlogo from '../assets/logo.png';
 import UsaFlag from '../assets/usa-flag.svg';
 import FrenchFlag from '../assets/french-flag.svg';
 import NavRoutes from '../common/NavRoutes';
-import { useState } from 'react';
+import { ACNetwork,Urls,config} from '../config';
 import '../styles/Header.css';
 import { Icons } from '../common';
+
 
 const Header = () => {
     const { AI,GI } = Icons;
@@ -38,7 +40,8 @@ const Header = () => {
     const { Logout, token } = useToken();
     let navigate = useNavigate();
     const [open, setOpen] = useState(false);
-    const [openDrop, setOpenDrop] = useState(false);
+    const [query, setQuery] = useState('');
+    const [searchedData, setSearchedData] = useState([]);
     const handleNavbar = () => {
         console.log('Toggle');
         setOpen(!open);
@@ -57,7 +60,22 @@ const Header = () => {
         Logout();
         navigate(NavRoutes.Login);
     };
+  
+    const handleQuery = debounce(async(text) => {
+        setQuery(text); 
+        const obj = {
+            productName:text
+        };
+        const response = await ACNetwork.post(Urls.productsearch(i18next.language), obj, (await config()).headers)
+        
+        console.log(response.data.products); 
+        setSearchedData(response.data.products);
+
+  },1000)
+    
     const { t } = useTranslation(['Categories']);
+    
+   
     return (
         <div>
             <Navbar style={{ backgroundColor: '#131921', color: 'white' }} expand='lg'>
@@ -72,11 +90,16 @@ const Header = () => {
                        
                         <NavItem>
                             <div className='d-flex flex-row'>
-                                <Input placeholder='Search' onChange={()=>console.log('change')} className='Search-Box' />
+                                <Input placeholder='Search'  onChange={(e)=>handleQuery(e.target.value)} className='Search-Box' />
                                 <button className='Search-Btn'>
                                     <AI.AiOutlineSearch size='25px' />
                                 </button>
                             </div>
+                            {query && <div className='search-results' style={{ backgroundColor: 'white' }}>
+                                {searchedData.map((product) => {
+                                 return <div className='ps-3 m-2 searched-item' style={{backgroundColor:'white',color:'black'}}>{product.name}</div>
+                             })}
+                            </div>}
                         </NavItem>
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret style={{ color: 'white' }}>
@@ -105,6 +128,7 @@ const Header = () => {
                             <AI.AiOutlineShoppingCart size='2em' color='white' />
                                 </div>
                         </Link>
+                        {query}
                     </NavbarText>
                     {token ? (
                         <UncontrolledDropdown>
