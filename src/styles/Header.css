@@ -66,6 +66,9 @@
    height: 40px;
 }
 
+.Search-Box:focus{
+    border-radius: 0px;
+}
 .Custom-nav{
     display: flex;
     align-items: center;

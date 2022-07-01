@@ -26,7 +26,7 @@ const ProductCard = ({ product }) => {
         <Card className='card-with-shadow'>
             <Link
                 to={NavRoutes.ProductDetail}
-                state={{ id: product?._id, data: product }}
+                state={{ id: product?._id }}
                 style={{ textDecoration: 'none' }}
             >
                 <CardBody>

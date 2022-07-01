@@ -13,15 +13,17 @@ import '../styles/CartPage.css';
 
 const ProductDetail = () => {
     let location = useLocation();
+  
     const [loading, setLoading] = useState(true);
     const [product, setProduct] = useState();
     let dispatch = useDispatch();
     useEffect(() => {
         getProduct();
-    }, []);
+    }, [location.state.id]);
 
     const getProduct = async () => {
         setLoading(true);
+        
         const response = await ACNetwork.get(
             Urls.getProduct(i18next.language) + location.state.id,
             (
@@ -79,7 +81,7 @@ const ProductDetail = () => {
                             <hr />
                             <h6>About this term</h6>
                             <div>{product.description}</div>
-                            <Button className='float-end mt-5 amazon-btn' onClick={()=>dispatch(AddToCart(location.state.data))}>Add To Cart</Button>
+                            <Button className='float-end mt-5 amazon-btn' onClick={()=>dispatch(AddToCart(product))}>Add To Cart</Button>
                         </Col>
                     </Row>
                 </Container>

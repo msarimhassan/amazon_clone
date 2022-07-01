@@ -71,7 +71,12 @@ const Header = () => {
         console.log(response.data.products); 
         setSearchedData(response.data.products);
 
-  },1000)
+    }, 1000)
+    
+    const handleNavigation = (product_id) => {
+        setQuery('');
+        navigate(NavRoutes.ProductDetail,{state:{id:product_id}})
+    }
     
     const { t } = useTranslation(['Categories']);
     
@@ -97,7 +102,17 @@ const Header = () => {
                             </div>
                             {query && <div className='search-results' style={{ backgroundColor: 'white' }}>
                                 {searchedData.map((product) => {
-                                 return <div className='ps-3 m-2 searched-item' style={{backgroundColor:'white',color:'black'}}>{product.name}</div>
+                                 return (
+                                     <div
+                                         className='ps-3 m-2 searched-item'
+                                         style={{ backgroundColor: 'white', color: 'black' }}
+                                         onClick={()=>handleNavigation(product._id)}
+                                     >
+                                      
+                                    {product?.name}
+                                         
+                                     </div>
+                                 );
                              })}
                             </div>}
                         </NavItem>
