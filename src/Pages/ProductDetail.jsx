@@ -13,7 +13,6 @@ import '../styles/CartPage.css';
 
 const ProductDetail = () => {
     let location = useLocation();
-  
     const [loading, setLoading] = useState(true);
     const [product, setProduct] = useState();
     let dispatch = useDispatch();

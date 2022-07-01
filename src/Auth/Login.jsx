@@ -1,7 +1,7 @@
 // Library Imports
 import React, { useEffect } from 'react';
 import { Form, Button } from 'reactstrap';
-import { NavLink,useNavigate } from 'react-router-dom';
+import { NavLink,useNavigate,Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { gapi } from 'gapi-script';
@@ -96,6 +96,8 @@ const Login = () => {
                     componentClicked={componentClicked}
                 />
                 <GoogleLogin responseGoogle={responseGoogle} />
+                <br/>
+                <Link to={NavRoutes.forgetPassword}>ForgetPassword?</Link>
                 <NavLink to={NavRoutes.Signup}>
                     <Button type='button' className='w-100 mt-3'>
                         {t('I am a new customer')}
