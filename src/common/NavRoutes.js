@@ -10,6 +10,7 @@ export default {
     confirmOrder: '/confirmOrder',
     myOrder: '/myorders',
     myCards: '/mycards',
-    forgetPassword:'/forgetpassword',
+    forgetPassword: '/forgetpassword',
+    codeVerification:'/verifycode',
     NotFound:'*',
 };

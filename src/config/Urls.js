@@ -16,5 +16,6 @@ export default {
     getOrders: 'customer/my-orders',
     getOrderDetail: 'customer/order-detail/',
     getOrderHistory: 'customer/orders-history',
-    productsearch:(ln)=>`products/${ln}/search`,
+    productsearch: (ln) => `products/${ln}/search`,
+    forgetPassword: 'customer/send-code',
 };

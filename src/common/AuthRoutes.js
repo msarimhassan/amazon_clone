@@ -2,6 +2,7 @@ import NavRoutes from "./NavRoutes";
 import Login from "../Auth/Login";
 import Signup from "../Auth/Signup";
 import ForgetPassword from "../Auth/ForgetPassword";
+import CodeVerify from "../Auth/CodeVerify";
 
 
 export const AuthRoutes=[
@@ -14,5 +15,8 @@ export const AuthRoutes=[
     }, {
         link: NavRoutes.forgetPassword,
         element:<ForgetPassword/>
+    }, {
+        link: NavRoutes.codeVerification,
+        element:<CodeVerify/>
     }
 ];
