@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody, CardTitle, CardSubtitle, CardText, Button, CardImg } from 'reactstrap';
+import { Card, CardBody, CardTitle, Button, CardImg } from 'reactstrap';
 
 import { Link } from 'react-router-dom';
 import NavRoutes from '../common/NavRoutes';

@@ -3,10 +3,17 @@ import {Row,Col,Button} from 'reactstrap';
 import NavRoutes from '../../common/NavRoutes';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import useToken from '../../hooks/useToken';
+
 
 export default function Bill({totalPrice}) {
-  let navigate = useNavigate();
-   const handleOrder = () => {
+    let navigate = useNavigate();
+    const { token } = useToken();
+    const handleOrder = () => {
+        if (!token)
+        {
+            return navigate(NavRoutes.Login);
+           }
        navigate(NavRoutes.Order);
     };
     const { t } = useTranslation(['Cart']);
