@@ -25,9 +25,9 @@ const Signup = () => {
     const onSubmit = async (values) => {
         const { name, email, password, phone, address } = values;
         const obj = { name, email, password, phone, address };
-        console.log(obj);
+       
         const response = await ACNetwork.post(Urls.signUp, obj, (await config()).headers);
-        console.log(response);
+      
         Login(response.data.token);
         navigate(NavRoutes.Homepage);
     };

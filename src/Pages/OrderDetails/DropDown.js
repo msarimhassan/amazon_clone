@@ -27,7 +27,7 @@ export default function DropDown({ order }) {
                 await config()
             ).headers
         );
-        console.log(response.data);
+        
         setOrderDetails(response.data.orderedProduct);
         setLoading(false);
     };

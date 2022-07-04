@@ -29,7 +29,7 @@ const Login = () => {
         const onSubmit = async(values) => {
         
       const response=await ACNetwork.post(Urls.login,values,{});
-      console.log(response.data.token);
+     
             Login(response.data.token)
             navigate(NavRoutes.Homepage);
     };
@@ -54,7 +54,7 @@ const Login = () => {
     };
 
     const componentClicked = (res) => {
-        console.log(res);
+        
     };
 
     const responseGoogle = (response) => {

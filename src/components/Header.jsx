@@ -43,7 +43,7 @@ const Header = () => {
     const [query, setQuery] = useState('');
     const [searchedData, setSearchedData] = useState([]);
     const handleNavbar = () => {
-        console.log('Toggle');
+        
         setOpen(!open);
     };
     useEffect(() => {
@@ -68,7 +68,7 @@ const Header = () => {
         };
         const response = await ACNetwork.post(Urls.productsearch(i18next.language), obj, (await config()).headers)
         
-        console.log(response.data.products); 
+  
         setSearchedData(response.data.products);
 
     }, 1000)

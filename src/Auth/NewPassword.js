@@ -20,7 +20,7 @@ export default function NewPassword() {
         const newObj = { email: location.state.email, password: data.password };
 
         const response = await ACNetwork.put(Urls.updatePassword, newObj, (await config()).headers);
-        console.log(response)
+    
         if (response.status != '200') {
             return toast.error(response.data.error, { position: toast.POSITION.TOP_RIGHT });
         }

@@ -15,12 +15,12 @@ const initialValues = {
 
 const CardForm = ({ addCard, setShowModal }) => {
     const onSubmit = async (values) => {
-        console.log(values);
+      
         const d = new Date(values.expiryDate);
         const mn = d.getMonth();
-        console.log(mn);
+       
         const response = await ACNetwork.post(Urls.addCard, values, (await config()).headers);
-        console.log(response.data);
+       
         if (!response.ok) {
             toast.error(response.data.error.message, {
                 position: toast.POSITION.TOP_RIGHT,

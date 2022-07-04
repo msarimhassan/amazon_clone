@@ -15,9 +15,9 @@ const initialValues = {
 export default function ForgetPassword() {
   let navigate = useNavigate();
     const onSubmit = async (data) => {
-        console.log(data);
+      
         const response = await ACNetwork.post(Urls.forgetPassword,data,(await config()).headers);
-        console.log(response);
+       
         if (response.status=='404') {
           return  toast.error(response.data.error, {
                 position: toast.POSITION.TOP_RIGHT,

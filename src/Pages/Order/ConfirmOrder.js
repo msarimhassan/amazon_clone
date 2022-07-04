@@ -47,10 +47,10 @@ export default function ConfirmOrder() {
             
         };
     
-        console.log(obj);
+        
 
         const response = await ACNetwork.post(Urls.addOrder(i18next.language), obj, (await config()).headers);
-        console.log(response.data);
+        
         if (!response.ok)
         {
         toast.error(response.data.error, {

@@ -16,7 +16,7 @@ export default function Card() {
     const getCards = async () => {
         setLoading(true);
         const response = await ACNetwork.get(Urls.getCards, (await config()).headers);
-        console.log(response.data);
+        
         setUserCards(response.data.cards);
         setLoading(false);
     };

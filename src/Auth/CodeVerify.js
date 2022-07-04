@@ -17,8 +17,8 @@ export default function CodeVerify() {
 
   const onSubmit = (data) => {
       
-    console.log(location.state.code);
-    console.log(data.code);
+    
+    
         if (location.state.code != data.code) {
             return toast.error('Not matched', {
                 position: toast.POSITION.TOP_RIGHT,
