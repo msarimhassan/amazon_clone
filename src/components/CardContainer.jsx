@@ -14,7 +14,7 @@ const CardContainer = ({ id, image, name }) => {
                 alt='Card image cap'
                 src={image}
                 top
-                style={{ width: '300px', height: '300px' }}
+                style={{ width: '100%', height: '300px',objectFit:'cover' }}
                 className='rounded'
             />
             <CardBody>
