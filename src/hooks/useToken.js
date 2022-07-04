@@ -13,6 +13,8 @@ const  useToken=()=>{
 
     const Logout=()=>{
         localStorage.removeItem('AC-Token');
+        localStorage.removeItem('user');
+        setCurrentUser(null);
         setToken(null);
     }
 

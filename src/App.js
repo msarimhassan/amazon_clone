@@ -15,10 +15,14 @@ const App = () => {
 
     useEffect(() => {
         const t = localStorage.getItem('AC-Token');
+        const user = JSON.parse(localStorage.getItem('user'));
         if (t) {
             setToken(t);
-            let user = JSON.parse(localStorage.getItem('user'));
-            setCurrentUser(user);
+          
+        }
+
+         if (user) {
+              setCurrentUser(user);
         }
     }, []);
 

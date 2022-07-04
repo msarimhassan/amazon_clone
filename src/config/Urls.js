@@ -19,4 +19,5 @@ export default {
     productsearch: (ln) => `products/${ln}/search`,
     forgetPassword: 'customer/send-code',
     updatePassword: 'customer/reset-password',
+    updateCustomer: 'customer/update-customer',
 };
