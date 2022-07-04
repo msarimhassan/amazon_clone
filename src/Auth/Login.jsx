@@ -54,7 +54,8 @@ const Login = () => {
     };
 
     const responseGoogle = (response) => {
-        console.log(response.accessToken);
+        console.log('response', response);
+        // console.log(response.accessToken);
     }
 
     const { t } = useTranslation(['Login']);
