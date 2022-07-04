@@ -1,37 +1,43 @@
 // Library Imports
 import React, { useEffect } from 'react';
 import { Form, Button } from 'reactstrap';
-import { NavLink,useNavigate,Link } from 'react-router-dom';
+import { NavLink, useNavigate, Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { gapi } from 'gapi-script';
+import { toast } from 'react-toastify';
 
 // Custom Imports
-import Logo from '../assets/logo.png';
+import Logo from '../assets/logo2.png';
 import '../styles/Form.css';
 import { loginSchema } from '../validations/LoginSchema';
 import AuthInput from './Signup/AuthInput';
 import GoogleLogin from './AuthProviders/GoogleLogin';
-import FacebookLogin from './AuthProviders/FacebookLogin';
+// import FacebookLogin from './AuthProviders/FacebookLogin';
 import NavRoutes from '../common/NavRoutes';
-import {ACNetwork,Urls} from '../config'
+import { ACNetwork, config, Urls } from '../config';
 import useToken from '../hooks/useToken';
+import { Icons } from '../common';
+
 const initialValues = {
     email: '',
     password: '',
 };
 
-const clientId = '602962461138-h83tgckucrbsbh5m4q7e9d1doh3hrq50.apps.googleusercontent.com';
+// const clientId = '602962461138-h83tgckucrbsbh5m4q7e9d1doh3hrq50.apps.googleusercontent.com';
 const Login = () => {
-
-    const { Login } = useToken();
+    const { Login, setProfile } = useToken();
+    const { FC } = Icons;
     let navigate = useNavigate();
-        const onSubmit = async(values) => {
-        
-      const response=await ACNetwork.post(Urls.login,values,{});
-      console.log(response.data.token);
-            Login(response.data.token)
-            navigate(NavRoutes.Homepage);
+    const onSubmit = async (values) => {
+        const response = await ACNetwork.post(Urls.login, values, {});
+
+        if (!response.ok) {
+            return toast.error(response.data.error, { position: toast.POSITION.TOP_RIGHT });
+        }
+        Login(response.data.token);
+        setProfile(response.data.customer);
+        navigate(NavRoutes.Homepage);
     };
     const { values, handleChange, handleSubmit, errors } = useFormik({
         initialValues,
@@ -39,27 +45,18 @@ const Login = () => {
         validationSchema: loginSchema,
     });
 
-    useEffect(() => {
-        function Start() {
-            gapi.client.init({
-                clientId: clientId,
-                scope: '',
-            });
-        }
-        gapi.load('client:auth2', Start);
-    }, []);
+    useEffect(() => {}, []);
 
-    const responseFacebook = (response) => {
+    const handleGoogle = async () => {
+        const response = await ACNetwork.get(Urls.googleLogin, (await config()).headers, {});
+
         console.log(response);
-    };
-
-    const componentClicked = (res) => {
-        console.log(res);
     };
 
     const responseGoogle = (response) => {
-        console.log(response);
-    };
+        console.log('response', response);
+        // console.log(response.accessToken);
+    }
 
     const { t } = useTranslation(['Login']);
 
@@ -91,12 +88,19 @@ const Login = () => {
                     </Button>
                 </Form>
                 <hr />
-                <FacebookLogin
-                    responseFacebook={responseFacebook}
-                    componentClicked={componentClicked}
+
+                {/* <div
+                    className='mx-auto shadow p-3'
+                    style={{ borderRadius: '80px', width: '60px', cursor: 'pointer' }}
+                    onClick={() => handleGoogle()}
+                >
+                    <FC.FcGoogle size={30} />
+                </div> */}
+                <GoogleLogin
+                    clientId='480584143172-8hj4e7ej9ca27i5uhv54p5cih7m4uskj.apps.googleusercontent.com'
+                    responseGoogle={responseGoogle}
                 />
-                <GoogleLogin responseGoogle={responseGoogle} />
-                <br/>
+                <br />
                 <Link to={NavRoutes.forgetPassword}>ForgetPassword?</Link>
                 <NavLink to={NavRoutes.Signup}>
                     <Button type='button' className='w-100 mt-3'>
@@ -109,3 +113,14 @@ const Login = () => {
 };
 
 export default Login;
+
+//  <FacebookLogin responseFacebook={responseFacebook  componentClicked={componentClicked} />
+{
+     
+}
+//  const responseGoogle = (response) => {
+//      console.log(response);
+//  };
+//   const responseFacebook = (response) => {
+//       console.log(response);
+//   };

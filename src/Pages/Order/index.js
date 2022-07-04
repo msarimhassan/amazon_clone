@@ -39,7 +39,7 @@ export default function Order() {
     let navigate = useNavigate();
     const getAddresses = async () => {
         const response = await ACNetwork.get(Urls.getAddresses, (await config()).headers, {});
-        console.log(response.data);
+
         setAddress(response.data.addresses);
     };
 

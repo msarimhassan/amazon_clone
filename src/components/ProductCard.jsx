@@ -11,14 +11,13 @@ import { AddToCart } from '../app/CartHandler/CartSlice';
 import { Icons } from '../common';
 import '../styles/Card.css';
 const ProductCard = ({ product }) => {
-    console.log(product);
 
     const dispatch = useDispatch();
     const products = useSelector((state) => state.cart.cartProducts);
     const { AI } = Icons;
 
     const handleProduct = (product) => {
-        console.log(product);
+      
         dispatch(AddToCart(product));
     };
     const { t } = useTranslation(['Products']);

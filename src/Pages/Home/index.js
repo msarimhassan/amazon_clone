@@ -16,7 +16,6 @@ const HomePage = () => {
         setLoading(true);
         const response = await ACNetwork.get(Urls.getCategories(i18next.language), (await config()).headers);
         setCategories(response.data.categories);
-        console.log(response.data);
         setLoading(false);
     };
     return <>{loading ? <Loader /> : <CardHandler categories={categories} />}</>;

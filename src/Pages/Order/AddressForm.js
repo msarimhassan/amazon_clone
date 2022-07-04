@@ -39,7 +39,7 @@ const AddressForm = ({ setAddress,setOpen }) => {
         setLoading(true);
         setCountryCode(obj);
         const response = await ACNetwork.get(Urls.getStates + obj.value, (await config()).headers);
-        console.log(response.data.states);
+    
         const newarray = response.data.states.map((element) => {
             return {
                 label: element.name,

@@ -22,7 +22,6 @@ export default function MyOrders() {
                 await config()
             ).headers
         );
-        console.log(response.data);
         setUserOrders(response.data.orders);
         setTotalPages(response.data.totalpages);
         setLoading(false);

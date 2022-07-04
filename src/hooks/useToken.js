@@ -3,7 +3,7 @@ import {UserContext} from '../Context'
 
 const  useToken=()=>{
 
-    const { token, setToken } = useContext(UserContext);
+    const { token, setToken,currentUser,setCurrentUser } = useContext(UserContext);
 
     const Login=(t)=>{
         localStorage.setItem('AC-Token',t);
@@ -13,6 +13,8 @@ const  useToken=()=>{
 
     const Logout=()=>{
         localStorage.removeItem('AC-Token');
+        localStorage.removeItem('user');
+        setCurrentUser(null);
         setToken(null);
     }
 
@@ -20,7 +22,19 @@ const  useToken=()=>{
     const t=localStorage.getItem('AC-Token');
     setToken(t);
     }
-    return  {token,Login,Logout,tokenRestore};
+
+    const setProfile = (user) => {
+        localStorage.setItem('user', JSON.stringify(user));
+        setCurrentUser(user);
+    }
+
+    const getProfile = () => {
+        let user = JSON.parse(localStorage.getItem('user'));
+        setCurrentUser(user);
+        return currentUser;
+    }
+
+    return  {token,Login,Logout,tokenRestore,setProfile,getProfile,currentUser};
 
 }
 export default useToken;

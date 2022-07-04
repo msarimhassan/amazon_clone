@@ -3,16 +3,12 @@ import { create } from 'apisauce';
  const baseURL = 'https://amazon-clone-12345.herokuapp.com/api/';
 
 // const baseURL = 'http://192.168.10.4:8080/api/';
-
-console.log({ baseURL });
-
 const client = create({
     baseURL,
 });
 
 export const config = async () => {
     const token = localStorage.getItem('AC-Token');
-    console.log(token);
     return {
         headers: {
             Authorization: `Bearer ${token}`,
