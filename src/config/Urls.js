@@ -20,4 +20,5 @@ export default {
     forgetPassword: 'customer/send-code',
     updatePassword: 'customer/reset-password',
     updateCustomer: 'customer/update-customer',
+    googleLogin: 'auth/google',
 };

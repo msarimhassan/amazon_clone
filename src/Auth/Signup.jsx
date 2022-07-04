@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import Logo from '../assets/logo.png';
+import Logo from '../assets/logo2.png';
 import '../styles/Form.css';
 import { signupSchema } from '../validations';
 import GeneralInfoForm from './Signup/GeneralForm';
