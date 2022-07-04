@@ -24,13 +24,14 @@ const initialValues = {
 const clientId = '602962461138-h83tgckucrbsbh5m4q7e9d1doh3hrq50.apps.googleusercontent.com';
 const Login = () => {
 
-    const { Login } = useToken();
+    const { Login,setProfile } = useToken();
     let navigate = useNavigate();
         const onSubmit = async(values) => {
         
       const response=await ACNetwork.post(Urls.login,values,{});
      
             Login(response.data.token)
+            setProfile(response.data.customer);
             navigate(NavRoutes.Homepage);
     };
     const { values, handleChange, handleSubmit, errors } = useFormik({

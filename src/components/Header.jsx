@@ -92,29 +92,35 @@ const Header = () => {
                 </NavbarToggler>
                 <Collapse isOpen={open} navbar>
                     <Nav className='m-auto' navbar>
-                       
                         <NavItem>
                             <div className='d-flex flex-row'>
-                                <Input placeholder='Search'  onChange={(e)=>handleQuery(e.target.value)} className='Search-Box' />
+                                <Input
+                                    placeholder='Search'
+                                    onChange={(e) => handleQuery(e.target.value)}
+                                    className='Search-Box'
+                                />
                                 <button className='Search-Btn'>
                                     <AI.AiOutlineSearch size='25px' />
                                 </button>
                             </div>
-                            {query && <div className='search-results' style={{ backgroundColor: 'white' }}>
-                                {searchedData.map((product) => {
-                                 return (
-                                     <div
-                                         className='ps-3 m-2 searched-item'
-                                         style={{ backgroundColor: 'white', color: 'black' }}
-                                         onClick={()=>handleNavigation(product._id)}
-                                     >
-                                      
-                                    {product?.name}
-                                         
-                                     </div>
-                                 );
-                             })}
-                            </div>}
+                            {query && (
+                                <div
+                                    className='search-results'
+                                    style={{ backgroundColor: 'white' }}
+                                >
+                                    {searchedData.map((product) => {
+                                        return (
+                                            <div
+                                                className='ps-3 m-2 searched-item'
+                                                style={{ backgroundColor: 'white', color: 'black' }}
+                                                onClick={() => handleNavigation(product._id)}
+                                            >
+                                                {product?.name}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            )}
                         </NavItem>
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret style={{ color: 'white' }}>
@@ -139,9 +145,9 @@ const Header = () => {
                         {/* <Badge color='warning'>{cartCount?.length}</Badge> */}
                         <Link to={NavRoutes.CartPage}>
                             <div>
-                            <NotificationBadge count={cartCount?.length}  />
-                            <AI.AiOutlineShoppingCart size='2em' color='white' />
-                                </div>
+                                <NotificationBadge count={cartCount?.length} />
+                                <AI.AiOutlineShoppingCart size='2em' color='white' />
+                            </div>
                         </Link>
                         {query}
                     </NavbarText>
@@ -159,7 +165,9 @@ const Header = () => {
                                 />
                             </DropdownToggle>
                             <DropdownMenu right>
-                                <DropdownItem>{t('profile')}</DropdownItem>
+                                <DropdownItem onClick={() => navigate(NavRoutes.profile)}>
+                                    {t('profile')}
+                                </DropdownItem>
                                 <DropdownItem divider />
                                 <DropdownItem onClick={() => navigate(NavRoutes.myOrder)}>
                                     Order

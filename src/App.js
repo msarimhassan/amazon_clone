@@ -7,15 +7,18 @@ import { PrivateRoutes } from './common/PrivateRoutes';
 import { AuthRoutes } from './common/AuthRoutes';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import "./App.css";
-            
+import './App.css';
+
 const App = () => {
     const [token, setToken] = useState();
+    const [currentUser, setCurrentUser] = useState();
 
     useEffect(() => {
         const t = localStorage.getItem('AC-Token');
         if (t) {
             setToken(t);
+            let user = JSON.parse(localStorage.getItem('user'));
+            setCurrentUser(user);
         }
     }, []);
 
@@ -31,10 +34,10 @@ const App = () => {
 
     return (
         <Suspense fallback={null}>
-            <UserContext.Provider value={{ setToken, token }}>
+            <UserContext.Provider value={{ setToken, token, currentUser, setCurrentUser }}>
                 <Router>
                     <Header />
-                    <ToastContainer/>
+                    <ToastContainer />
                     <RoutesList
                         data={
                             !token

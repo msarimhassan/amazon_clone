@@ -12,6 +12,7 @@ export default {
     myCards: '/mycards',
     forgetPassword: '/forgetpassword',
     codeVerification: '/verifycode',
-    newPassword:'/newpassword',
+    newPassword: '/newpassword',
+    profile:'/profile',
     NotFound:'*',
 };
