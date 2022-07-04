@@ -24,7 +24,7 @@ export default function Card() {
         <>
             <Container className='d-flex flex-column'>
                 <Button onClick={() => setShowModal(true)} className='amazon-btn'>
-                    Add Address
+                    Add Card
                 </Button>
                 <Drawer open={showModal} setOpen={setShowModal} Header='Add Card'>
                     <CardForm setShowModal={setShowModal} addCard={setUserCards} />

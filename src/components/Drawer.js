@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Offcanvas, OffcanvasBody, OffcanvasHeader, Button } from 'reactstrap';
+import React from 'react';
+import { Offcanvas, OffcanvasBody, OffcanvasHeader} from 'reactstrap';
 import '../styles/CartPage.css';
 
 export default function Drawer({ children,open,setOpen,Header }) {
