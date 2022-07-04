@@ -16,8 +16,11 @@ export default function CodeVerify() {
     if (location.state.code !== data.code)
     { 
 
-      
-      }
+      toast.error('Not matched', {
+        position: toast.POSITION.TOP_RIGHT
+      })
+    }
+    
   }
 
    const { values, handleChange, handleSubmit, errors } = useFormik({

@@ -18,11 +18,11 @@ export default function ForgetPassword() {
         console.log(data);
         const response = await ACNetwork.post(Urls.forgetPassword,data,(await config()).headers);
         console.log(response);
-        if (!response.ok) {
-           toast.error(response.data.error, {
+        if (response.status=='404') {
+          return  toast.error(response.data.error, {
                 position: toast.POSITION.TOP_RIGHT,
            });
-          return
+          
         }
       navigate(NavRoutes.codeVerification, { state: { code: response.data.code } });
     };
