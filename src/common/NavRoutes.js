@@ -11,6 +11,7 @@ export default {
     myOrder: '/myorders',
     myCards: '/mycards',
     forgetPassword: '/forgetpassword',
-    codeVerification:'/verifycode',
+    codeVerification: '/verifycode',
+    newPassword:'/newpassword',
     NotFound:'*',
 };

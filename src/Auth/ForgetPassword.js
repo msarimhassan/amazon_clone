@@ -24,7 +24,7 @@ export default function ForgetPassword() {
            });
           
         }
-      navigate(NavRoutes.codeVerification, { state: { code: response.data.code } });
+      navigate(NavRoutes.codeVerification, { state: { code: response.data.code,email:data.email } });
     };
 
     const { values, handleChange, handleSubmit, errors } = useFormik({

@@ -18,4 +18,5 @@ export default {
     getOrderHistory: 'customer/orders-history',
     productsearch: (ln) => `products/${ln}/search`,
     forgetPassword: 'customer/send-code',
+    updatePassword: 'customer/reset-password',
 };
