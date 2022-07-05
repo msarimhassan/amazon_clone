@@ -40,14 +40,14 @@ const ProductDetail = () => {
             {loading ? (
                 <Loader />
             ) : (
-                <Container className='mt-5 d-flex justify-content-center '>
+                <Container className='mt-5'>
                     <Row>
                         {/* Column that hold the image  */}
-                        <Col>
-                            <img src={product.imageUrl} alt='airpods' style={{ height: '500px' }} />
+                        <Col lg={6} sm={12}>
+                            <img src={product.imageUrl} alt='airpods' style={{width:'100%'}} />
                         </Col>
                         {/* Columns that hold the details */}
-                        <Col>
+                        <Col lg={6} sm={12}>
                             <h3>{product.name}</h3>
                             <h6>Visit the store</h6>
                             <Ratings />
