@@ -105,7 +105,7 @@ const Login = () => {
                         error={errors}
                     />
                 </div>
-                <Link to={NavRoutes.forgetPassword} style={{ float: 'right' }}>
+                <Link to={NavRoutes.forgetPassword} style={{ float: 'right',fontSize:'0.75em' }}>
                     ForgetPassword?
                 </Link>
                 <br />
@@ -117,7 +117,7 @@ const Login = () => {
                         clientId='480584143172-8hj4e7ej9ca27i5uhv54p5cih7m4uskj.apps.googleusercontent.com'
                         responseGoogle={responseGoogle}
                     />
-                    {/* <button onClick={()=>handleGoogle()}>google</button> */}
+                  
                 </div>
                 <NavLink to={NavRoutes.Signup}>
                     <Button type='button' className='w-100 mt-3'>

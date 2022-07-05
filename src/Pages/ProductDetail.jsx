@@ -78,7 +78,7 @@ const ProductDetail = () => {
                                 </tbody>
                             </Table>
                             <hr />
-                            <h6>About this term</h6>
+                            <h6>About this Product</h6>
                             <div>{product.description}</div>
                             <Button className='float-end mt-5 amazon-btn' onClick={()=>dispatch(AddToCart(product))}>Add To Cart</Button>
                         </Col>
