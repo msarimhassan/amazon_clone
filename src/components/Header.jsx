@@ -149,7 +149,6 @@ const Header = () => {
                                 <AI.AiOutlineShoppingCart size='2em' color='white' />
                             </div>
                         </Link>
-                        {query}
                     </NavbarText>
                     {token ? (
                         <UncontrolledDropdown>
