@@ -37,7 +37,7 @@ export default function MyOrders() {
               <Loader />
           ) : (
               <>
-                  {userOrders.length > 0 ? (
+                  {userOrders?.length > 0 ? (
                       userOrders.map((order) => {
                           return <DropDown order={order} />;
                       })

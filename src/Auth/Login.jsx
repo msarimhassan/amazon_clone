@@ -52,46 +52,23 @@ const Login = () => {
 
     useEffect(() => {}, []);
 
-    const handleGoogle = async () => {
-        const response = await ACNetwork.get(Urls.googleLogin, (await config()).headers, {});
+    // const handleGoogle = async () => {
+    //     const response = await ACNetwork.get(Urls.googleLogin, (await config()).headers, {});
 
-        console.log(response);
-    };
+    //     console.log(response);
+    // };
 
-    const responseGoogle = (response) => {
-        console.log('response', response);
-        // console.log(response.accessToken);
+    const responseGoogle = async(response) => {
+        
+        console.log(response);  
+        // const res = await ACNetwork.get(Urls.googleLogin, (await config()).headers, {});
+        // console.log(res);
+       
     }
 
     const { t } = useTranslation(['Login']);
 
     return (
-        // <div className='main-login rounded'>
-        //
-        //     <div className=' border shadow login-form'>
-        //         <Form inline>
-        //
-        //
-
-        //             {/* <Button type='submit' onClick={handleSubmit} className=''>
-        //                 
-        //             </Button> */}
-
-        //         </Form>
-        //         <hr />
-
-        //         {/* <div
-        //             className='mx-auto shadow p-3'
-        //             style={{ borderRadius: '80px', width: '60px', cursor: 'pointer' }}
-        //             onClick={() => handleGoogle()}
-        //         >
-        //             <FC.FcGoogle size={30} />
-        //         </div> */}
-
-        //         <br />
-
-        //     </div>
-        // </div>
         <div
             className='d-flex justify-content-center align-items-center flex-column'
             style={{ height: '100vh' }}
@@ -132,6 +109,7 @@ const Login = () => {
                         clientId='480584143172-8hj4e7ej9ca27i5uhv54p5cih7m4uskj.apps.googleusercontent.com'
                         responseGoogle={responseGoogle}
                     />
+                    {/* <button onClick={()=>handleGoogle()}>google</button> */}
                 </div>
                 <NavLink to={NavRoutes.Signup}>
                     <Button type='button' className='w-100 mt-3'>
