@@ -1,6 +1,5 @@
 import React from 'react';
 import Lottie from 'react-lottie'
-import circleloader from './circleloader.json';
 import amazonloader from './amazonloader.json';
 
 export default function Loader() {

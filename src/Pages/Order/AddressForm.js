@@ -4,14 +4,14 @@ import '../../styles/CartPage.css';
 import { ACNetwork, Urls, config } from '../../config';
 import { useFormik } from 'formik';
 import Select from 'react-select';
-
+import { toast } from 'react-toastify';
 const initialValues = {
     area: '',
     houseNumber: '',
     streetNumber: '',
 };
 
-const AddressForm = ({ setAddress,setOpen }) => {
+const AddressForm = ({ setAddress,setOpen,addressList }) => {
     const [countries, setCountries] = useState();
     const [states, setStates] = useState();
     const [cities, setCities] = useState();
@@ -69,6 +69,7 @@ const AddressForm = ({ setAddress,setOpen }) => {
         setLoading(false);
     };
     const onSubmit = async (value) => {
+        
         const obj = {
             ...value,
             country: countryCode.label,
@@ -77,10 +78,11 @@ const AddressForm = ({ setAddress,setOpen }) => {
         };
 
         const response = await ACNetwork.post(Urls.addNewAddress, obj, (await config()).headers);
-        setAddress((preState) => {
-            return [...preState, response.data.address];
-        });
-
+        console.log(response)
+        setAddress( [...addressList,response.data.address]);
+        toast.success('Added', {
+            position: toast.POSITION.TOP_RIGHT,
+         })
         setOpen(false);
     };
     const { values, handleChange, handleSubmit, errors } = useFormik({

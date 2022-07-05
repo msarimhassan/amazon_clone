@@ -71,7 +71,6 @@ export default function Order() {
                                 Add Address
                             </Button>
                             <Drawer open={showModal} setOpen={setShowModal} Header='Add Address'>
-                                <AddressForm setOpen={setShowModal} setAddress={setAddress} />
                             </Drawer>
                             <br />
                             <br />

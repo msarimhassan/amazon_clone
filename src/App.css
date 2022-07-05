@@ -45,3 +45,33 @@ box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1p
   background-color: #EAEAEA !important
   
 }
+
+.loading-btn{
+    border: 1px solid #f5bb5c;
+    border-radius:10px;
+    color: white;
+    font-size: 1.2em;
+    background-color: #f5bb5c;
+    padding: 5px;
+    cursor: pointer;
+    font-weight: bolder;
+    width: 100%;
+    text-align: center;
+}
+
+.loading-btn2{
+  border: 1px solid #f5bb5c;
+    border-radius: 10px;
+    font-size: 1.2em;
+    background-color: white;
+    padding: 5px;
+    cursor: pointer;
+    font-weight: bolder;
+    width: 100%;
+      text-align: center;
+}
+
+.Address-Card{
+  border: 1px solid #f5bb5c;
+  width: 40%;
+}

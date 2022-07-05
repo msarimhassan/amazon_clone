@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button } from 'reactstrap';
 import { useTranslation } from 'react-i18next';
+import LoadingButton from '../../components/LoadingButton';
+
 
 import AuthInput from './AuthInput';
 
-const GeneralInfoForm = ({ values, onSignUp, handleChange, errors }) => {
+const GeneralInfoForm = ({ values, onSignUp, handleChange, errors,loading }) => {
     const { t } = useTranslation(['Signup']);
     return (
         <div>
@@ -35,15 +36,15 @@ const GeneralInfoForm = ({ values, onSignUp, handleChange, errors }) => {
             />
             <AuthInput
                 label='Phone'
-                name='phone'
+                name='phoneNumber'
                 type='text'
-                value={values.phone}
+                value={values.phonNumber}
                 onChange={handleChange}
                 error={errors}
             />
-            <Button type='button' className='w-100 mt-4 btn-color' onClick={onSignUp}>
-                Signup
-            </Button>
+            <div onClick={onSignUp} className='mt-3'>
+                <LoadingButton loading={loading} type='submit' text={t('signup')} />
+            </div>
         </div>
     );
 };

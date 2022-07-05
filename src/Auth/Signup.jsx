@@ -1,8 +1,8 @@
-import React from 'react';
-import { Form } from 'reactstrap';
+import React,{useState} from 'react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import Logo from '../assets/logo2.png';
 import '../styles/Form.css';
@@ -16,19 +16,24 @@ const initialValues = {
     name: '',
     email: '',
     password: '',
-    phone: '',
+    phoneNumber: '',
 };
 
 const Signup = () => {
     let navigate = useNavigate();
-    const { Login } = useToken();
+    const { Login,setProfile } = useToken();
+    const [loading, setLoading] = useState(false);
     const onSubmit = async (values) => {
-        const { name, email, password, phone, address } = values;
-        const obj = { name, email, password, phone, address };
-       
-        const response = await ACNetwork.post(Urls.signUp, obj, (await config()).headers);
-      
+        setLoading(true);
+        const obj={}
+        const response = await ACNetwork.post(Urls.signUp,values, (await config()).headers);
+        if (!response.ok) {
+            setLoading(false);
+            return toast.error(response.data.error, { position: toast.POSITION.TOP_RIGHT });
+        }
+        setLoading(false)
         Login(response.data.token);
+        setProfile(response.data.customer);
         navigate(NavRoutes.Homepage);
     };
     const { values, handleChange, handleSubmit, errors } = useFormik({
@@ -39,19 +44,20 @@ const Signup = () => {
 
     const { t } = useTranslation(['Signup']);
     return (
-        <div className='main-login pb-5'>
-            <img src={Logo} alt='Amazaon Logo' style={{ width: '200px' }} />
-            <div className=' border shadow login-form rounded'>
-                <Form inline>
-                    <h2>{t('createaccount')}</h2>
-
-                    <GeneralInfoForm
+        <div className='d-flex justify-content-center align-items-center flex-column' style={{height:'100vh'}}>
+            <img src={Logo} alt='Amazaon Logo' style={{ width: '200px' }}  />
+            <div className='border ps-5 pe-5 pt-4 pb-4 mt-3 Signup-form'>
+                <h2>{t('createaccount')}</h2>
+                  <GeneralInfoForm
                         values={values}
                         errors={errors}
                         handleChange={handleChange}
-                        onSignUp={handleSubmit}
-                    />
-                </Form>
+                    onSignUp={handleSubmit}
+                    loading={loading}
+                />
+                <div className='text-center'>
+                    Already have an account?{' '}<Link to={NavRoutes.Login}>Login</Link>
+                    </div>
             </div>
         </div>
     );

@@ -20,5 +20,6 @@ export default {
     forgetPassword: 'customer/send-code',
     updatePassword: 'customer/reset-password',
     updateCustomer: 'customer/update-customer',
-    googleLogin: 'auth/google',
+    googleLogin: 'auth/social-login',
+    deleteAddress: (id) => `customer/delete-address/${id}`,
 };
