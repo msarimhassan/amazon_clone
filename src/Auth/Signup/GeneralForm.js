@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import { useTranslation } from 'react-i18next';
+import LoadingButton from '../../components/LoadingButton';
 
 import AuthInput from './AuthInput';
 
@@ -41,9 +42,9 @@ const GeneralInfoForm = ({ values, onSignUp, handleChange, errors }) => {
                 onChange={handleChange}
                 error={errors}
             />
-            <Button type='button' className='w-100 mt-4 btn-color' onClick={onSignUp}>
-                Signup
-            </Button>
+            <div  onClick={onSignUp}>
+                <LoadingButton/>
+            </div>
         </div>
     );
 };

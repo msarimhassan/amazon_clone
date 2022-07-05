@@ -39,19 +39,26 @@ const Signup = () => {
 
     const { t } = useTranslation(['Signup']);
     return (
-        <div className='main-login pb-5'>
-            <img src={Logo} alt='Amazaon Logo' style={{ width: '200px' }} />
-            <div className=' border shadow login-form rounded'>
-                <Form inline>
-                    <h2>{t('createaccount')}</h2>
+        // <div className='main-login pb-5'>
 
-                    <GeneralInfoForm
+        //     <div className=' border shadow login-form rounded'>
+        //         <Form inline>
+        //
+
+        //           
+        //         </Form>
+        //     </div>
+        // </div>
+        <div className='d-flex justify-content-center align-items-center flex-column'>
+            <img src={Logo} alt='Amazaon Logo' style={{ width: '200px' }} />
+            <div className='border'>
+                <h2>{t('createaccount')}</h2>
+                  <GeneralInfoForm
                         values={values}
                         errors={errors}
                         handleChange={handleChange}
                         onSignUp={handleSubmit}
                     />
-                </Form>
             </div>
         </div>
     );
