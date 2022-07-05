@@ -4,6 +4,7 @@ import Ratings from './Ratings';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import ReactStars from 'react-stars';
 
 import NavRoutes from '../common/NavRoutes';
 import '../styles/Form.css';
@@ -20,6 +21,9 @@ const ProductCard = ({ product }) => {
       
         dispatch(AddToCart(product));
     };
+      const ratingChanged = (newRating) => {
+          console.log(newRating);
+      };
     const { t } = useTranslation(['Products']);
     return (
         <Card className='card-with-shadow'>
@@ -38,7 +42,15 @@ const ProductCard = ({ product }) => {
                         <CardTitle tag='h3' className='text-black mt-2'>
                             {product?.name}
                         </CardTitle>
-                        <Ratings />
+                        <ReactStars
+                            count={5}
+                            onChange={ratingChanged}
+                            size={20}
+                            color2={'#ffd700'}
+                            edit={false}
+                            value={3}
+                        />
+                        
                         <div className='d-flex justify-content-between'>
                             <CardText tag='h5' className='text-black'>
                                 {t('price')}

@@ -18,7 +18,7 @@ export default function Profile() {
     };
 
     const onSubmit = async (data) => {
-        if (flag == false && data.password == '') {
+        if (flag == false) {
             const obj = {
                 name: data.name,
                 email: data.email,
@@ -68,6 +68,7 @@ export default function Profile() {
         if (response.status == 404) {
             return toast.error(response.data.error, { position: toast.POSITION.TOP_RIGHT });
         }
+        localStorage.setItem('user',response.data.customer);
         toast.success(response.data.message, { position: toast.POSITION.TOP_RIGHT });
     };
 
@@ -104,20 +105,6 @@ export default function Profile() {
                             />
                         </Col>
                         <Row className='mt-lg-4'>
-                            <span onClick={() => setFlag(!flag)}>
-                                {flag ? 'Hide' : 'Change Password'}
-                            </span>
-                            {flag ? (
-                                <Col lg={6} md={6} sm={12}>
-                                    <Label>Password</Label>
-                                    <Input
-                                        name='password'
-                                        type='password'
-                                        onChange={handleChange}
-                                        value={values.password}
-                                    />
-                                </Col>
-                            ) : null}
                             <Col lg={6} md={6} sm={12}>
                                 <Label>Phone Number </Label>
                                 <Input
@@ -127,11 +114,23 @@ export default function Profile() {
                                     value={values.phoneNumber}
                                 />
                             </Col>
-                            <Button className='amazon-btn mt-3 ms-2' onClick={handleSubmit}>
-                                Update
-                            </Button>
+                            <Col lg={6} md={6} sm={12}>
+                                <Label>Password</Label>
+                                <Input
+                                    name='password'
+                                    type='password'
+                                    onChange={handleChange}
+                                    value={values.password}
+                                />
+                            </Col>
                         </Row>
                     </Row>
+                    <input type='checkbox' onChange={() => setFlag(!flag)} className='mt-3' />
+                    <label className='ms-2'>Update Password</label>
+                    <br/>
+                    <Button className='amazon-btn mt-3 ms-2' onClick={handleSubmit}>
+                        Update
+                    </Button>
                 </div>
             </div>
         </div>
