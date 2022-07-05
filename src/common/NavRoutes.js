@@ -13,6 +13,7 @@ export default {
     forgetPassword: '/forgetpassword',
     codeVerification: '/verifycode',
     newPassword: '/newpassword',
-    profile:'/profile',
+    profile: '/profile',
+    address:'address',
     NotFound:'*',
 };

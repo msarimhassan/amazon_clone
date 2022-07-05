@@ -4,6 +4,7 @@ import ConfirmOrder from '../Pages/Order/ConfirmOrder';
 import OrderDetails from '../Pages/OrderDetails';
 import Card from '../Pages/Card';
 import Profile from '../Pages/Profile';
+import Address from '../Pages/Address';
 
 export const PrivateRoutes=[
     {
@@ -24,5 +25,8 @@ export const PrivateRoutes=[
     }, {
         link: NavRoutes.profile,
         element:<Profile/>
+    }, {
+        link: NavRoutes.address,
+        element:<Address/>
     }
 ]

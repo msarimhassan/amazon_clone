@@ -1,5 +1,5 @@
 // Library Imports
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Button } from 'reactstrap';
 import { NavLink, useNavigate, Link } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -58,13 +58,21 @@ const Login = () => {
     //     console.log(response);
     // };
 
-    const responseGoogle = async(response) => {
-        
-        console.log(response);  
-        // const res = await ACNetwork.get(Urls.googleLogin, (await config()).headers, {});
-        // console.log(res);
-       
-    }
+    const responseGoogle = async (response) => {
+        console.log(response.tokenId);
+
+        const obj = {
+            tokenId: response.tokenId,
+        };
+
+        const res = await ACNetwork.post(Urls.googleLogin, obj, (await config()).headers);
+        if (!res.ok) {
+            return toast.error(response.data.error, { position: toast.POSITION.TOP_RIGHT });
+        }
+        Login(res.data.token);
+        setProfile(res.data.customer);
+        navigate(NavRoutes.Homepage);
+    };
 
     const { t } = useTranslation(['Login']);
 
@@ -125,7 +133,6 @@ export default Login;
 
 //  <FacebookLogin responseFacebook={responseFacebook  componentClicked={componentClicked} />
 {
-     
 }
 //  const responseGoogle = (response) => {
 //      console.log(response);

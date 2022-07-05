@@ -1,8 +1,8 @@
 import { create } from 'apisauce';
 
-//  const baseURL = 'https://amazon-clone-12345.herokuapp.com/api/';
+ const baseURL = 'https://amazon-clone-12345.herokuapp.com/api/';
 
-const baseURL = 'http://192.168.10.3:8080/api/';
+// const baseURL = 'http://192.168.10.3:8080/api/';
 const client = create({
     baseURL,
 });
