@@ -12,15 +12,16 @@ export default function Address() {
     const [loading, setLoading] = useState(true);
     const [addressList, setAddressList] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const GetAddresses = async () => {
-        setLoading(true);
-        const response = await ACNetwork.get(Urls.getAddresses,{},(await config()).headers);
-        setAddressList(response.data.addresses);
-        setLoading(false);
-    };
     useEffect(() => {
         GetAddresses();
     }, []);
+    const GetAddresses = async () => {
+        setLoading(true);
+        const response = await ACNetwork.get(Urls.getAddresses,(await config()).headers);
+        setAddressList(response.data.addresses);
+        setLoading(false);
+    };
+    
 
     const handleDelete =async (id) => {
         setAddressList(
@@ -39,7 +40,7 @@ export default function Address() {
                 <Loader />
             ) : (
                 <>
-                    <div className='mt-4 ms-5'>
+                    <div className='btn-align'>
                         <Button onClick={() => setShowModal(true)} className='amazon-btn'>
                             Add Address
                         </Button>
@@ -50,11 +51,12 @@ export default function Address() {
                             setAddress={setAddressList}
                             addressList={addressList}
                         />
-                    </Drawer>
-                    {addressList?.length > 0 ? (
-                        <>
+                        </Drawer>
+                        
+                    {addressList?.length !==0 ? (
+                       
                             <AddressCards addressList={addressList} handleDelete={handleDelete} />
-                        </>
+
                     ) : (
                         <NoData />
                     )}
