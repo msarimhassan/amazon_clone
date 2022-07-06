@@ -9,10 +9,13 @@ import { AuthRoutes } from './common/AuthRoutes';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import NavRoutes from './common/NavRoutes';
 
 const App = () => {
     const [token, setToken] = useState();
     const [currentUser, setCurrentUser] = useState();
+    const [showHeader, setShowHeader] = useState(true);
+   
 
     useEffect(() => {
         const t = localStorage.getItem('AC-Token');
@@ -21,10 +24,11 @@ const App = () => {
             setToken(t);
         }
 
-         if (user) {
-              setCurrentUser(user);
+        if (user) {
+            setCurrentUser(user);
         }
     }, []);
+
 
     const RoutesList = ({ data }) => {
         return (
@@ -39,8 +43,9 @@ const App = () => {
     return (
         <Suspense fallback={null}>
             <UserContext.Provider value={{ setToken, token, currentUser, setCurrentUser }}>
+                {console.log(window.location.href)}
                 <Router>
-                    <Header  />
+                    <Header />
                     <MobileAppBar />
                     <ToastContainer />
                     <RoutesList
