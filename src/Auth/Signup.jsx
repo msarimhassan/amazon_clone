@@ -45,7 +45,7 @@ const Signup = () => {
     const { t } = useTranslation(['Signup']);
     return (
         <div className='d-flex justify-content-center align-items-center flex-column' style={{height:'100vh'}}>
-            <img src={Logo} alt='Amazaon Logo' style={{ width: '200px' }}  />
+         <Link to={NavRoutes.Homepage}><img src={Logo} alt='Amazaon Logo' style={{ width: '200px' }}  /></Link>
             <div className='border ps-5 pe-5 pt-4 pb-4 mt-3 Signup-form'>
                 <h2>{t('createaccount')}</h2>
                   <GeneralInfoForm
