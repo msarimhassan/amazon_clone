@@ -4,13 +4,13 @@ import Ratings from './Ratings';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import ReactStars from 'react-stars';
 
 import NavRoutes from '../common/NavRoutes';
 import '../styles/Form.css';
 import { AddToCart } from '../app/CartHandler/CartSlice';
 import { Icons } from '../common';
 import '../styles/Card.css';
-import ReactStars from 'react-stars';
 const ProductCard = ({ product }) => {
 
     const dispatch = useDispatch();
@@ -21,6 +21,9 @@ const ProductCard = ({ product }) => {
       
         dispatch(AddToCart(product));
     };
+      const ratingChanged = (newRating) => {
+          console.log(newRating);
+      };
     const { t } = useTranslation(['Products']);
     return (
         <Card className='card-with-shadow'>
@@ -41,12 +44,22 @@ const ProductCard = ({ product }) => {
                         </CardTitle>
                         <ReactStars
                             count={5}
+<<<<<<< HEAD
                             size={20}
                             value={product?.rating.avg == 'null' ? 0 : product.rating.avg}
                             color2={'#ffd700'}
                             edit={false}
                         />
                         <BS.BsFillPersonFill />{ product?.rating.totalRatings}
+=======
+                            onChange={ratingChanged}
+                            size={20}
+                            color2={'#ffd700'}
+                            edit={false}
+                            value={3}
+                        />
+                        
+>>>>>>> master
                         <div className='d-flex justify-content-between'>
                             <CardText tag='h5' className='text-black'>
                                 {t('price')}

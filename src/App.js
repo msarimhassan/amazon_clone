@@ -19,7 +19,6 @@ const App = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         if (t) {
             setToken(t);
-          
         }
 
          if (user) {

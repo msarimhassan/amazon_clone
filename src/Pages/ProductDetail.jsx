@@ -9,12 +9,16 @@ import Loader from '../assets/animations';
 import { ACNetwork, config, Urls } from '../config';
 import { AddToCart } from '../app/CartHandler/CartSlice';
 import '../styles/CartPage.css';
+import { Icons } from './../common';
+import useToken from '../hooks/useToken';
 
 
 const ProductDetail = () => {
     let location = useLocation();
     const [loading, setLoading] = useState(true);
     const [product, setProduct] = useState();
+    const { FC } = Icons;
+    const { token} = useToken();
     let dispatch = useDispatch();
     useEffect(() => {
         getProduct();
@@ -50,7 +54,11 @@ const ProductDetail = () => {
                         <Col lg={6} sm={12}>
                             <h3>{product.name}</h3>
                             <h6>Visit the store</h6>
-                            <Ratings />
+                            <div style={{display:'inline',verticalAlign:'middle'}}>
+                                <FC.FcRating size={30} />
+                                    <span style={{fontSize:'1.2em',marginTop:'45px',marginLeft:'15px'}}>3.5/5</span>
+                            </div>
+                           {token?<Ratings />:null}
                             <hr />
                             {product.quantity > 0 ? (
                                 <div>
@@ -80,7 +88,12 @@ const ProductDetail = () => {
                             <hr />
                             <h6>About this Product</h6>
                             <div>{product.description}</div>
-                            <Button className='float-end mt-5 amazon-btn' onClick={()=>dispatch(AddToCart(product))}>Add To Cart</Button>
+                            <Button
+                                className='float-end mt-5 amazon-btn'
+                                onClick={() => dispatch(AddToCart(product))}
+                            >
+                                Add To Cart
+                            </Button>
                         </Col>
                     </Row>
                 </Container>
