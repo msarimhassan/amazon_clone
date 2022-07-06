@@ -71,6 +71,11 @@ export default function Order() {
                                 Add Address
                             </Button>
                             <Drawer open={showModal} setOpen={setShowModal} Header='Add Address'>
+                                <AddressForm
+                                    setOpen={setShowModal}
+                                    setAddress={setAddress}
+                                    addressList={address}
+                                />
                             </Drawer>
                             <br />
                             <br />
@@ -104,7 +109,11 @@ export default function Order() {
                             >
                                 Add Card
                             </Button>
-                            <Drawer open={showCardModal} setOpen={setShowCardModal} Header="Add Card">
+                            <Drawer
+                                open={showCardModal}
+                                setOpen={setShowCardModal}
+                                Header='Add Card'
+                            >
                                 <CardForm setShowModal={setShowCardModal} addCard={setCardList} />
                             </Drawer>
                             <div className='d-flex flex-column mt-5'>
