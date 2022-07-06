@@ -19,7 +19,7 @@ const PaymentMethod = [
     },
     {
         _id: 1,
-        mode: 'card',
+        mode: 'Card',
     },
 ];
 
@@ -107,7 +107,7 @@ export default function Order() {
                             <Drawer open={showCardModal} setOpen={setShowCardModal} Header="Add Card">
                                 <CardForm setShowModal={setShowCardModal} addCard={setCardList} />
                             </Drawer>
-                            <div className='d-flex flex-row'>
+                            <div className='d-flex flex-column mt-5'>
                                 {PaymentMethod.map((payment) => {
                                     return (
                                         <div>
@@ -121,11 +121,11 @@ export default function Order() {
                                     );
                                 })}
                             </div>
-                            {mode?.mode == 'card' ? (
+                            {mode?.mode == 'Card' ? (
                                 <h4 className='mt-4 ms-4'>Select Card</h4>
                             ) : null}
 
-                            {mode?.mode == 'card'
+                            {mode?.mode == 'Card'
                                 ? cardList?.map((Card) => {
                                       return (
                                           <RadioButton

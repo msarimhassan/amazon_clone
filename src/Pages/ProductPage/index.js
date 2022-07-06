@@ -51,7 +51,7 @@ const ProductCardHandler = () => {
                         <Row>
                             {products.map((product, index) => {
                                 return (
-                                    <Col sm={3} md={6} lg={3}>
+                                    <Col sm={3} md={6} lg={3} className='mt-3 mb-3'>
                                         <ProductCard key={index} product={product} />
                                     </Col>
                                 );
