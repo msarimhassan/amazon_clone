@@ -19,10 +19,12 @@ export default function MobileAppBar() {
     const { GI, AI,CG,FA } = Icons;
     let navigate = useNavigate();
     const [hide, setHide] = useState(true);
-    const { token } = useToken();
+    const { token, Logout } = useToken();
     const cartCount = useSelector((state) => state.cart.cartProducts);
     const handleLogout = () => {
-
+        setHide(true);
+        Logout();
+        navigate(NavRoutes.Login);
     };
 
     const handleNavigation = (route) => {
@@ -84,6 +86,9 @@ export default function MobileAppBar() {
                                     </li>
                                     <li onClick={() => handleNavigation(NavRoutes.address)}>
                                         <FA.FaAddressBook /> Address
+                                    </li>
+                                    <li onClick={() => handleLogout()}>
+                                        <AI.AiOutlineLogout /> Logout
                                     </li>
                                 </>
                             ) : (
