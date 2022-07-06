@@ -43,8 +43,8 @@ const Header = () => {
     const [query, setQuery] = useState('');
     const [searchedData, setSearchedData] = useState([]);
     const handleNavbar = () => {
+          
         
-        setOpen(!open);
     };
     useEffect(() => {
         if (localStorage.getItem('i8nextLng')?.length > 2) {
@@ -82,7 +82,7 @@ const Header = () => {
     
    
     return (
-        <div>
+        <div className='AppBar'>
             <Navbar style={{ backgroundColor: '#131921', color: 'white' }} expand='lg'>
                 <NavbarBrand href='/'>
                     <img src={Amazonlogo} alt='Amazon-Logo' width='150px' />
@@ -90,7 +90,7 @@ const Header = () => {
                 <NavbarToggler onClick={() => handleNavbar()} style={{ color: 'white' }}>
                     <GI.GiHamburgerMenu size={40} />
                 </NavbarToggler>
-                <Collapse isOpen={open} navbar>
+                <Collapse  navbar>
                     <Nav className='m-auto' navbar>
                         <NavItem>
                             <div className='d-flex flex-row'>

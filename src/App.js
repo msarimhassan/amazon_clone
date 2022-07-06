@@ -1,6 +1,7 @@
 import { Suspense, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
+import MobileAppBar from './components/MobileAppBar';
 import { UserContext } from './Context';
 import { PublicRoutes } from './common/PublicRoutes';
 import { PrivateRoutes } from './common/PrivateRoutes';
@@ -40,7 +41,8 @@ const App = () => {
         <Suspense fallback={null}>
             <UserContext.Provider value={{ setToken, token, currentUser, setCurrentUser }}>
                 <Router>
-                    <Header />
+                    <Header  />
+                    <MobileAppBar />
                     <ToastContainer />
                     <RoutesList
                         data={

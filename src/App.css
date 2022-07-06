@@ -75,3 +75,52 @@ box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1p
   border: 1px solid #f5bb5c;
   width: 40%;
 }
+
+.AppBar{
+   display: block;
+}
+
+.MobileBar{
+ display: none;
+}
+
+@media only screen  and (max-width:768px) {
+  .AppBar{
+    display: none;
+  }
+    .MobileBar {
+      display: block;
+     
+    }
+    .Mobile-Nav{
+      background-color: #131921;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            align-content: center;
+    }
+  .overlay{
+    position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color:#131921;
+      z-index: 2;
+      cursor: pointer;
+      overflow-y: hidden;
+      
+  }
+
+  .overlay-menu li{
+    text-decoration: none;
+    color: white;
+    font-size: 2em;
+    list-style-type: none;
+  }
+  
+ 
+}
