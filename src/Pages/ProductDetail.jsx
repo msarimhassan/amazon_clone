@@ -11,6 +11,7 @@ import { AddToCart } from '../app/CartHandler/CartSlice';
 import '../styles/CartPage.css';
 import { Icons } from './../common';
 import useToken from '../hooks/useToken';
+import { toast } from 'react-toastify';
 
 
 const ProductDetail = () => {
@@ -38,8 +39,17 @@ const ProductDetail = () => {
 
         setLoading(false);
     };
-    const ratingChanged = (res) => {
+    const ratingChanged = async(res) => {
         console.log(res);
+        const obj = {
+            productId: location.state.id,
+            rating:res,
+        };
+        const response = await ACNetwork.post(Urls.addRatings, obj, (await config()).headers);
+        if (!response.ok) {
+           return toast(response.data.error, { position: toast.POSITION.TOP_RIGHT });
+        }
+        toast(response.data.message, { position: toast.POSITION.TOP_RIGHT });
     }
     return (
         <div>
@@ -66,7 +76,7 @@ const ProductDetail = () => {
                                         marginLeft: '15px',
                                     }}
                                 >
-                                    {product?.rating.avg == null ? '0' : product?.rating.avg}/5
+                                    {product?.rating.avg == null ? '0' : Math.ceil(product?.rating.avg)}/5
                                 </span>
                             </div>
                             {token ? (

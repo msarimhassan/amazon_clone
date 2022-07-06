@@ -22,4 +22,5 @@ export default {
     updateCustomer: 'customer/update-customer',
     googleLogin: 'auth/social-login',
     deleteAddress: (id) => `customer/delete-address/${id}`,
+    addRatings: 'customer/add-rating',
 };
