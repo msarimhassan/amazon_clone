@@ -37,7 +37,7 @@ const Header = () => {
     const { AI,GI } = Icons;
     const itemCount = useSelector((state) => state.counter.itemcount);
     const cartCount = useSelector((state) => state.cart.cartProducts);
-    const { Logout, token } = useToken();
+    const { Logout, token,currentUser } = useToken();
     let navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState('');
@@ -79,7 +79,7 @@ const Header = () => {
     }
     
     const { t } = useTranslation(['Categories']);
-    
+
    
     return (
         <div className='AppBar'>
@@ -157,9 +157,11 @@ const Header = () => {
                                 style={{ backgroundColor: 'transparent', border: 0 }}
                             >
                                 <img
-                                    src='https://mdbcdn.b-cdn.net/img/new/avatars/1.webp'
+                                    src={currentUser.image ? currentUser.image :'https://mdbcdn.b-cdn.net/img/new/avatars/1.webp'}
                                     className='rounded-circle shadow-4'
+                                    style={{objectFit:'cover'}}
                                     width='50px'
+                                    height="50px"
                                     alt='Avatar'
                                 />
                             </DropdownToggle>

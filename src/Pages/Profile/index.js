@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import useToken from '../../hooks/useToken';
 import { useFormik } from 'formik';
 import { Row, Col, Input, Label, Button } from 'reactstrap';
 import '../../styles/CartPage.css';
 import { ACNetwork, Urls, config } from '../../config';
 import { toast } from 'react-toastify';
+import { Icons } from '../../common';
+import LoadingButton from '../../components/LoadingButton';
 
 export default function Profile() {
-    const { currentUser } = useToken();
-
+    const { currentUser,setProfile } = useToken();
+    const inputFile = useRef(null);
+    const [loading, setLoading] = useState(false);
+    const { AI } = Icons;
     const [flag, setFlag] = useState(false);
+    const [imgUrl, setImgUrl] = useState(currentUser?currentUser.image:'https://mdbcdn.b-cdn.net/img/new/avatars/1.webp');
+    const [baseUrl, setBaseUrl] = useState(null);
+
     const initialValues = {
         name: currentUser?.name,
         email: currentUser?.email,
@@ -17,58 +24,33 @@ export default function Profile() {
         phoneNumber: currentUser?.phoneNumber,
     };
 
+    
+
     const onSubmit = async (data) => {
-        if (flag == false) {
-            const obj = {
-                name: data.name,
-                email: data.email,
-                phoneNumber: data.phoneNumber.toString(),
-            };
+        setLoading(true);
+        
+        const { password, phoneNumber, ...restValues } = data;
 
-            const response = await ACNetwork.put(
-                Urls.updateCustomer,
-                obj,
-                (
-                    await config()
-                ).headers
-            );
+        let obj = { ...restValues, phoneNumber: phoneNumber.toString() };
 
-            if (response.status == 404) {
-                return toast.error(response.data.error, { position: toast.POSITION.TOP_RIGHT });
-            }
-            toast.success(response.data.message, { position: toast.POSITION.TOP_RIGHT });
-            return;
-        } else if (flag == true && data.password == '') {
-            const obj = {
-                name: data.name,
-                email: data.email,
-                phoneNumber: data.phoneNumber.toString(),
-            };
-            const response = await ACNetwork.put(
-                Urls.updateCustomer,
-                obj,
-                (
-                    await config()
-                ).headers
-            );
-            if (response.status == 404) {
-                return toast.error(response.data.error, { position: toast.POSITION.TOP_RIGHT });
-            }
-            toast.success(response.data.message, { position: toast.POSITION.TOP_RIGHT });
-            return;
+        if (flag && password) {
+            obj = { ...obj, password };
         }
 
-        const obj = {
-            name: data.name,
-            email: data.email,
-            phoneNumber: data.phoneNumber.toString(),
-            password: data.password,
-        };
-        const response = await ACNetwork.put(Urls.updateCustomer, obj, (await config()).headers);
+
+        if (baseUrl) {
+            obj = { ...obj, image: baseUrl };
+        }
+
+
+        const response = await ACNetwork.put(Urls.updateCustomer, obj, (await config()).headers)
+        console.log(response);
         if (response.status == 404) {
+            setLoading(false);
             return toast.error(response.data.error, { position: toast.POSITION.TOP_RIGHT });
         }
-        localStorage.setItem('user',response.data.customer);
+        setLoading(false);
+        setProfile(response.data.customer);
         toast.success(response.data.message, { position: toast.POSITION.TOP_RIGHT });
     };
 
@@ -76,6 +58,25 @@ export default function Profile() {
         initialValues,
         onSubmit,
     });
+
+    const handleImage = () => {
+        inputFile.current.click();
+    };
+
+    const ChangeImage = (e) => {
+        console.log(e.target.files[0]);
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            console.log({reader})
+            setBaseUrl(reader.result);
+        };
+         const result = reader.readAsDataURL(e.target.files[0]);
+        setImgUrl(URL.createObjectURL(e.target.files[0]));
+        setBaseUrl(result);
+        console.log({baseUrl})
+    };
+
+
     return (
         <div
             className='d-flex justify-content-center align-items-center'
@@ -83,7 +84,27 @@ export default function Profile() {
         >
             <div className='border d-flex p-5'>
                 <div>
-                    <h1>Profile</h1>
+                    <div className='d-flex'>
+                        <h1>Edit Profile</h1>
+                        <div className='ms-3' onClick={() => handleImage()}>
+                            <img
+                                src={baseUrl ? baseUrl : imgUrl}
+                                style={{ objectFit: 'cover' }}
+                                className='rounded-circle shadow-4'
+                                width='80px'
+                                height='80px'
+                                alt='Avatar'
+                            />
+                        </div>
+                        <AI.AiFillEdit />
+                    </div>
+                    <input
+                        type='file'
+                        id='file'
+                        ref={inputFile}
+                        onChange={(e) => ChangeImage(e)}
+                        style={{ display: 'none' }}
+                    />
                     <Row>
                         <Col lg={6} sm={12} md={6}>
                             <Label>Name</Label>
@@ -127,10 +148,11 @@ export default function Profile() {
                     </Row>
                     <input type='checkbox' onChange={() => setFlag(!flag)} className='mt-3' />
                     <label className='ms-2'>Update Password</label>
-                    <br/>
-                    <Button className='amazon-btn mt-3 ms-2' onClick={handleSubmit}>
-                        Update
-                    </Button>
+                    <br />
+                    <div onClick={handleSubmit}>
+                        <LoadingButton loading={loading} type='submit' text='Update' />
+                    </div>
+                    
                 </div>
             </div>
         </div>
