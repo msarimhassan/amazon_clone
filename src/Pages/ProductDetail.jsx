@@ -48,17 +48,25 @@ const ProductDetail = () => {
                     <Row>
                         {/* Column that hold the image  */}
                         <Col lg={6} sm={12}>
-                            <img src={product.imageUrl} alt='airpods' style={{width:'100%'}} />
+                            <img src={product.imageUrl} alt='airpods' style={{ width: '100%' }} />
                         </Col>
                         {/* Columns that hold the details */}
                         <Col lg={6} sm={12}>
                             <h3>{product.name}</h3>
                             <h6>Visit the store</h6>
-                            <div style={{display:'inline',verticalAlign:'middle'}}>
+                            <div style={{ display: 'inline', verticalAlign: 'middle' }}>
                                 <FC.FcRating size={30} />
-                                    <span style={{fontSize:'1.2em',marginTop:'45px',marginLeft:'15px'}}>3.5/5</span>
+                                <span
+                                    style={{
+                                        fontSize: '1.2em',
+                                        marginTop: '45px',
+                                        marginLeft: '15px',
+                                    }}
+                                >
+                                    {product?.rating.avg == null ? '0' : product?.rating.avg}/5
+                                </span>
                             </div>
-                           {token?<Ratings />:null}
+                            {token ? <Ratings /> : null}
                             <hr />
                             {product.quantity > 0 ? (
                                 <div>

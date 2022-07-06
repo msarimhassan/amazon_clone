@@ -44,22 +44,12 @@ const ProductCard = ({ product }) => {
                         </CardTitle>
                         <ReactStars
                             count={5}
-<<<<<<< HEAD
                             size={20}
                             value={product?.rating.avg == 'null' ? 0 : product.rating.avg}
                             color2={'#ffd700'}
                             edit={false}
                         />
                         <BS.BsFillPersonFill />{ product?.rating.totalRatings}
-=======
-                            onChange={ratingChanged}
-                            size={20}
-                            color2={'#ffd700'}
-                            edit={false}
-                            value={3}
-                        />
-                        
->>>>>>> master
                         <div className='d-flex justify-content-between'>
                             <CardText tag='h5' className='text-black'>
                                 {t('price')}
