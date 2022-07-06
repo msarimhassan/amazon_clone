@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import i18next from 'i18next';
+import ReactStars from 'react-stars';
 
 import { Container, Row, Col, Table,Button } from 'reactstrap';
-import Ratings from '../components/Ratings';
 import Loader from '../assets/animations';
 import { ACNetwork, config, Urls } from '../config';
 import { AddToCart } from '../app/CartHandler/CartSlice';
@@ -38,13 +38,16 @@ const ProductDetail = () => {
 
         setLoading(false);
     };
+    const ratingChanged = (res) => {
+        console.log(res);
+    }
     return (
         <div>
             {/* Detail Container */}
             {loading ? (
                 <Loader />
             ) : (
-                <Container className='mt-5'>
+                <Container className='mt-5 mb-5'>
                     <Row>
                         {/* Column that hold the image  */}
                         <Col lg={6} sm={12}>
@@ -66,7 +69,14 @@ const ProductDetail = () => {
                                     {product?.rating.avg == null ? '0' : product?.rating.avg}/5
                                 </span>
                             </div>
-                            {token ? <Ratings /> : null}
+                            {token ? (
+                                <ReactStars
+                                    count={5}
+                                    onChange={ratingChanged}
+                                    size={20}
+                                    color2={'#ffd700'}
+                                />
+                            ) : null}
                             <hr />
                             {product.quantity > 0 ? (
                                 <div>
