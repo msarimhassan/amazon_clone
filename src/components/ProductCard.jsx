@@ -10,11 +10,12 @@ import '../styles/Form.css';
 import { AddToCart } from '../app/CartHandler/CartSlice';
 import { Icons } from '../common';
 import '../styles/Card.css';
+import ReactStars from 'react-stars';
 const ProductCard = ({ product }) => {
 
     const dispatch = useDispatch();
     const products = useSelector((state) => state.cart.cartProducts);
-    const { AI } = Icons;
+    const { AI,BS } = Icons;
 
     const handleProduct = (product) => {
       
@@ -38,7 +39,14 @@ const ProductCard = ({ product }) => {
                         <CardTitle tag='h3' className='text-black mt-2'>
                             {product?.name}
                         </CardTitle>
-                        <Ratings />
+                        <ReactStars
+                            count={5}
+                            size={20}
+                            value={product?.rating.avg == 'null' ? 0 : product.rating.avg}
+                            color2={'#ffd700'}
+                            edit={false}
+                        />
+                        <BS.BsFillPersonFill />{ product?.rating.totalRatings}
                         <div className='d-flex justify-content-between'>
                             <CardText tag='h5' className='text-black'>
                                 {t('price')}
