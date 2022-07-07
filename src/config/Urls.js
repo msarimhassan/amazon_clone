@@ -23,4 +23,5 @@ export default {
     googleLogin: 'auth/social-login',
     deleteAddress: (id) => `customer/delete-address/${id}`,
     addRatings: 'customer/add-rating',
+    creatChat: (ln) => `customer/${ln}/create-chat`,
 };

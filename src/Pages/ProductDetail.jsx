@@ -54,6 +54,15 @@ const ProductDetail = () => {
         }
         toast(response.data.message, { position: toast.POSITION.TOP_RIGHT });
     }
+
+
+    const createChat =async () => {
+        const response = await ACNetwork.post(Urls.creatChat(i18next.language), { productId: location.state.id }, (await config()).headers);
+        console.log(response.data);
+        setShowModal(!showModal);
+   }
+
+
     return (
         <div>
             {/* Detail Container */}
@@ -130,7 +139,7 @@ const ProductDetail = () => {
                             </Button>
                              <Chat open={showModal} setOpen={setShowModal} Header='Chat' />
                             {token ? (
-                                <Button className='float-end mt-5 me-2 amazon-btn' onClick={()=>setShowModal(!showModal)}>chat</Button>
+                                <Button className='float-end mt-5 me-2 amazon-btn' onClick={()=>createChat()}>chat</Button>
                             ) : null}
                         </Col>
                     </Row>

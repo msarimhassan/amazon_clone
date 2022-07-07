@@ -21,27 +21,7 @@ export default function Messages() {
                 <NotMyMessages />
                 <MyMessages />
                 <NotMyMessages />
-                <MyMessages />
-                <NotMyMessages />
-                <MyMessages />
-                <NotMyMessages />
-                <MyMessages />
-                <NotMyMessages />
-                <MyMessages />
-                <NotMyMessages />
-                <MyMessages />
-                <NotMyMessages />
-                <MyMessages />
-                <NotMyMessages />
-                <MyMessages />
-                <NotMyMessages />
-                <MyMessages />
-                <NotMyMessages />
-                <MyMessages />
-                <NotMyMessages />
-                <MyMessages />
-                <NotMyMessages />
-                <MyMessages />
+    
         </>
     );
 }
