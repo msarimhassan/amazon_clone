@@ -20,7 +20,8 @@ const ProductDetail = () => {
     let location = useLocation();
     const [loading, setLoading] = useState(true);
     const [product, setProduct] = useState();
-     const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [conversationId, setConversationId] = useState(null);
     const { FC,BS } = Icons;
     const { token} = useToken();
     let dispatch = useDispatch();
@@ -59,6 +60,7 @@ const ProductDetail = () => {
     const createChat =async () => {
         const response = await ACNetwork.post(Urls.creatChat(i18next.language), { productId: location.state.id }, (await config()).headers);
         console.log(response.data);
+        setConversationId(response.data.conversation);
         setShowModal(!showModal);
    }
 
@@ -137,7 +139,7 @@ const ProductDetail = () => {
                             >
                                 Add To Cart
                             </Button>
-                             <Chat open={showModal} setOpen={setShowModal} Header='Chat' />
+                            { conversationId&&<Chat open={showModal} setOpen={setShowModal} Header='Chat' conversationId={conversationId} shopId={product.creator._id} />}
                             {token ? (
                                 <Button className='float-end mt-5 me-2 amazon-btn' onClick={()=>createChat()}>chat</Button>
                             ) : null}

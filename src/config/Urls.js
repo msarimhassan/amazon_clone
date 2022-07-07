@@ -24,4 +24,6 @@ export default {
     deleteAddress: (id) => `customer/delete-address/${id}`,
     addRatings: 'customer/add-rating',
     creatChat: (ln) => `customer/${ln}/create-chat`,
+    sendMessage: 'customer/send-message',
+    getMessage: 'customer/get-messages/',
 };

@@ -1,27 +1,35 @@
 import React from 'react'
+import useToken from '../../hooks/useToken';
 
-const MyMessages = () => {
+const MyMessages = ({message}) => {
     return (
         <div className='d-flex justify-content-end' >
-            <div className='user-message'>user-message</div>
+            <div className='user-message'>{message}</div>
         </div>
     );
 }
 
-const NotMyMessages = () => {
+const NotMyMessages = ({message}) => {
     return <div className='shop-message'>
-          shop-message
+          {message}
     </div>
 }
 
 
-export default function Messages() {
+export default function Messages({ conversation }) {
+    const {currentUser } = useToken();
     return (
         <>
-                <NotMyMessages />
-                <MyMessages />
-                <NotMyMessages />
-    
+               
+            {conversation.map((message) => {
+                if (message.sender === currentUser._id) {
+                    return <MyMessages message={message.message} />
+                } 
+                else {
+                    return <NotMyMessages message={message.message} />
+                }
+                
+         })}
         </>
     );
 }

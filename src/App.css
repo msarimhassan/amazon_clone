@@ -95,8 +95,9 @@ box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1p
    position: fixed;
    bottom: 0;
    margin-bottom: 1%;
-   width: 24%;
+   min-width: 50%;
    margin-left: 1.5%;
+   min-width:35px
  
  }
 
@@ -113,6 +114,7 @@ box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1p
    display: flex;
    justify-content: end;
    width: 50%;
+   margin-top: 5px;
 
 }
 
@@ -183,6 +185,9 @@ box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1p
     justify-content: center;
     margin-right: 60px;
   }
+     .create-message {
+         min-width: 50%;
+     }
 
  
 }
