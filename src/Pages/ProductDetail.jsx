@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import i18next from 'i18next';
 import ReactStars from 'react-stars';
+import { toast } from 'react-toastify';
 
 import { Container, Row, Col, Table,Button } from 'reactstrap';
 import Loader from '../assets/animations';
@@ -11,14 +12,16 @@ import { AddToCart } from '../app/CartHandler/CartSlice';
 import '../styles/CartPage.css';
 import { Icons } from './../common';
 import useToken from '../hooks/useToken';
-import { toast } from 'react-toastify';
+import Chat from './Chat';
+
 
 
 const ProductDetail = () => {
     let location = useLocation();
     const [loading, setLoading] = useState(true);
     const [product, setProduct] = useState();
-    const { FC } = Icons;
+     const [showModal, setShowModal] = useState(false);
+    const { FC,BS } = Icons;
     const { token} = useToken();
     let dispatch = useDispatch();
     useEffect(() => {
@@ -76,7 +79,10 @@ const ProductDetail = () => {
                                         marginLeft: '15px',
                                     }}
                                 >
-                                    {product?.rating.avg == null ? '0' : Math.ceil(product?.rating.avg)}/5
+                                    {product?.rating.avg == null
+                                        ? '0'
+                                        : Math.ceil(product?.rating.avg)}
+                                    /5
                                 </span>
                             </div>
                             {token ? (
@@ -122,6 +128,10 @@ const ProductDetail = () => {
                             >
                                 Add To Cart
                             </Button>
+                             <Chat open={showModal} setOpen={setShowModal} Header='Chat' />
+                            {token ? (
+                                <Button className='float-end mt-5 me-2 amazon-btn' onClick={()=>setShowModal(!showModal)}>chat</Button>
+                            ) : null}
                         </Col>
                     </Row>
                 </Container>

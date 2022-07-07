@@ -3,7 +3,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import { Icons } from '../common';
 import NotificationBadge from 'react-notification-badge';
+import i18next from 'i18next';
 import { useSelector } from 'react-redux';
+import UsaFlag from '../assets/usa-flag.svg';
+import FrenchFlag from '../assets/french-flag.svg';
 import {
     UncontrolledDropdown,
     DropdownToggle,
@@ -31,6 +34,10 @@ export default function MobileAppBar() {
         setHide(true);
         navigate(route);
     }
+     const handleLanguage = (e) => {
+         i18next.changeLanguage(e.target.value);
+         window.location.reload();
+     };
 
     return (
         <div className='MobileBar'>
@@ -68,6 +75,26 @@ export default function MobileAppBar() {
                 </div>
 
                 <div className='overlay-menu'>
+                    <div style={{ float:'right'}}>
+                        <UncontrolledDropdown>
+                            <DropdownToggle nav caret style={{ color: 'white' }}>
+                                {i18next.language == 'en' ? (
+                                    <img src={UsaFlag} width='30px' height='25px' />
+                                ) : (
+                                    <img src={FrenchFlag} width='30px' height='25px' />
+                                )}
+                            </DropdownToggle>
+                            <DropdownMenu right>
+                                <DropdownItem value='en' onClick={(e) => handleLanguage(e)}>
+                                    English
+                                </DropdownItem>
+                                <DropdownItem divider />
+                                <DropdownItem value='fr' onClick={(e) => handleLanguage(e)}>
+                                    French
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                    </div>
                     <div
                         className='d-flex justify-content-center align-items-center'
                         style={{ height: '60vh' }}

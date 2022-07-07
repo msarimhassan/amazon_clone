@@ -91,6 +91,52 @@ box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1p
     margin-right: 30px;
 }
 
+ .create-message {
+   position: fixed;
+   bottom: 0;
+   margin-bottom: 1%;
+   width: 24%;
+   margin-left: 1.5%;
+ 
+ }
+
+ .message-input{
+    border-radius: 20px;
+ }
+
+.user-message{
+  
+  background-color: #1AF189;
+  padding: 10px;
+  border-radius: 20px;
+   color: white;
+   display: flex;
+   justify-content: end;
+   width: 50%;
+
+}
+
+.shop-message{
+  background-color:#DEDEDE;
+  padding: 10px;
+  border-radius: 20px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: start;
+  width: 50%;
+}
+
+
+
+
+
+.send-btn{
+  background-color: #f5bb5c;
+  border-color: #f5bb5c;
+}
+
+
+
 @media only screen  and (max-width:768px) {
   .AppBar{
     display: none;
@@ -134,6 +180,6 @@ box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1p
     justify-content: center;
     margin-right: 60px;
   }
- 
+
  
 }
