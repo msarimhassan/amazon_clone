@@ -66,15 +66,20 @@ export default function Chat({ open, setOpen, Header, conversationId, shopId }) 
                     </div>
                 </OffcanvasBody>
                 <div className='d-flex create-message'>
-                    <Input
-                        placeholder='Enter a message'
-                        className='message-input'
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                    />
-                    <Button className='ms-2 send-btn' onClick={() => SendMessage()}>
-                        <AI.AiOutlineSend size={20} />
-                    </Button>
+                    <div>
+                        <Input
+                            placeholder='Enter a message'
+                            className='message-input'
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                        />
+                    </div>
+
+                    <div>
+                        <Button className='ms-2 send-btn' onClick={() => SendMessage()}>
+                            <AI.AiOutlineSend size={20} />
+                        </Button>
+                    </div>
                 </div>
             </Offcanvas>
         </div>

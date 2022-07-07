@@ -112,20 +112,38 @@ const Header = () => {
                                         className='search-results'
                                         style={{ backgroundColor: 'white' }}
                                     >
-                                        {searchedData.map((product) => {
-                                            return (
-                                                <div
-                                                    className='ps-3 m-2 searched-item'
-                                                    style={{
-                                                        backgroundColor: 'white',
-                                                        color: 'black',
-                                                    }}
-                                                    onClick={() => handleNavigation(product._id)}
-                                                >
-                                                    {product?.name}
-                                                </div>
-                                            );
-                                        })}
+                                        {searchedData?.length != 0 ? (
+                                            <>
+                                                {searchedData?.map((product) => {
+                                                    return (
+                                                        <div
+                                                            className='ps-3 m-2 searched-item'
+                                                            style={{
+                                                                backgroundColor: 'white',
+                                                                color: 'black',
+                                                            }}
+                                                            onClick={() =>
+                                                                handleNavigation(product._id)
+                                                            }
+                                                        >
+                                                            {product?.name}
+                                                        </div>
+                                                    );
+                                                })}
+                                            </>
+                                        ) : (
+                                            <div
+                                                className='ps-3 m-2 searched-item'
+                                                style={{
+                                                    backgroundColor: 'white',
+                                                    color: 'black',
+                                                    textAlign:'center'
+                                                }}
+                                               
+                                            >
+                                              No data Found 
+                                            </div>
+                                        )}
                                     </div>
                                 )}
                             </NavItem>
@@ -187,6 +205,10 @@ const Header = () => {
                                     <DropdownItem divider />
                                     <DropdownItem onClick={() => navigate(NavRoutes.myCards)}>
                                         Cards
+                                    </DropdownItem>
+                                    <DropdownItem divider />
+                                    <DropdownItem onClick={() => navigate(NavRoutes.userChats)}>
+                                        Chats
                                     </DropdownItem>
                                     <DropdownItem divider />
                                     <DropdownItem onClick={() => navigate(NavRoutes.address)}>

@@ -14,6 +14,7 @@ export default {
     codeVerification: '/verifycode',
     newPassword: '/newpassword',
     profile: '/profile',
-    address:'address',
+    address: '/address',
+    userChats:'/chats',
     NotFound:'*',
 };

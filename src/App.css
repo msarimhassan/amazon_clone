@@ -97,7 +97,7 @@ box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1p
    margin-bottom: 1%;
    min-width: 50%;
    margin-left: 1.5%;
-   min-width:35px
+  width: 36%;
  
  }
 
@@ -125,21 +125,20 @@ box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1p
   margin-top: 10px;
   display: flex;
   justify-content: start;
-  width: 50%;
 }
-
-.chat-section{
-  
-}
-
-
-
 
 .send-btn{
   background-color: #f5bb5c;
   border-color: #f5bb5c;
 }
 
+.chat-list{
+ width: 38%;
+}
+.chat-screen{
+  width: 62%;
+  height: 100vh;
+}
 
 
 @media only screen  and (max-width:768px) {
@@ -185,9 +184,10 @@ box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1p
     justify-content: center;
     margin-right: 60px;
   }
-     .create-message {
-         min-width: 50%;
-     }
+  .create-message{
+    width: 80%;
+  }
+    
 
  
 }
