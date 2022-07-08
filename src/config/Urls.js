@@ -26,4 +26,5 @@ export default {
     creatChat: (ln) => `customer/${ln}/create-chat`,
     sendMessage: 'customer/send-message',
     getMessage: 'customer/get-messages/',
+    getConversations: 'customer/conversations',
 };

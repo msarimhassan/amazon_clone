@@ -9,12 +9,10 @@ import { AuthRoutes } from './common/AuthRoutes';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
-import NavRoutes from './common/NavRoutes';
 
 const App = () => {
     const [token, setToken] = useState();
     const [currentUser, setCurrentUser] = useState();
-    const [showHeader, setShowHeader] = useState(true);
    
 
     useEffect(() => {

@@ -10,7 +10,7 @@ i18.use(Backend).use(LanguageDetector).use(initReactI18next).init({
         //translation file paths are given in backcend
         loadPath:"assets/i18n/{{ns}}//{{lng}}.json"
     },
-    fallbackLng: 'en',
+    fallbackLng: 'en-US',
     debug: true,
     ns:["Login","Signup","Products"],
     interpolation:{

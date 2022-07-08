@@ -149,14 +149,14 @@ const Header = () => {
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret style={{ color: 'white' }}>
-                                    {i18next.language == 'en' ? (
+                                    {i18next.language == 'en-US' ? (
                                         <img src={UsaFlag} width='30px' height='25px' />
                                     ) : (
                                         <img src={FrenchFlag} width='30px' height='25px' />
                                     )}
                                 </DropdownToggle>
                                 <DropdownMenu right>
-                                    <DropdownItem value='en' onClick={(e) => handleLanguage(e)}>
+                                    <DropdownItem value='en-US' onClick={(e) => handleLanguage(e)}>
                                         English
                                     </DropdownItem>
                                     <DropdownItem divider />
