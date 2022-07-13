@@ -121,6 +121,7 @@ box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1p
 .shop-message{
   background-color:#DEDEDE;
   padding: 10px;
+  width: 50%;
   border-radius: 20px;
   margin-top: 10px;
   display: flex;
@@ -140,6 +141,16 @@ box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1p
   height: 100vh;
 }
 
+.chat-card{
+  background-color: #DEDEDE;
+  margin: 8px;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  
+}
 
 @media only screen  and (max-width:768px) {
   .AppBar{
