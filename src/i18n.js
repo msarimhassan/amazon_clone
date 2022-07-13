@@ -11,7 +11,7 @@ i18.use(Backend).use(LanguageDetector).use(initReactI18next).init({
         loadPath:"assets/i18n/{{ns}}//{{lng}}.json"
     },
     fallbackLng: 'en-US',
-    debug: true,
+    debug: false,
     ns:["Login","Signup","Products"],
     interpolation:{
         escapeValue:false,
