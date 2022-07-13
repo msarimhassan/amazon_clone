@@ -5,7 +5,6 @@ import OrderDetails from '../Pages/OrderDetails';
 import Card from '../Pages/Card';
 import Profile from '../Pages/Profile';
 import Address from '../Pages/Address';
-import ChatScreen from '../Pages/Chat/ChatScreen';
 
 export const PrivateRoutes=[
     {
@@ -29,8 +28,5 @@ export const PrivateRoutes=[
     }, {
         link: NavRoutes.address,
         element:<Address/>
-    }, {
-        link: NavRoutes.userChats,
-        element:<ChatScreen/>
     }
 ]

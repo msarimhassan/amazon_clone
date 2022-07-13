@@ -31,6 +31,8 @@ import NavRoutes from '../common/NavRoutes';
 import { ACNetwork, Urls, config } from '../config';
 import '../styles/Header.css';
 import { Icons } from '../common';
+import ChatList from '../Pages/Chat/ChatList';
+import Chat from '../Pages/Chat';
 
 const Header = () => {
     const { AI, GI } = Icons;
@@ -40,6 +42,8 @@ const Header = () => {
     let navigate = useNavigate();
     let location = useLocation();
     const [open, setOpen] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [currentChat, setCurrentChat] = useState({});
     const [query, setQuery] = useState('');
     const [searchedData, setSearchedData] = useState([]);
     const handleNavbar = () => {};
@@ -79,6 +83,10 @@ const Header = () => {
         navigate(NavRoutes.ProductDetail, { state: { id: product_id } });
     };
 
+    const OpenChats = () => {
+        setOpen(!open);
+        }
+
     const { t } = useTranslation(['Categories']);
 
     if (location.pathname.includes(NavRoutes.Login) || location.pathname.includes(NavRoutes.Signup))
@@ -86,6 +94,21 @@ const Header = () => {
 
     return (
         <>
+            <ChatList
+                open={open}
+                setOpen={setOpen}
+                setShowModal={setShowModal}
+                showModal={showModal}
+                setCurrentChat={setCurrentChat}
+            />
+           {!open? <Chat
+                shopId={currentChat?.shop}
+                Header='Chat'
+                conversationId={currentChat.conversation?._id}
+                open={showModal}
+                setOpen={setShowModal}
+
+            />:null}
             <div className='AppBar'>
                 <Navbar style={{ backgroundColor: '#131921', color: 'white' }} expand='lg'>
                     <NavbarBrand href='/'>
@@ -137,11 +160,10 @@ const Header = () => {
                                                 style={{
                                                     backgroundColor: 'white',
                                                     color: 'black',
-                                                    textAlign:'center'
+                                                    textAlign: 'center',
                                                 }}
-                                               
                                             >
-                                              No data Found 
+                                                No data Found
                                             </div>
                                         )}
                                     </div>
@@ -207,9 +229,7 @@ const Header = () => {
                                         Cards
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem onClick={() => navigate(NavRoutes.userChats)}>
-                                        Chats
-                                    </DropdownItem>
+                                    <DropdownItem onClick={() => OpenChats()}>Chats</DropdownItem>
                                     <DropdownItem divider />
                                     <DropdownItem onClick={() => navigate(NavRoutes.address)}>
                                         Addresses
