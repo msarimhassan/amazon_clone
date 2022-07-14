@@ -14,7 +14,7 @@ export default function OrderHistory() {
      const getOrderHistory = async (page) => {
          setLoading(true);
          const response = await ACNetwork.get(
-             Urls.getOrderHistory + `?page=${page}&limit=${totalPages}`,
+             Urls.getOrderHistory + `?page=${page}&limit=10`,
              (
                  await config()
              ).headers
