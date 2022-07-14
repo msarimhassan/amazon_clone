@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react';
 import { OffcanvasBody, Offcanvas, OffcanvasHeader, Modal } from 'reactstrap';
 import { ACNetwork,Urls,config} from '../../config';
 import {Icons} from '../../common';
+import i18next from 'i18next';
 
 
 
@@ -19,7 +20,7 @@ const ChatList = ({ open, setOpen, setShowModal, showModal, setCurrentChat }) =>
         setShowModal(!showModal);
     };
     const MyConversations = async () => {
-        const response = await ACNetwork.get(Urls.getConversations, (await config()).headers);
+        const response = await ACNetwork.get(Urls.getConversations(i18next.language), (await config()).headers);
         setConversations(response.data.conversations);
     };
 
@@ -34,14 +35,14 @@ const ChatList = ({ open, setOpen, setShowModal, showModal, setCurrentChat }) =>
                             <div className='chat-card' onClick={() => handleModal(conversation)}>
                                 <div className='p-2'>
                                     <img
-                                        src='https://mdbcdn.b-cdn.net/img/new/avatars/1.webp'
+                                        src={conversation.productImage}
                                         className='rounded-circle shadow-4'
-                                        style={{width:"50px"}}
+                                        style={{width:"50px",objectFit:'cover'}}
                                         alt='Avatar'
                                     />
                                 </div>
                                     <div>
-                                        <h5>KeyBoard</h5>
+                                        <h5>{conversation.productName}</h5>
                                         {conversation.conversation.chatRoom}
                                     </div>
                                 
