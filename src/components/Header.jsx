@@ -36,7 +36,6 @@ import Chat from '../Pages/Chat';
 
 const Header = () => {
     const { AI, GI } = Icons;
-    const itemCount = useSelector((state) => state.counter.itemcount);
     const cartCount = useSelector((state) => state.cart.cartProducts);
     const { Logout, token, currentUser } = useToken();
     let navigate = useNavigate();
