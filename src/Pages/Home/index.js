@@ -1,22 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ACNetwork, config, Urls } from '../../config';
 import Loader from '../../assets/animations';
-import * as PusherPushNotifications from '@pusher/push-notifications-web';
-import addNotification from 'react-push-notification';
 
 import CardHandler from './CardHandler';
 import i18next from 'i18next';
 import OneSignalReact from 'react-onesignal';
 
-const buttonClick = () => {
-    addNotification({
-        title: 'Amazon-Clone',
-        subtitle: 'E-commerce app',
-        message: 'This is a very long message',
-        theme: 'darkblue',
-        native: true, // when using native, your OS will handle theming.
-    });
-};
+
 
 const HomePage = () => {
     const [categories, setCategories] = useState([]);
@@ -26,15 +16,6 @@ const HomePage = () => {
     }, []);
 
     useEffect(() => {
-    //    const beamsClient = new PusherPushNotifications.Client({
-    //        instanceId: 'b68c3438-b8da-4987-b801-5860b34eb8fe',
-    //    });
-
-    //    beamsClient
-    //        .start()
-    //        .then(() => beamsClient.addDeviceInterest('hello'))
-    //        .then(() => console.log('Successfully registered and subscribed!'))
-    //        .catch(console.error);
         OneSignalReact.init({
             appId: 'c39fd41f-9972-43bd-adc8-454cb203c9c0',
         });
@@ -53,9 +34,7 @@ const HomePage = () => {
     };
     return (
         <>
-            <button onClick={buttonClick} className='button'>
-                Hello world.
-            </button>
+        
             {loading ? <Loader /> : <CardHandler categories={categories} />}
         </>
     );
