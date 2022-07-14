@@ -6,6 +6,7 @@ import addNotification from 'react-push-notification';
 
 import CardHandler from './CardHandler';
 import i18next from 'i18next';
+import OneSignalReact from 'react-onesignal';
 
 const buttonClick = () => {
     addNotification({
@@ -25,15 +26,18 @@ const HomePage = () => {
     }, []);
 
     useEffect(() => {
-       const beamsClient = new PusherPushNotifications.Client({
-           instanceId: 'b68c3438-b8da-4987-b801-5860b34eb8fe',
-       });
+    //    const beamsClient = new PusherPushNotifications.Client({
+    //        instanceId: 'b68c3438-b8da-4987-b801-5860b34eb8fe',
+    //    });
 
-       beamsClient
-           .start()
-           .then(() => beamsClient.addDeviceInterest('hello'))
-           .then(() => console.log('Successfully registered and subscribed!'))
-           .catch(console.error);
+    //    beamsClient
+    //        .start()
+    //        .then(() => beamsClient.addDeviceInterest('hello'))
+    //        .then(() => console.log('Successfully registered and subscribed!'))
+    //        .catch(console.error);
+        OneSignalReact.init({
+            appId: 'c39fd41f-9972-43bd-adc8-454cb203c9c0',
+        });
     }, []);
 
     const GetAllCategories = async () => {
