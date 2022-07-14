@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { ACNetwork, config, Urls } from '../../config';
 import Loader from '../../assets/animations';
-import OneSignal from 'react-onesignal';
+import * as PusherPushNotifications from '@pusher/push-notifications-web';
+import addNotification from 'react-push-notification';
 
 import CardHandler from './CardHandler';
 import i18next from 'i18next';
+
+const buttonClick = () => {
+    addNotification({
+        title: 'Amazon-Clone',
+        subtitle: 'E-commerce app',
+        message: 'This is a very long message',
+        theme: 'darkblue',
+        native: true, // when using native, your OS will handle theming.
+    });
+};
 
 const HomePage = () => {
     const [categories, setCategories] = useState([]);
@@ -14,13 +25,15 @@ const HomePage = () => {
     }, []);
 
     useEffect(() => {
-        (async () => {
-            OneSignal.init({
-                appId: 'ef310da3-333f-4388-8f16-912687b69466',
-                allowLocalhostAsSecureOrigin: true,
-            });
-            OneSignal.showSlidedownPrompt();
-        })();
+       const beamsClient = new PusherPushNotifications.Client({
+           instanceId: 'b68c3438-b8da-4987-b801-5860b34eb8fe',
+       });
+
+       beamsClient
+           .start()
+           .then(() => beamsClient.addDeviceInterest('hello'))
+           .then(() => console.log('Successfully registered and subscribed!'))
+           .catch(console.error);
     }, []);
 
     const GetAllCategories = async () => {
@@ -34,7 +47,14 @@ const HomePage = () => {
         setCategories(response.data.categories);
         setLoading(false);
     };
-    return <>{loading ? <Loader /> : <CardHandler categories={categories} />}</>;
+    return (
+        <>
+            <button onClick={buttonClick} className='button'>
+                Hello world.
+            </button>
+            {loading ? <Loader /> : <CardHandler categories={categories} />}
+        </>
+    );
 };
 
 export default HomePage;

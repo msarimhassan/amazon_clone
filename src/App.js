@@ -8,7 +8,12 @@ import { PrivateRoutes } from './common/PrivateRoutes';
 import { AuthRoutes } from './common/AuthRoutes';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Notifications } from 'react-push-notification';
 import './App.css';
+
+
+
+
 
 const App = () => {
     const [token, setToken] = useState();
@@ -41,7 +46,7 @@ const App = () => {
     return (
         <Suspense fallback={null}>
             <UserContext.Provider value={{ setToken, token, currentUser, setCurrentUser }}>
-                {console.log(window.location.href)}
+                <Notifications />
                 <Router>
                     <Header />
                     <MobileAppBar />

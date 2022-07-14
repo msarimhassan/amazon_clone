@@ -30,12 +30,25 @@ const ChatList = ({ open, setOpen, setShowModal, showModal, setCurrentChat }) =>
                 <OffcanvasBody style={{ height: '80%', flexGrow: 0 }}>
                     {conversations?.map((conversation) => {
                         return (
+                            <>
                             <div className='chat-card' onClick={() => handleModal(conversation)}>
                                 <div className='p-2'>
-                                    <BS.BsFillChatFill size={30} color='#f5bb5c' />
+                                    <img
+                                        src='https://mdbcdn.b-cdn.net/img/new/avatars/1.webp'
+                                        className='rounded-circle shadow-4'
+                                        style={{width:"50px"}}
+                                        alt='Avatar'
+                                    />
                                 </div>
-                                <div>{conversation.conversation.chatRoom}</div>
-                            </div>
+                                    <div>
+                                        <h5>KeyBoard</h5>
+                                        {conversation.conversation.chatRoom}
+                                    </div>
+                                
+                                </div>
+                              
+                                </>
+                           
                         );
                     })}
                 </OffcanvasBody>
