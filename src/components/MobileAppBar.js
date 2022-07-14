@@ -123,7 +123,7 @@ export default function MobileAppBar() {
                         </div>
                         <div
                             className='d-flex justify-content-center align-items-center'
-                            style={{ height: '60vh' }}
+                            style={{ height: '90vh' }}
                         >
                             <ul>
                                 {token ? (

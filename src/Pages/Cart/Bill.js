@@ -29,20 +29,22 @@ export default function Bill({totalPrice}) {
           </Row>
           <hr />
           <Row>
-              <Col sm={6}>{t('total') }</Col>
+              <Col sm={6}>{t('total')}</Col>
               <Col sm={6} style={{ textAlign: 'right' }}>
                   Rs{totalPrice}
               </Col>
           </Row>
           <div className='text-center mt-5'>
-              <Button
-                  onClick={() => {
-                      handleOrder();
-                  }}
-                  className='amazon-btn'
-              >
-                  {t('proceed')}
-              </Button>
+              {token && (
+                  <Button
+                      onClick={() => {
+                          handleOrder();
+                      }}
+                      className='amazon-btn'
+                  >
+                      {t('proceed')}
+                  </Button>
+              )}
           </div>
       </>
   );
