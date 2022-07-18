@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useLocation } from 'react-router-dom';
 
-export default function () {
+import ProductDetails from './ProductDetail'
+import Reviews from './Reviews'
+
+
+export default function ProductDetail() {
+  const [productId, setProductId] = useState('');
+  const location = useLocation();
   return (
-    <div></div>
+    <>
+      <ProductDetails />
+      <h1>{location.state.id}</h1>
+      <Reviews productId={location.state.id} />
+    </>
   )
 }

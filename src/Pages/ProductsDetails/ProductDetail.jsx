@@ -4,15 +4,15 @@ import { useDispatch } from 'react-redux';
 import i18next from 'i18next';
 import ReactStars from 'react-stars';
 import { toast } from 'react-toastify';
+import { Container, Row, Col, Table, Button } from 'reactstrap';
 
-import { Container, Row, Col, Table,Button } from 'reactstrap';
-import Loader from '../assets/animations';
-import { ACNetwork, config, Urls } from '../config';
-import { AddToCart } from '../app/CartHandler/CartSlice';
-import '../styles/CartPage.css';
-import { Icons } from './../common';
-import useToken from '../hooks/useToken';
-import Chat from './Chat';
+import Loader from '../../assets/animations';
+import { ACNetwork,Urls,config} from '../../config';
+import { AddToCart } from '../../app/CartHandler/CartSlice';
+import '../../styles/CartPage.css'
+import { Icons } from '../../common';
+import useToken from '../../hooks/useToken';
+import Chat from '../Chat';
 
 
 
@@ -22,8 +22,8 @@ const ProductDetail = () => {
     const [product, setProduct] = useState();
     const [showModal, setShowModal] = useState(false);
     const [conversationId, setConversationId] = useState(null);
-    const { FC,BS } = Icons;
-    const { token} = useToken();
+    const { FC, BS } = Icons;
+    const { token } = useToken();
     let dispatch = useDispatch();
     useEffect(() => {
         getProduct();
@@ -31,7 +31,7 @@ const ProductDetail = () => {
 
     const getProduct = async () => {
         setLoading(true);
-        
+
         const response = await ACNetwork.get(
             Urls.getProduct(i18next.language) + location.state.id,
             (
@@ -43,27 +43,31 @@ const ProductDetail = () => {
 
         setLoading(false);
     };
-    const ratingChanged = async(res) => {
+    const ratingChanged = async (res) => {
         console.log(res);
         const obj = {
             productId: location.state.id,
-            rating:res,
+            rating: res,
         };
         const response = await ACNetwork.post(Urls.addRatings, obj, (await config()).headers);
         if (!response.ok) {
-           return toast(response.data.error, { position: toast.POSITION.TOP_RIGHT });
+            return toast(response.data.error, { position: toast.POSITION.TOP_RIGHT });
         }
         toast(response.data.message, { position: toast.POSITION.TOP_RIGHT });
-    }
+    };
 
-
-    const createChat =async () => {
-        const response = await ACNetwork.post(Urls.creatChat(i18next.language), { productId: location.state.id }, (await config()).headers);
+    const createChat = async () => {
+        const response = await ACNetwork.post(
+            Urls.creatChat(i18next.language),
+            { productId: location.state.id },
+            (
+                await config()
+            ).headers
+        );
         console.log(response.data);
         setConversationId(response.data.conversation);
         setShowModal(!showModal);
-   }
-
+    };
 
     return (
         <div>
@@ -104,7 +108,7 @@ const ProductDetail = () => {
                                     color2={'#ffd700'}
                                 />
                             ) : null}
-                                <hr />
+                            <hr />
                             {product.quantity > 0 ? (
                                 <div>
                                     <h6 style={{ color: 'green' }}>Available</h6>
@@ -133,15 +137,30 @@ const ProductDetail = () => {
                             <hr />
                             <h6>About this Product</h6>
                             <div>{product.description}</div>
-                           {product.quantity>0? <Button
-                                className='float-end mt-5 amazon-btn'
-                                onClick={() => dispatch(AddToCart(product))}
-                            >
-                                Add To Cart
-                            </Button>:null}
-                            { conversationId&&<Chat open={showModal} setOpen={setShowModal} Header='Chat' conversationId={conversationId} shopId={product.creator._id} />}
+                            {product.quantity > 0 ? (
+                                <Button
+                                    className='float-end mt-5 amazon-btn'
+                                    onClick={() => dispatch(AddToCart(product))}
+                                >
+                                    Add To Cart
+                                </Button>
+                            ) : null}
+                            {conversationId && (
+                                <Chat
+                                    open={showModal}
+                                    setOpen={setShowModal}
+                                    Header='Chat'
+                                    conversationId={conversationId}
+                                    shopId={product.creator._id}
+                                />
+                            )}
                             {token ? (
-                                <Button className='float-end mt-5 me-2 amazon-btn' onClick={()=>createChat()}>chat</Button>
+                                <Button
+                                    className='float-end mt-5 me-2 amazon-btn'
+                                    onClick={() => createChat()}
+                                >
+                                    chat
+                                </Button>
                             ) : null}
                         </Col>
                     </Row>

@@ -26,5 +26,6 @@ export default {
     creatChat: (ln) => `customer/${ln}/create-chat`,
     sendMessage: 'customer/send-message',
     getMessage: 'customer/get-messages/',
-    getConversations:(ln)=>`customer/${ln}/conversations`,
+    getConversations: (ln) => `customer/${ln}/conversations`,
+    addReview: 'customer/add-review',
 };
