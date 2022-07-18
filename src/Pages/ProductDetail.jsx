@@ -104,7 +104,7 @@ const ProductDetail = () => {
                                     color2={'#ffd700'}
                                 />
                             ) : null}
-                            <hr />
+                                <hr />
                             {product.quantity > 0 ? (
                                 <div>
                                     <h6 style={{ color: 'green' }}>Available</h6>
@@ -133,12 +133,12 @@ const ProductDetail = () => {
                             <hr />
                             <h6>About this Product</h6>
                             <div>{product.description}</div>
-                            <Button
+                           {product.quantity>0? <Button
                                 className='float-end mt-5 amazon-btn'
                                 onClick={() => dispatch(AddToCart(product))}
                             >
                                 Add To Cart
-                            </Button>
+                            </Button>:null}
                             { conversationId&&<Chat open={showModal} setOpen={setShowModal} Header='Chat' conversationId={conversationId} shopId={product.creator._id} />}
                             {token ? (
                                 <Button className='float-end mt-5 me-2 amazon-btn' onClick={()=>createChat()}>chat</Button>
