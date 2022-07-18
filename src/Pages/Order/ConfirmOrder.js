@@ -12,7 +12,7 @@ import '../../styles/CartPage.css';
 import { config, ACNetwork, Urls } from '../../config'
 import NavRoutes from '../../common/NavRoutes';
 import { EmptyCart } from '../../app/CartHandler/CartSlice';
-import Notification from '../../components/Notification';
+import LoadingButton from '../../components/LoadingButton';
 
 
 export default function ConfirmOrder() {
@@ -21,15 +21,17 @@ export default function ConfirmOrder() {
     let location = useLocation();
     let navigate = useNavigate();
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
     
 
     const PlaceOrder = async () => {
-        
+        setLoading(true);
         let orderId = uuidv4();
         orderId = orderId.substring(0, 7);
         if (products.length == 0)
         {
             toast.warning('No Items in the Cart')
+            setLoading(false);
             return
             }
         const newarray = products.map((product) => {
@@ -56,19 +58,20 @@ export default function ConfirmOrder() {
         toast.error(response.data.error, {
         position: toast.POSITION.TOP_RIGHT,
         });
+            setLoading(false);
          return  
         }
         // setNotification(true);
        toast.success('Order Placed', {
            position: toast.POSITION.TOP_RIGHT,
        });
+        setLoading(false);
         dispatch(EmptyCart())
         navigate(NavRoutes.Homepage);
     }
 
     return (
         <>
-           
             <Container>
                 <Row>
                     <Col lg={8} md={6} sm={12} className='p-5'>
@@ -138,13 +141,16 @@ export default function ConfirmOrder() {
                             <h6>Address</h6>
                             <h6>
                                 {location?.state.address.country}, {location?.state.address.city},
-                                {location?.state.address.area}, {location?.state.address.houseNumber},{' '}
+                                {location?.state.address.area},{' '}
+                                {location?.state.address.houseNumber},{' '}
                                 {location?.state.address.streetNumber}
                             </h6>
                         </div>
-                        <Button className='float-end amazon-btn mt-3' onClick={() => PlaceOrder()}>
-                            Place Order
-                        </Button>
+                        <div className='mt-3' onClick={() => PlaceOrder()}>
+                            <LoadingButton loading={loading} text='Place Order' type='submit'>
+                                Place Order
+                            </LoadingButton>
+                        </div>
                     </Col>
                 </Row>
             </Container>
