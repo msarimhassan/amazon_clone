@@ -28,4 +28,6 @@ export default {
     getMessage: 'customer/get-messages/',
     getConversations: (ln) => `customer/${ln}/conversations`,
     addReview: 'customer/add-review',
+    getReviews: (ln) => `/${ln}/get-reviews/`,
+    deleteReview:'customer/delete-review/'
 };
