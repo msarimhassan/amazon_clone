@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { ACNetwork, config, Urls } from '../../config';
-import Loader from '../../assets/animations';
-
-import CardHandler from './CardHandler';
-import i18next from 'i18next';
 import OneSignalReact from 'react-onesignal';
+import i18next from 'i18next';
+
+import Loader from '../../assets/animations';
+import CardHandler from './CardHandler';
+import { ACNetwork, config, Urls } from '../../config';
+import useToken from '../../hooks/useToken';
+
 
 
 
 const HomePage = () => {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
+    const { currentUser,token } = useToken();
     useEffect(() => {
         GetAllCategories();
     }, []);
 
     useEffect(() => {
-        OneSignalReact.init({
-            appId: 'c39fd41f-9972-43bd-adc8-454cb203c9c0',
-        });
+        if (token) {
+            OneSignalReact.init({
+                appId: 'c39fd41f-9972-43bd-adc8-454cb203c9c0',
+            });
+            OneSignalReact.setExternalUserId(currentUser?._id);
+       }
     }, []);
 
     const GetAllCategories = async () => {
