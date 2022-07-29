@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import i18next from 'i18next';
 
-
 import ProductCard from '../../components/ProductCard';
 import { ACNetwork, config, Urls } from '../../config';
 import Loader from '../../assets/animations';
@@ -25,9 +24,14 @@ const ProductCardHandler = () => {
 
     const getProduct = async (page) => {
         setLoading(true);
+        const obj = {
+            latitude: null,
+            longitude: null,
+        };
 
-        const response = await ACNetwork.get(
+        const response = await ACNetwork.post(
             Urls.getProducts(i18next.language) + location.state.id + `?page=${page}&limit=10`,
+            obj,
             (
                 await config()
             ).headers
@@ -44,30 +48,34 @@ const ProductCardHandler = () => {
                 <Loader />
             ) : (
                 <>
-                        {products.length > 0 ? 
-                     <>
-                   <h1 className='heading'>{category && category}</h1>
-                    <Container className='mt-4'>
-                        <Row>
-                            {products.map((product, index) => {
-                                return (
-                                    <Col sm={3} md={6} lg={3} className='mt-3 mb-3'>
-                                        <ProductCard key={index} product={product} />
-                                    </Col>
-                                );
-                            })}
-                        </Row>
-                        {page < totalPages && (
-                            <Button
-                                onClick={() => {
-                                    getProduct(page + 1);
-                                    setPage(page + 1);
-                                }}
-                            >
-                                More
-                            </Button>
-                        )}
-                    </Container></>:<NoData/>}
+                    {products.length > 0 ? (
+                        <>
+                            <h1 className='heading'>{category && category}</h1>
+                            <Container className='mt-4'>
+                                <Row>
+                                    {products.map((product, index) => {
+                                        return (
+                                            <Col sm={3} md={6} lg={3} className='mt-3 mb-3'>
+                                                <ProductCard key={index} product={product} />
+                                            </Col>
+                                        );
+                                    })}
+                                </Row>
+                                {page < totalPages && (
+                                    <Button
+                                        onClick={() => {
+                                            getProduct(page + 1);
+                                            setPage(page + 1);
+                                        }}
+                                    >
+                                        More
+                                    </Button>
+                                )}
+                            </Container>
+                        </>
+                    ) : (
+                        <NoData />
+                    )}
                 </>
             )}
         </div>
